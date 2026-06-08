@@ -1,0 +1,88 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand: #F22044;
+  --color-brand-dark: #C41535;
+  --color-brand-light: #FFF0F3;
+  --color-primary: #1A1A2E;
+  --color-surface: #FFFFFF;
+  --color-surface-2: #F8F9FC;
+  --color-surface-3: #F0F2F8;
+  --color-border: #E2E8F0;
+  --color-border-strong: #CBD5E0;
+  --color-text: #1A202C;
+  --color-text-muted: #718096;
+  --color-text-light: #A0AEC0;
+
+  --color-status-approved: #22C55E;
+  --color-status-approved-bg: #F0FDF4;
+  --color-status-approved-border: #86EFAC;
+  --color-status-declined: #EF4444;
+  --color-status-declined-bg: #FEF2F2;
+  --color-status-declined-border: #FCA5A5;
+  --color-status-pending: #F59E0B;
+  --color-status-pending-bg: #FFFBEB;
+  --color-status-pending-border: #FCD34D;
+  --color-status-viewed: #3B82F6;
+  --color-status-viewed-bg: #EFF6FF;
+  --color-status-viewed-border: #93C5FD;
+  --color-status-draft: #6B7280;
+  --color-status-draft-bg: #F9FAFB;
+  --color-status-draft-border: #D1D5DB;
+  --color-status-published: #8B5CF6;
+  --color-status-published-bg: #F5F3FF;
+  --color-status-published-border: #C4B5FD;
+
+  --font-sans: 'Montserrat', system-ui, sans-serif;
+
+  --shadow-card: 0 1px 3px rgba(0,0,0,0.07), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-card-hover: 0 4px 12px rgba(0,0,0,0.1), 0 2px 4px rgba(0,0,0,0.06);
+  --shadow-dropdown: 0 8px 24px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.08);
+}
+
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html, body {
+    height: 100%;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--color-surface-2);
+    color: var(--color-text);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+}
+
+@layer utilities {
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-border) transparent;
+  }
+
+  .rich-text h1, .rich-text h2, .rich-text h3, .rich-text h4 {
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    color: var(--color-text);
+  }
+  .rich-text h1 { font-size: 1.5rem; }
+  .rich-text h2 { font-size: 1.25rem; }
+  .rich-text h3 { font-size: 1.1rem; }
+  .rich-text p { margin-bottom: 0.75rem; line-height: 1.7; }
+  .rich-text ul, .rich-text ol { margin-left: 1.5rem; margin-bottom: 0.75rem; }
+  .rich-text li { margin-bottom: 0.25rem; line-height: 1.6; }
+  .rich-text strong { font-weight: 600; }
+  .rich-text em { font-style: italic; }
+  .rich-text blockquote { border-left: 3px solid var(--color-brand); padding-left: 1rem; color: var(--color-text-muted); }
+}

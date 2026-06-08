@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 46, "column": 0}, "map": {"version":3,"sources":["file:///Users/onepoint/Desktop/1pt_proposals/client_portal/src/app/api/auth/me/route.js"],"sourcesContent":["import { NextResponse } from 'next/server'\nimport { cookies } from 'next/headers'\nimport { jwtVerify } from 'jose'\n\nexport async function GET() {\n  try {\n    const cookieStore = await cookies()\n    const token = cookieStore.get('client_auth_token')?.value\n\n    if (!token) return NextResponse.json({ user: null }, { status: 401 })\n\n    const { payload } = await jwtVerify(\n      token,\n      new TextEncoder().encode(process.env.JWT_SECRET)\n    )\n\n    return NextResponse.json({ user: payload })\n  } catch {\n    return NextResponse.json({ user: null }, { status: 401 })\n  }\n}\n"],"names":[],"mappings":";;;;AAAA;AACA;AACA;;;;AAEO,eAAe;IACpB,IAAI;QACF,MAAM,cAAc,MAAM,IAAA,4IAAO;QACjC,MAAM,QAAQ,YAAY,GAAG,CAAC,sBAAsB;QAEpD,IAAI,CAAC,OAAO,OAAO,gJAAY,CAAC,IAAI,CAAC;YAAE,MAAM;QAAK,GAAG;YAAE,QAAQ;QAAI;QAEnE,MAAM,EAAE,OAAO,EAAE,GAAG,MAAM,IAAA,sKAAS,EACjC,OACA,IAAI,cAAc,MAAM,CAAC,QAAQ,GAAG,CAAC,UAAU;QAGjD,OAAO,gJAAY,CAAC,IAAI,CAAC;YAAE,MAAM;QAAQ;IAC3C,EAAE,OAAM;QACN,OAAO,gJAAY,CAAC,IAAI,CAAC;YAAE,MAAM;QAAK,GAAG;YAAE,QAAQ;QAAI;IACzD;AACF"}}]
+}

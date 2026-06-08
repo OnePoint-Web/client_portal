@@ -1,0 +1,10 @@
+var R=require("../../../../../chunks/[turbopack]_runtime.js")("server/app/api/proposals/[slug]/decline/route.js")
+R.c("server/chunks/node_modules_next_dist_esm_build_templates_app-route_0cf00237.js")
+R.c("server/chunks/node_modules_jose_dist_webapi_8797f52b._.js")
+R.c("server/chunks/[root-of-the-server]__7bf78b7b._.js")
+R.c("server/chunks/[root-of-the-server]__bfe4d977._.js")
+R.c("server/chunks/node_modules_fa51162b._.js")
+R.c("server/chunks/[root-of-the-server]__f408c708._.js")
+R.c("server/chunks/_next-internal_server_app_api_proposals_[slug]_decline_route_actions_b359fed0.js")
+R.m(31740)
+module.exports=R.m(31740).exports
