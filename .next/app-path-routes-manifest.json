@@ -18,5 +18,8 @@
   "/api/proposals/[slug]/route": "/api/proposals/[slug]",
   "/api/proposals/route": "/api/proposals",
   "/api/settings/password/route": "/api/settings/password",
-  "/page": "/"
+  "/api/view/[token]/route": "/api/view/[token]",
+  "/api/view/[token]/session/route": "/api/view/[token]/session",
+  "/page": "/",
+  "/view/[token]/page": "/view/[token]"
 }

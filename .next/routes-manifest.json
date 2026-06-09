@@ -46,12 +46,36 @@
       "namedRegex": "^/api/proposals/(?<nxtPslug>[^/]+?)/decline(?:/)?$"
     },
     {
+      "page": "/api/view/[token]",
+      "regex": "^/api/view/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPtoken": "nxtPtoken"
+      },
+      "namedRegex": "^/api/view/(?<nxtPtoken>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/api/view/[token]/session",
+      "regex": "^/api/view/([^/]+?)/session(?:/)?$",
+      "routeKeys": {
+        "nxtPtoken": "nxtPtoken"
+      },
+      "namedRegex": "^/api/view/(?<nxtPtoken>[^/]+?)/session(?:/)?$"
+    },
+    {
       "page": "/proposals/[slug]",
       "regex": "^/proposals/([^/]+?)(?:/)?$",
       "routeKeys": {
         "nxtPslug": "nxtPslug"
       },
       "namedRegex": "^/proposals/(?<nxtPslug>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/view/[token]",
+      "regex": "^/view/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPtoken": "nxtPtoken"
+      },
+      "namedRegex": "^/view/(?<nxtPtoken>[^/]+?)(?:/)?$"
     }
   ],
   "staticRoutes": [

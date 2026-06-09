@@ -18,5 +18,8 @@
   "/api/proposals/[slug]/route": "app/api/proposals/[slug]/route.js",
   "/api/proposals/route": "app/api/proposals/route.js",
   "/api/settings/password/route": "app/api/settings/password/route.js",
-  "/page": "app/page.js"
+  "/api/view/[token]/route": "app/api/view/[token]/route.js",
+  "/api/view/[token]/session/route": "app/api/view/[token]/session/route.js",
+  "/page": "app/page.js",
+  "/view/[token]/page": "app/view/[token]/page.js"
 }
