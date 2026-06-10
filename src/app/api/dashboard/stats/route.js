@@ -13,12 +13,12 @@ export async function GET() {
 
     const [received, accepted, declined, recent] = await Promise.all([
       prisma.proposal.count({
-        where: { clientId, statusId: { in: [2, 3, 4, 5, 6] } },
+        where: { clientId, statusId: { in: [3, 4, 5, 6] } },
       }),
       prisma.proposal.count({ where: { clientId, statusId: 5 } }),
       prisma.proposal.count({ where: { clientId, statusId: 6 } }),
       prisma.proposal.findMany({
-        where: { clientId, statusId: { in: [2, 3, 4, 5, 6] } },
+        where: { clientId, statusId: { in: [3, 4, 5, 6] } },
         orderBy: { dateCreated: 'desc' },
         take: 5,
         include: { proposalStatus: true },
