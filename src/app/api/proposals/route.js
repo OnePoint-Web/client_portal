@@ -18,6 +18,7 @@ export async function GET(req) {
 
     const where = {
       clientId: payload.clientId,
+      statusId: { in: [3, 4, 5, 6] },
       ...(search && {
         proposalTitle: { contains: search },
       }),
