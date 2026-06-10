@@ -54,6 +54,11 @@ export type ProposalView = $Result.DefaultSelection<Prisma.$ProposalViewPayload>
  */
 export type ProposalSession = $Result.DefaultSelection<Prisma.$ProposalSessionPayload>
 /**
+ * Model ProposalShareToken
+ * 
+ */
+export type ProposalShareToken = $Result.DefaultSelection<Prisma.$ProposalShareTokenPayload>
+/**
  * Model SelectedMember
  * 
  */
@@ -331,6 +336,16 @@ export class PrismaClient<
     * ```
     */
   get proposalSession(): Prisma.ProposalSessionDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.proposalShareToken`: Exposes CRUD operations for the **ProposalShareToken** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ProposalShareTokens
+    * const proposalShareTokens = await prisma.proposalShareToken.findMany()
+    * ```
+    */
+  get proposalShareToken(): Prisma.ProposalShareTokenDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.selectedMember`: Exposes CRUD operations for the **SelectedMember** model.
@@ -940,6 +955,7 @@ export namespace Prisma {
     ProposalStatus: 'ProposalStatus',
     ProposalView: 'ProposalView',
     ProposalSession: 'ProposalSession',
+    ProposalShareToken: 'ProposalShareToken',
     SelectedMember: 'SelectedMember',
     TeamMember: 'TeamMember',
     Timeline: 'Timeline',
@@ -974,7 +990,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "accountStatus" | "role" | "clientProfile" | "proposal" | "proposalStatus" | "proposalView" | "proposalSession" | "selectedMember" | "teamMember" | "timeline" | "timelineScopeItem" | "slaOffer" | "package" | "dealItem" | "dealEntry" | "packageDealItem" | "packageDealEntry" | "serviceProductOffer" | "service" | "product" | "offerEntry" | "notification" | "activityLogs"
+      modelProps: "user" | "accountStatus" | "role" | "clientProfile" | "proposal" | "proposalStatus" | "proposalView" | "proposalSession" | "proposalShareToken" | "selectedMember" | "teamMember" | "timeline" | "timelineScopeItem" | "slaOffer" | "package" | "dealItem" | "dealEntry" | "packageDealItem" | "packageDealEntry" | "serviceProductOffer" | "service" | "product" | "offerEntry" | "notification" | "activityLogs"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1503,6 +1519,72 @@ export namespace Prisma {
           count: {
             args: Prisma.ProposalSessionCountArgs<ExtArgs>
             result: $Utils.Optional<ProposalSessionCountAggregateOutputType> | number
+          }
+        }
+      }
+      ProposalShareToken: {
+        payload: Prisma.$ProposalShareTokenPayload<ExtArgs>
+        fields: Prisma.ProposalShareTokenFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ProposalShareTokenFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProposalShareTokenPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ProposalShareTokenFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProposalShareTokenPayload>
+          }
+          findFirst: {
+            args: Prisma.ProposalShareTokenFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProposalShareTokenPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ProposalShareTokenFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProposalShareTokenPayload>
+          }
+          findMany: {
+            args: Prisma.ProposalShareTokenFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProposalShareTokenPayload>[]
+          }
+          create: {
+            args: Prisma.ProposalShareTokenCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProposalShareTokenPayload>
+          }
+          createMany: {
+            args: Prisma.ProposalShareTokenCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.ProposalShareTokenDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProposalShareTokenPayload>
+          }
+          update: {
+            args: Prisma.ProposalShareTokenUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProposalShareTokenPayload>
+          }
+          deleteMany: {
+            args: Prisma.ProposalShareTokenDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ProposalShareTokenUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.ProposalShareTokenUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProposalShareTokenPayload>
+          }
+          aggregate: {
+            args: Prisma.ProposalShareTokenAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateProposalShareToken>
+          }
+          groupBy: {
+            args: Prisma.ProposalShareTokenGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ProposalShareTokenGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ProposalShareTokenCountArgs<ExtArgs>
+            result: $Utils.Optional<ProposalShareTokenCountAggregateOutputType> | number
           }
         }
       }
@@ -2666,6 +2748,7 @@ export namespace Prisma {
     proposalStatus?: ProposalStatusOmit
     proposalView?: ProposalViewOmit
     proposalSession?: ProposalSessionOmit
+    proposalShareToken?: ProposalShareTokenOmit
     selectedMember?: SelectedMemberOmit
     teamMember?: TeamMemberOmit
     timeline?: TimelineOmit
@@ -2891,6 +2974,7 @@ export namespace Prisma {
     proposalViews: number
     selectedMembers: number
     timelines: number
+    shareTokens: number
   }
 
   export type ProposalCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2899,6 +2983,7 @@ export namespace Prisma {
     proposalViews?: boolean | ProposalCountOutputTypeCountProposalViewsArgs
     selectedMembers?: boolean | ProposalCountOutputTypeCountSelectedMembersArgs
     timelines?: boolean | ProposalCountOutputTypeCountTimelinesArgs
+    shareTokens?: boolean | ProposalCountOutputTypeCountShareTokensArgs
   }
 
   // Custom InputTypes
@@ -2945,6 +3030,13 @@ export namespace Prisma {
    */
   export type ProposalCountOutputTypeCountTimelinesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: TimelineWhereInput
+  }
+
+  /**
+   * ProposalCountOutputType without action
+   */
+  export type ProposalCountOutputTypeCountShareTokensArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ProposalShareTokenWhereInput
   }
 
 
@@ -7548,6 +7640,7 @@ export namespace Prisma {
     proposalViews?: boolean | Proposal$proposalViewsArgs<ExtArgs>
     selectedMembers?: boolean | Proposal$selectedMembersArgs<ExtArgs>
     timelines?: boolean | Proposal$timelinesArgs<ExtArgs>
+    shareTokens?: boolean | Proposal$shareTokensArgs<ExtArgs>
     _count?: boolean | ProposalCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["proposal"]>
 
@@ -7585,6 +7678,7 @@ export namespace Prisma {
     proposalViews?: boolean | Proposal$proposalViewsArgs<ExtArgs>
     selectedMembers?: boolean | Proposal$selectedMembersArgs<ExtArgs>
     timelines?: boolean | Proposal$timelinesArgs<ExtArgs>
+    shareTokens?: boolean | Proposal$shareTokensArgs<ExtArgs>
     _count?: boolean | ProposalCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -7599,6 +7693,7 @@ export namespace Prisma {
       proposalViews: Prisma.$ProposalViewPayload<ExtArgs>[]
       selectedMembers: Prisma.$SelectedMemberPayload<ExtArgs>[]
       timelines: Prisma.$TimelinePayload<ExtArgs>[]
+      shareTokens: Prisma.$ProposalShareTokenPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       proposalId: number
@@ -7968,6 +8063,7 @@ export namespace Prisma {
     proposalViews<T extends Proposal$proposalViewsArgs<ExtArgs> = {}>(args?: Subset<T, Proposal$proposalViewsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProposalViewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     selectedMembers<T extends Proposal$selectedMembersArgs<ExtArgs> = {}>(args?: Subset<T, Proposal$selectedMembersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SelectedMemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     timelines<T extends Proposal$timelinesArgs<ExtArgs> = {}>(args?: Subset<T, Proposal$timelinesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TimelinePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    shareTokens<T extends Proposal$shareTokensArgs<ExtArgs> = {}>(args?: Subset<T, Proposal$shareTokensArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProposalShareTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -8476,6 +8572,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: TimelineScalarFieldEnum | TimelineScalarFieldEnum[]
+  }
+
+  /**
+   * Proposal.shareTokens
+   */
+  export type Proposal$shareTokensArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProposalShareToken
+     */
+    select?: ProposalShareTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProposalShareToken
+     */
+    omit?: ProposalShareTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProposalShareTokenInclude<ExtArgs> | null
+    where?: ProposalShareTokenWhereInput
+    orderBy?: ProposalShareTokenOrderByWithRelationInput | ProposalShareTokenOrderByWithRelationInput[]
+    cursor?: ProposalShareTokenWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ProposalShareTokenScalarFieldEnum | ProposalShareTokenScalarFieldEnum[]
   }
 
   /**
@@ -9469,18 +9589,21 @@ export namespace Prisma {
     viewId: number | null
     proposalId: number | null
     clientId: number | null
+    tokenId: number | null
   }
 
   export type ProposalViewSumAggregateOutputType = {
     viewId: number | null
     proposalId: number | null
     clientId: number | null
+    tokenId: number | null
   }
 
   export type ProposalViewMinAggregateOutputType = {
     viewId: number | null
     proposalId: number | null
     clientId: number | null
+    tokenId: number | null
     dateViewed: Date | null
   }
 
@@ -9488,6 +9611,7 @@ export namespace Prisma {
     viewId: number | null
     proposalId: number | null
     clientId: number | null
+    tokenId: number | null
     dateViewed: Date | null
   }
 
@@ -9495,6 +9619,7 @@ export namespace Prisma {
     viewId: number
     proposalId: number
     clientId: number
+    tokenId: number
     dateViewed: number
     _all: number
   }
@@ -9504,18 +9629,21 @@ export namespace Prisma {
     viewId?: true
     proposalId?: true
     clientId?: true
+    tokenId?: true
   }
 
   export type ProposalViewSumAggregateInputType = {
     viewId?: true
     proposalId?: true
     clientId?: true
+    tokenId?: true
   }
 
   export type ProposalViewMinAggregateInputType = {
     viewId?: true
     proposalId?: true
     clientId?: true
+    tokenId?: true
     dateViewed?: true
   }
 
@@ -9523,6 +9651,7 @@ export namespace Prisma {
     viewId?: true
     proposalId?: true
     clientId?: true
+    tokenId?: true
     dateViewed?: true
   }
 
@@ -9530,6 +9659,7 @@ export namespace Prisma {
     viewId?: true
     proposalId?: true
     clientId?: true
+    tokenId?: true
     dateViewed?: true
     _all?: true
   }
@@ -9623,7 +9753,8 @@ export namespace Prisma {
   export type ProposalViewGroupByOutputType = {
     viewId: number
     proposalId: number
-    clientId: number
+    clientId: number | null
+    tokenId: number | null
     dateViewed: Date
     _count: ProposalViewCountAggregateOutputType | null
     _avg: ProposalViewAvgAggregateOutputType | null
@@ -9650,6 +9781,7 @@ export namespace Prisma {
     viewId?: boolean
     proposalId?: boolean
     clientId?: boolean
+    tokenId?: boolean
     dateViewed?: boolean
     proposal?: boolean | ProposalDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["proposalView"]>
@@ -9660,10 +9792,11 @@ export namespace Prisma {
     viewId?: boolean
     proposalId?: boolean
     clientId?: boolean
+    tokenId?: boolean
     dateViewed?: boolean
   }
 
-  export type ProposalViewOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"viewId" | "proposalId" | "clientId" | "dateViewed", ExtArgs["result"]["proposalView"]>
+  export type ProposalViewOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"viewId" | "proposalId" | "clientId" | "tokenId" | "dateViewed", ExtArgs["result"]["proposalView"]>
   export type ProposalViewInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     proposal?: boolean | ProposalDefaultArgs<ExtArgs>
   }
@@ -9676,7 +9809,8 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       viewId: number
       proposalId: number
-      clientId: number
+      clientId: number | null
+      tokenId: number | null
       dateViewed: Date
     }, ExtArgs["result"]["proposalView"]>
     composites: {}
@@ -10051,6 +10185,7 @@ export namespace Prisma {
     readonly viewId: FieldRef<"ProposalView", 'Int'>
     readonly proposalId: FieldRef<"ProposalView", 'Int'>
     readonly clientId: FieldRef<"ProposalView", 'Int'>
+    readonly tokenId: FieldRef<"ProposalView", 'Int'>
     readonly dateViewed: FieldRef<"ProposalView", 'DateTime'>
   }
     
@@ -10427,19 +10562,25 @@ export namespace Prisma {
 
   export type ProposalSessionAvgAggregateOutputType = {
     sessionId: number | null
+    proposalId: number | null
     clientId: number | null
+    tokenId: number | null
     durationSeconds: number | null
   }
 
   export type ProposalSessionSumAggregateOutputType = {
     sessionId: number | null
+    proposalId: number | null
     clientId: number | null
+    tokenId: number | null
     durationSeconds: number | null
   }
 
   export type ProposalSessionMinAggregateOutputType = {
     sessionId: number | null
+    proposalId: number | null
     clientId: number | null
+    tokenId: number | null
     startedAt: Date | null
     lastActivityAt: Date | null
     endedAt: Date | null
@@ -10448,7 +10589,9 @@ export namespace Prisma {
 
   export type ProposalSessionMaxAggregateOutputType = {
     sessionId: number | null
+    proposalId: number | null
     clientId: number | null
+    tokenId: number | null
     startedAt: Date | null
     lastActivityAt: Date | null
     endedAt: Date | null
@@ -10457,7 +10600,9 @@ export namespace Prisma {
 
   export type ProposalSessionCountAggregateOutputType = {
     sessionId: number
+    proposalId: number
     clientId: number
+    tokenId: number
     startedAt: number
     lastActivityAt: number
     endedAt: number
@@ -10468,19 +10613,25 @@ export namespace Prisma {
 
   export type ProposalSessionAvgAggregateInputType = {
     sessionId?: true
+    proposalId?: true
     clientId?: true
+    tokenId?: true
     durationSeconds?: true
   }
 
   export type ProposalSessionSumAggregateInputType = {
     sessionId?: true
+    proposalId?: true
     clientId?: true
+    tokenId?: true
     durationSeconds?: true
   }
 
   export type ProposalSessionMinAggregateInputType = {
     sessionId?: true
+    proposalId?: true
     clientId?: true
+    tokenId?: true
     startedAt?: true
     lastActivityAt?: true
     endedAt?: true
@@ -10489,7 +10640,9 @@ export namespace Prisma {
 
   export type ProposalSessionMaxAggregateInputType = {
     sessionId?: true
+    proposalId?: true
     clientId?: true
+    tokenId?: true
     startedAt?: true
     lastActivityAt?: true
     endedAt?: true
@@ -10498,7 +10651,9 @@ export namespace Prisma {
 
   export type ProposalSessionCountAggregateInputType = {
     sessionId?: true
+    proposalId?: true
     clientId?: true
+    tokenId?: true
     startedAt?: true
     lastActivityAt?: true
     endedAt?: true
@@ -10594,11 +10749,13 @@ export namespace Prisma {
 
   export type ProposalSessionGroupByOutputType = {
     sessionId: number
-    clientId: number
+    proposalId: number
+    clientId: number | null
+    tokenId: number | null
     startedAt: Date
     lastActivityAt: Date | null
     endedAt: Date | null
-    durationSeconds: number
+    durationSeconds: number | null
     _count: ProposalSessionCountAggregateOutputType | null
     _avg: ProposalSessionAvgAggregateOutputType | null
     _sum: ProposalSessionSumAggregateOutputType | null
@@ -10622,7 +10779,9 @@ export namespace Prisma {
 
   export type ProposalSessionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     sessionId?: boolean
+    proposalId?: boolean
     clientId?: boolean
+    tokenId?: boolean
     startedAt?: boolean
     lastActivityAt?: boolean
     endedAt?: boolean
@@ -10633,25 +10792,29 @@ export namespace Prisma {
 
   export type ProposalSessionSelectScalar = {
     sessionId?: boolean
+    proposalId?: boolean
     clientId?: boolean
+    tokenId?: boolean
     startedAt?: boolean
     lastActivityAt?: boolean
     endedAt?: boolean
     durationSeconds?: boolean
   }
 
-  export type ProposalSessionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"sessionId" | "clientId" | "startedAt" | "lastActivityAt" | "endedAt" | "durationSeconds", ExtArgs["result"]["proposalSession"]>
+  export type ProposalSessionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"sessionId" | "proposalId" | "clientId" | "tokenId" | "startedAt" | "lastActivityAt" | "endedAt" | "durationSeconds", ExtArgs["result"]["proposalSession"]>
 
   export type $ProposalSessionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "ProposalSession"
     objects: {}
     scalars: $Extensions.GetPayloadResult<{
       sessionId: number
-      clientId: number
+      proposalId: number
+      clientId: number | null
+      tokenId: number | null
       startedAt: Date
       lastActivityAt: Date | null
       endedAt: Date | null
-      durationSeconds: number
+      durationSeconds: number | null
     }, ExtArgs["result"]["proposalSession"]>
     composites: {}
   }
@@ -11022,7 +11185,9 @@ export namespace Prisma {
    */
   interface ProposalSessionFieldRefs {
     readonly sessionId: FieldRef<"ProposalSession", 'Int'>
+    readonly proposalId: FieldRef<"ProposalSession", 'Int'>
     readonly clientId: FieldRef<"ProposalSession", 'Int'>
+    readonly tokenId: FieldRef<"ProposalSession", 'Int'>
     readonly startedAt: FieldRef<"ProposalSession", 'DateTime'>
     readonly lastActivityAt: FieldRef<"ProposalSession", 'DateTime'>
     readonly endedAt: FieldRef<"ProposalSession", 'DateTime'>
@@ -11345,6 +11510,1021 @@ export namespace Prisma {
      * Omit specific fields from the ProposalSession
      */
     omit?: ProposalSessionOmit<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ProposalShareToken
+   */
+
+  export type AggregateProposalShareToken = {
+    _count: ProposalShareTokenCountAggregateOutputType | null
+    _avg: ProposalShareTokenAvgAggregateOutputType | null
+    _sum: ProposalShareTokenSumAggregateOutputType | null
+    _min: ProposalShareTokenMinAggregateOutputType | null
+    _max: ProposalShareTokenMaxAggregateOutputType | null
+  }
+
+  export type ProposalShareTokenAvgAggregateOutputType = {
+    tokenId: number | null
+    proposalId: number | null
+    portalUserId: number | null
+  }
+
+  export type ProposalShareTokenSumAggregateOutputType = {
+    tokenId: number | null
+    proposalId: number | null
+    portalUserId: number | null
+  }
+
+  export type ProposalShareTokenMinAggregateOutputType = {
+    tokenId: number | null
+    token: string | null
+    proposalId: number | null
+    recipientEmail: string | null
+    isPortalUser: boolean | null
+    portalUserId: number | null
+    usedAt: Date | null
+    expiresAt: Date | null
+    createdAt: Date | null
+  }
+
+  export type ProposalShareTokenMaxAggregateOutputType = {
+    tokenId: number | null
+    token: string | null
+    proposalId: number | null
+    recipientEmail: string | null
+    isPortalUser: boolean | null
+    portalUserId: number | null
+    usedAt: Date | null
+    expiresAt: Date | null
+    createdAt: Date | null
+  }
+
+  export type ProposalShareTokenCountAggregateOutputType = {
+    tokenId: number
+    token: number
+    proposalId: number
+    recipientEmail: number
+    isPortalUser: number
+    portalUserId: number
+    usedAt: number
+    expiresAt: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type ProposalShareTokenAvgAggregateInputType = {
+    tokenId?: true
+    proposalId?: true
+    portalUserId?: true
+  }
+
+  export type ProposalShareTokenSumAggregateInputType = {
+    tokenId?: true
+    proposalId?: true
+    portalUserId?: true
+  }
+
+  export type ProposalShareTokenMinAggregateInputType = {
+    tokenId?: true
+    token?: true
+    proposalId?: true
+    recipientEmail?: true
+    isPortalUser?: true
+    portalUserId?: true
+    usedAt?: true
+    expiresAt?: true
+    createdAt?: true
+  }
+
+  export type ProposalShareTokenMaxAggregateInputType = {
+    tokenId?: true
+    token?: true
+    proposalId?: true
+    recipientEmail?: true
+    isPortalUser?: true
+    portalUserId?: true
+    usedAt?: true
+    expiresAt?: true
+    createdAt?: true
+  }
+
+  export type ProposalShareTokenCountAggregateInputType = {
+    tokenId?: true
+    token?: true
+    proposalId?: true
+    recipientEmail?: true
+    isPortalUser?: true
+    portalUserId?: true
+    usedAt?: true
+    expiresAt?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type ProposalShareTokenAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ProposalShareToken to aggregate.
+     */
+    where?: ProposalShareTokenWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ProposalShareTokens to fetch.
+     */
+    orderBy?: ProposalShareTokenOrderByWithRelationInput | ProposalShareTokenOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ProposalShareTokenWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ProposalShareTokens from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ProposalShareTokens.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ProposalShareTokens
+    **/
+    _count?: true | ProposalShareTokenCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ProposalShareTokenAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ProposalShareTokenSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ProposalShareTokenMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ProposalShareTokenMaxAggregateInputType
+  }
+
+  export type GetProposalShareTokenAggregateType<T extends ProposalShareTokenAggregateArgs> = {
+        [P in keyof T & keyof AggregateProposalShareToken]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateProposalShareToken[P]>
+      : GetScalarType<T[P], AggregateProposalShareToken[P]>
+  }
+
+
+
+
+  export type ProposalShareTokenGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ProposalShareTokenWhereInput
+    orderBy?: ProposalShareTokenOrderByWithAggregationInput | ProposalShareTokenOrderByWithAggregationInput[]
+    by: ProposalShareTokenScalarFieldEnum[] | ProposalShareTokenScalarFieldEnum
+    having?: ProposalShareTokenScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ProposalShareTokenCountAggregateInputType | true
+    _avg?: ProposalShareTokenAvgAggregateInputType
+    _sum?: ProposalShareTokenSumAggregateInputType
+    _min?: ProposalShareTokenMinAggregateInputType
+    _max?: ProposalShareTokenMaxAggregateInputType
+  }
+
+  export type ProposalShareTokenGroupByOutputType = {
+    tokenId: number
+    token: string
+    proposalId: number
+    recipientEmail: string
+    isPortalUser: boolean
+    portalUserId: number | null
+    usedAt: Date | null
+    expiresAt: Date | null
+    createdAt: Date
+    _count: ProposalShareTokenCountAggregateOutputType | null
+    _avg: ProposalShareTokenAvgAggregateOutputType | null
+    _sum: ProposalShareTokenSumAggregateOutputType | null
+    _min: ProposalShareTokenMinAggregateOutputType | null
+    _max: ProposalShareTokenMaxAggregateOutputType | null
+  }
+
+  type GetProposalShareTokenGroupByPayload<T extends ProposalShareTokenGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ProposalShareTokenGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ProposalShareTokenGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ProposalShareTokenGroupByOutputType[P]>
+            : GetScalarType<T[P], ProposalShareTokenGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ProposalShareTokenSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    tokenId?: boolean
+    token?: boolean
+    proposalId?: boolean
+    recipientEmail?: boolean
+    isPortalUser?: boolean
+    portalUserId?: boolean
+    usedAt?: boolean
+    expiresAt?: boolean
+    createdAt?: boolean
+    proposal?: boolean | ProposalDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["proposalShareToken"]>
+
+
+
+  export type ProposalShareTokenSelectScalar = {
+    tokenId?: boolean
+    token?: boolean
+    proposalId?: boolean
+    recipientEmail?: boolean
+    isPortalUser?: boolean
+    portalUserId?: boolean
+    usedAt?: boolean
+    expiresAt?: boolean
+    createdAt?: boolean
+  }
+
+  export type ProposalShareTokenOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"tokenId" | "token" | "proposalId" | "recipientEmail" | "isPortalUser" | "portalUserId" | "usedAt" | "expiresAt" | "createdAt", ExtArgs["result"]["proposalShareToken"]>
+  export type ProposalShareTokenInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    proposal?: boolean | ProposalDefaultArgs<ExtArgs>
+  }
+
+  export type $ProposalShareTokenPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ProposalShareToken"
+    objects: {
+      proposal: Prisma.$ProposalPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      tokenId: number
+      token: string
+      proposalId: number
+      recipientEmail: string
+      isPortalUser: boolean
+      portalUserId: number | null
+      usedAt: Date | null
+      expiresAt: Date | null
+      createdAt: Date
+    }, ExtArgs["result"]["proposalShareToken"]>
+    composites: {}
+  }
+
+  type ProposalShareTokenGetPayload<S extends boolean | null | undefined | ProposalShareTokenDefaultArgs> = $Result.GetResult<Prisma.$ProposalShareTokenPayload, S>
+
+  type ProposalShareTokenCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ProposalShareTokenFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ProposalShareTokenCountAggregateInputType | true
+    }
+
+  export interface ProposalShareTokenDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ProposalShareToken'], meta: { name: 'ProposalShareToken' } }
+    /**
+     * Find zero or one ProposalShareToken that matches the filter.
+     * @param {ProposalShareTokenFindUniqueArgs} args - Arguments to find a ProposalShareToken
+     * @example
+     * // Get one ProposalShareToken
+     * const proposalShareToken = await prisma.proposalShareToken.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ProposalShareTokenFindUniqueArgs>(args: SelectSubset<T, ProposalShareTokenFindUniqueArgs<ExtArgs>>): Prisma__ProposalShareTokenClient<$Result.GetResult<Prisma.$ProposalShareTokenPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ProposalShareToken that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ProposalShareTokenFindUniqueOrThrowArgs} args - Arguments to find a ProposalShareToken
+     * @example
+     * // Get one ProposalShareToken
+     * const proposalShareToken = await prisma.proposalShareToken.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ProposalShareTokenFindUniqueOrThrowArgs>(args: SelectSubset<T, ProposalShareTokenFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ProposalShareTokenClient<$Result.GetResult<Prisma.$ProposalShareTokenPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ProposalShareToken that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProposalShareTokenFindFirstArgs} args - Arguments to find a ProposalShareToken
+     * @example
+     * // Get one ProposalShareToken
+     * const proposalShareToken = await prisma.proposalShareToken.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ProposalShareTokenFindFirstArgs>(args?: SelectSubset<T, ProposalShareTokenFindFirstArgs<ExtArgs>>): Prisma__ProposalShareTokenClient<$Result.GetResult<Prisma.$ProposalShareTokenPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ProposalShareToken that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProposalShareTokenFindFirstOrThrowArgs} args - Arguments to find a ProposalShareToken
+     * @example
+     * // Get one ProposalShareToken
+     * const proposalShareToken = await prisma.proposalShareToken.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ProposalShareTokenFindFirstOrThrowArgs>(args?: SelectSubset<T, ProposalShareTokenFindFirstOrThrowArgs<ExtArgs>>): Prisma__ProposalShareTokenClient<$Result.GetResult<Prisma.$ProposalShareTokenPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ProposalShareTokens that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProposalShareTokenFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ProposalShareTokens
+     * const proposalShareTokens = await prisma.proposalShareToken.findMany()
+     * 
+     * // Get first 10 ProposalShareTokens
+     * const proposalShareTokens = await prisma.proposalShareToken.findMany({ take: 10 })
+     * 
+     * // Only select the `tokenId`
+     * const proposalShareTokenWithTokenIdOnly = await prisma.proposalShareToken.findMany({ select: { tokenId: true } })
+     * 
+     */
+    findMany<T extends ProposalShareTokenFindManyArgs>(args?: SelectSubset<T, ProposalShareTokenFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProposalShareTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ProposalShareToken.
+     * @param {ProposalShareTokenCreateArgs} args - Arguments to create a ProposalShareToken.
+     * @example
+     * // Create one ProposalShareToken
+     * const ProposalShareToken = await prisma.proposalShareToken.create({
+     *   data: {
+     *     // ... data to create a ProposalShareToken
+     *   }
+     * })
+     * 
+     */
+    create<T extends ProposalShareTokenCreateArgs>(args: SelectSubset<T, ProposalShareTokenCreateArgs<ExtArgs>>): Prisma__ProposalShareTokenClient<$Result.GetResult<Prisma.$ProposalShareTokenPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ProposalShareTokens.
+     * @param {ProposalShareTokenCreateManyArgs} args - Arguments to create many ProposalShareTokens.
+     * @example
+     * // Create many ProposalShareTokens
+     * const proposalShareToken = await prisma.proposalShareToken.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ProposalShareTokenCreateManyArgs>(args?: SelectSubset<T, ProposalShareTokenCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a ProposalShareToken.
+     * @param {ProposalShareTokenDeleteArgs} args - Arguments to delete one ProposalShareToken.
+     * @example
+     * // Delete one ProposalShareToken
+     * const ProposalShareToken = await prisma.proposalShareToken.delete({
+     *   where: {
+     *     // ... filter to delete one ProposalShareToken
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ProposalShareTokenDeleteArgs>(args: SelectSubset<T, ProposalShareTokenDeleteArgs<ExtArgs>>): Prisma__ProposalShareTokenClient<$Result.GetResult<Prisma.$ProposalShareTokenPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ProposalShareToken.
+     * @param {ProposalShareTokenUpdateArgs} args - Arguments to update one ProposalShareToken.
+     * @example
+     * // Update one ProposalShareToken
+     * const proposalShareToken = await prisma.proposalShareToken.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ProposalShareTokenUpdateArgs>(args: SelectSubset<T, ProposalShareTokenUpdateArgs<ExtArgs>>): Prisma__ProposalShareTokenClient<$Result.GetResult<Prisma.$ProposalShareTokenPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ProposalShareTokens.
+     * @param {ProposalShareTokenDeleteManyArgs} args - Arguments to filter ProposalShareTokens to delete.
+     * @example
+     * // Delete a few ProposalShareTokens
+     * const { count } = await prisma.proposalShareToken.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ProposalShareTokenDeleteManyArgs>(args?: SelectSubset<T, ProposalShareTokenDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ProposalShareTokens.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProposalShareTokenUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ProposalShareTokens
+     * const proposalShareToken = await prisma.proposalShareToken.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ProposalShareTokenUpdateManyArgs>(args: SelectSubset<T, ProposalShareTokenUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one ProposalShareToken.
+     * @param {ProposalShareTokenUpsertArgs} args - Arguments to update or create a ProposalShareToken.
+     * @example
+     * // Update or create a ProposalShareToken
+     * const proposalShareToken = await prisma.proposalShareToken.upsert({
+     *   create: {
+     *     // ... data to create a ProposalShareToken
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ProposalShareToken we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ProposalShareTokenUpsertArgs>(args: SelectSubset<T, ProposalShareTokenUpsertArgs<ExtArgs>>): Prisma__ProposalShareTokenClient<$Result.GetResult<Prisma.$ProposalShareTokenPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ProposalShareTokens.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProposalShareTokenCountArgs} args - Arguments to filter ProposalShareTokens to count.
+     * @example
+     * // Count the number of ProposalShareTokens
+     * const count = await prisma.proposalShareToken.count({
+     *   where: {
+     *     // ... the filter for the ProposalShareTokens we want to count
+     *   }
+     * })
+    **/
+    count<T extends ProposalShareTokenCountArgs>(
+      args?: Subset<T, ProposalShareTokenCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ProposalShareTokenCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ProposalShareToken.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProposalShareTokenAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ProposalShareTokenAggregateArgs>(args: Subset<T, ProposalShareTokenAggregateArgs>): Prisma.PrismaPromise<GetProposalShareTokenAggregateType<T>>
+
+    /**
+     * Group by ProposalShareToken.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProposalShareTokenGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ProposalShareTokenGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ProposalShareTokenGroupByArgs['orderBy'] }
+        : { orderBy?: ProposalShareTokenGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ProposalShareTokenGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetProposalShareTokenGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ProposalShareToken model
+   */
+  readonly fields: ProposalShareTokenFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ProposalShareToken.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ProposalShareTokenClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    proposal<T extends ProposalDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProposalDefaultArgs<ExtArgs>>): Prisma__ProposalClient<$Result.GetResult<Prisma.$ProposalPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ProposalShareToken model
+   */
+  interface ProposalShareTokenFieldRefs {
+    readonly tokenId: FieldRef<"ProposalShareToken", 'Int'>
+    readonly token: FieldRef<"ProposalShareToken", 'String'>
+    readonly proposalId: FieldRef<"ProposalShareToken", 'Int'>
+    readonly recipientEmail: FieldRef<"ProposalShareToken", 'String'>
+    readonly isPortalUser: FieldRef<"ProposalShareToken", 'Boolean'>
+    readonly portalUserId: FieldRef<"ProposalShareToken", 'Int'>
+    readonly usedAt: FieldRef<"ProposalShareToken", 'DateTime'>
+    readonly expiresAt: FieldRef<"ProposalShareToken", 'DateTime'>
+    readonly createdAt: FieldRef<"ProposalShareToken", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ProposalShareToken findUnique
+   */
+  export type ProposalShareTokenFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProposalShareToken
+     */
+    select?: ProposalShareTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProposalShareToken
+     */
+    omit?: ProposalShareTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProposalShareTokenInclude<ExtArgs> | null
+    /**
+     * Filter, which ProposalShareToken to fetch.
+     */
+    where: ProposalShareTokenWhereUniqueInput
+  }
+
+  /**
+   * ProposalShareToken findUniqueOrThrow
+   */
+  export type ProposalShareTokenFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProposalShareToken
+     */
+    select?: ProposalShareTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProposalShareToken
+     */
+    omit?: ProposalShareTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProposalShareTokenInclude<ExtArgs> | null
+    /**
+     * Filter, which ProposalShareToken to fetch.
+     */
+    where: ProposalShareTokenWhereUniqueInput
+  }
+
+  /**
+   * ProposalShareToken findFirst
+   */
+  export type ProposalShareTokenFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProposalShareToken
+     */
+    select?: ProposalShareTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProposalShareToken
+     */
+    omit?: ProposalShareTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProposalShareTokenInclude<ExtArgs> | null
+    /**
+     * Filter, which ProposalShareToken to fetch.
+     */
+    where?: ProposalShareTokenWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ProposalShareTokens to fetch.
+     */
+    orderBy?: ProposalShareTokenOrderByWithRelationInput | ProposalShareTokenOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ProposalShareTokens.
+     */
+    cursor?: ProposalShareTokenWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ProposalShareTokens from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ProposalShareTokens.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ProposalShareTokens.
+     */
+    distinct?: ProposalShareTokenScalarFieldEnum | ProposalShareTokenScalarFieldEnum[]
+  }
+
+  /**
+   * ProposalShareToken findFirstOrThrow
+   */
+  export type ProposalShareTokenFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProposalShareToken
+     */
+    select?: ProposalShareTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProposalShareToken
+     */
+    omit?: ProposalShareTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProposalShareTokenInclude<ExtArgs> | null
+    /**
+     * Filter, which ProposalShareToken to fetch.
+     */
+    where?: ProposalShareTokenWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ProposalShareTokens to fetch.
+     */
+    orderBy?: ProposalShareTokenOrderByWithRelationInput | ProposalShareTokenOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ProposalShareTokens.
+     */
+    cursor?: ProposalShareTokenWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ProposalShareTokens from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ProposalShareTokens.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ProposalShareTokens.
+     */
+    distinct?: ProposalShareTokenScalarFieldEnum | ProposalShareTokenScalarFieldEnum[]
+  }
+
+  /**
+   * ProposalShareToken findMany
+   */
+  export type ProposalShareTokenFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProposalShareToken
+     */
+    select?: ProposalShareTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProposalShareToken
+     */
+    omit?: ProposalShareTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProposalShareTokenInclude<ExtArgs> | null
+    /**
+     * Filter, which ProposalShareTokens to fetch.
+     */
+    where?: ProposalShareTokenWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ProposalShareTokens to fetch.
+     */
+    orderBy?: ProposalShareTokenOrderByWithRelationInput | ProposalShareTokenOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ProposalShareTokens.
+     */
+    cursor?: ProposalShareTokenWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ProposalShareTokens from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ProposalShareTokens.
+     */
+    skip?: number
+    distinct?: ProposalShareTokenScalarFieldEnum | ProposalShareTokenScalarFieldEnum[]
+  }
+
+  /**
+   * ProposalShareToken create
+   */
+  export type ProposalShareTokenCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProposalShareToken
+     */
+    select?: ProposalShareTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProposalShareToken
+     */
+    omit?: ProposalShareTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProposalShareTokenInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ProposalShareToken.
+     */
+    data: XOR<ProposalShareTokenCreateInput, ProposalShareTokenUncheckedCreateInput>
+  }
+
+  /**
+   * ProposalShareToken createMany
+   */
+  export type ProposalShareTokenCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ProposalShareTokens.
+     */
+    data: ProposalShareTokenCreateManyInput | ProposalShareTokenCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ProposalShareToken update
+   */
+  export type ProposalShareTokenUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProposalShareToken
+     */
+    select?: ProposalShareTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProposalShareToken
+     */
+    omit?: ProposalShareTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProposalShareTokenInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ProposalShareToken.
+     */
+    data: XOR<ProposalShareTokenUpdateInput, ProposalShareTokenUncheckedUpdateInput>
+    /**
+     * Choose, which ProposalShareToken to update.
+     */
+    where: ProposalShareTokenWhereUniqueInput
+  }
+
+  /**
+   * ProposalShareToken updateMany
+   */
+  export type ProposalShareTokenUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ProposalShareTokens.
+     */
+    data: XOR<ProposalShareTokenUpdateManyMutationInput, ProposalShareTokenUncheckedUpdateManyInput>
+    /**
+     * Filter which ProposalShareTokens to update
+     */
+    where?: ProposalShareTokenWhereInput
+    /**
+     * Limit how many ProposalShareTokens to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ProposalShareToken upsert
+   */
+  export type ProposalShareTokenUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProposalShareToken
+     */
+    select?: ProposalShareTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProposalShareToken
+     */
+    omit?: ProposalShareTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProposalShareTokenInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ProposalShareToken to update in case it exists.
+     */
+    where: ProposalShareTokenWhereUniqueInput
+    /**
+     * In case the ProposalShareToken found by the `where` argument doesn't exist, create a new ProposalShareToken with this data.
+     */
+    create: XOR<ProposalShareTokenCreateInput, ProposalShareTokenUncheckedCreateInput>
+    /**
+     * In case the ProposalShareToken was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ProposalShareTokenUpdateInput, ProposalShareTokenUncheckedUpdateInput>
+  }
+
+  /**
+   * ProposalShareToken delete
+   */
+  export type ProposalShareTokenDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProposalShareToken
+     */
+    select?: ProposalShareTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProposalShareToken
+     */
+    omit?: ProposalShareTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProposalShareTokenInclude<ExtArgs> | null
+    /**
+     * Filter which ProposalShareToken to delete.
+     */
+    where: ProposalShareTokenWhereUniqueInput
+  }
+
+  /**
+   * ProposalShareToken deleteMany
+   */
+  export type ProposalShareTokenDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ProposalShareTokens to delete
+     */
+    where?: ProposalShareTokenWhereInput
+    /**
+     * Limit how many ProposalShareTokens to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ProposalShareToken without action
+   */
+  export type ProposalShareTokenDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProposalShareToken
+     */
+    select?: ProposalShareTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProposalShareToken
+     */
+    omit?: ProposalShareTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProposalShareTokenInclude<ExtArgs> | null
   }
 
 
@@ -27557,6 +28737,7 @@ export namespace Prisma {
     viewId: 'viewId',
     proposalId: 'proposalId',
     clientId: 'clientId',
+    tokenId: 'tokenId',
     dateViewed: 'dateViewed'
   };
 
@@ -27565,7 +28746,9 @@ export namespace Prisma {
 
   export const ProposalSessionScalarFieldEnum: {
     sessionId: 'sessionId',
+    proposalId: 'proposalId',
     clientId: 'clientId',
+    tokenId: 'tokenId',
     startedAt: 'startedAt',
     lastActivityAt: 'lastActivityAt',
     endedAt: 'endedAt',
@@ -27573,6 +28756,21 @@ export namespace Prisma {
   };
 
   export type ProposalSessionScalarFieldEnum = (typeof ProposalSessionScalarFieldEnum)[keyof typeof ProposalSessionScalarFieldEnum]
+
+
+  export const ProposalShareTokenScalarFieldEnum: {
+    tokenId: 'tokenId',
+    token: 'token',
+    proposalId: 'proposalId',
+    recipientEmail: 'recipientEmail',
+    isPortalUser: 'isPortalUser',
+    portalUserId: 'portalUserId',
+    usedAt: 'usedAt',
+    expiresAt: 'expiresAt',
+    createdAt: 'createdAt'
+  };
+
+  export type ProposalShareTokenScalarFieldEnum = (typeof ProposalShareTokenScalarFieldEnum)[keyof typeof ProposalShareTokenScalarFieldEnum]
 
 
   export const SelectedMemberScalarFieldEnum: {
@@ -27879,6 +29077,14 @@ export namespace Prisma {
   };
 
   export type ProposalStatusOrderByRelevanceFieldEnum = (typeof ProposalStatusOrderByRelevanceFieldEnum)[keyof typeof ProposalStatusOrderByRelevanceFieldEnum]
+
+
+  export const ProposalShareTokenOrderByRelevanceFieldEnum: {
+    token: 'token',
+    recipientEmail: 'recipientEmail'
+  };
+
+  export type ProposalShareTokenOrderByRelevanceFieldEnum = (typeof ProposalShareTokenOrderByRelevanceFieldEnum)[keyof typeof ProposalShareTokenOrderByRelevanceFieldEnum]
 
 
   export const TeamMemberOrderByRelevanceFieldEnum: {
@@ -28378,6 +29584,7 @@ export namespace Prisma {
     proposalViews?: ProposalViewListRelationFilter
     selectedMembers?: SelectedMemberListRelationFilter
     timelines?: TimelineListRelationFilter
+    shareTokens?: ProposalShareTokenListRelationFilter
   }
 
   export type ProposalOrderByWithRelationInput = {
@@ -28408,6 +29615,7 @@ export namespace Prisma {
     proposalViews?: ProposalViewOrderByRelationAggregateInput
     selectedMembers?: SelectedMemberOrderByRelationAggregateInput
     timelines?: TimelineOrderByRelationAggregateInput
+    shareTokens?: ProposalShareTokenOrderByRelationAggregateInput
     _relevance?: ProposalOrderByRelevanceInput
   }
 
@@ -28442,6 +29650,7 @@ export namespace Prisma {
     proposalViews?: ProposalViewListRelationFilter
     selectedMembers?: SelectedMemberListRelationFilter
     timelines?: TimelineListRelationFilter
+    shareTokens?: ProposalShareTokenListRelationFilter
   }, "proposalId" | "slug">
 
   export type ProposalOrderByWithAggregationInput = {
@@ -28545,7 +29754,8 @@ export namespace Prisma {
     NOT?: ProposalViewWhereInput | ProposalViewWhereInput[]
     viewId?: IntFilter<"ProposalView"> | number
     proposalId?: IntFilter<"ProposalView"> | number
-    clientId?: IntFilter<"ProposalView"> | number
+    clientId?: IntNullableFilter<"ProposalView"> | number | null
+    tokenId?: IntNullableFilter<"ProposalView"> | number | null
     dateViewed?: DateTimeFilter<"ProposalView"> | Date | string
     proposal?: XOR<ProposalScalarRelationFilter, ProposalWhereInput>
   }
@@ -28553,7 +29763,8 @@ export namespace Prisma {
   export type ProposalViewOrderByWithRelationInput = {
     viewId?: SortOrder
     proposalId?: SortOrder
-    clientId?: SortOrder
+    clientId?: SortOrderInput | SortOrder
+    tokenId?: SortOrderInput | SortOrder
     dateViewed?: SortOrder
     proposal?: ProposalOrderByWithRelationInput
   }
@@ -28564,7 +29775,8 @@ export namespace Prisma {
     OR?: ProposalViewWhereInput[]
     NOT?: ProposalViewWhereInput | ProposalViewWhereInput[]
     proposalId?: IntFilter<"ProposalView"> | number
-    clientId?: IntFilter<"ProposalView"> | number
+    clientId?: IntNullableFilter<"ProposalView"> | number | null
+    tokenId?: IntNullableFilter<"ProposalView"> | number | null
     dateViewed?: DateTimeFilter<"ProposalView"> | Date | string
     proposal?: XOR<ProposalScalarRelationFilter, ProposalWhereInput>
   }, "viewId">
@@ -28572,7 +29784,8 @@ export namespace Prisma {
   export type ProposalViewOrderByWithAggregationInput = {
     viewId?: SortOrder
     proposalId?: SortOrder
-    clientId?: SortOrder
+    clientId?: SortOrderInput | SortOrder
+    tokenId?: SortOrderInput | SortOrder
     dateViewed?: SortOrder
     _count?: ProposalViewCountOrderByAggregateInput
     _avg?: ProposalViewAvgOrderByAggregateInput
@@ -28587,7 +29800,8 @@ export namespace Prisma {
     NOT?: ProposalViewScalarWhereWithAggregatesInput | ProposalViewScalarWhereWithAggregatesInput[]
     viewId?: IntWithAggregatesFilter<"ProposalView"> | number
     proposalId?: IntWithAggregatesFilter<"ProposalView"> | number
-    clientId?: IntWithAggregatesFilter<"ProposalView"> | number
+    clientId?: IntNullableWithAggregatesFilter<"ProposalView"> | number | null
+    tokenId?: IntNullableWithAggregatesFilter<"ProposalView"> | number | null
     dateViewed?: DateTimeWithAggregatesFilter<"ProposalView"> | Date | string
   }
 
@@ -28596,20 +29810,24 @@ export namespace Prisma {
     OR?: ProposalSessionWhereInput[]
     NOT?: ProposalSessionWhereInput | ProposalSessionWhereInput[]
     sessionId?: IntFilter<"ProposalSession"> | number
-    clientId?: IntFilter<"ProposalSession"> | number
+    proposalId?: IntFilter<"ProposalSession"> | number
+    clientId?: IntNullableFilter<"ProposalSession"> | number | null
+    tokenId?: IntNullableFilter<"ProposalSession"> | number | null
     startedAt?: DateTimeFilter<"ProposalSession"> | Date | string
     lastActivityAt?: DateTimeNullableFilter<"ProposalSession"> | Date | string | null
     endedAt?: DateTimeNullableFilter<"ProposalSession"> | Date | string | null
-    durationSeconds?: IntFilter<"ProposalSession"> | number
+    durationSeconds?: IntNullableFilter<"ProposalSession"> | number | null
   }
 
   export type ProposalSessionOrderByWithRelationInput = {
     sessionId?: SortOrder
-    clientId?: SortOrder
+    proposalId?: SortOrder
+    clientId?: SortOrderInput | SortOrder
+    tokenId?: SortOrderInput | SortOrder
     startedAt?: SortOrder
     lastActivityAt?: SortOrderInput | SortOrder
     endedAt?: SortOrderInput | SortOrder
-    durationSeconds?: SortOrder
+    durationSeconds?: SortOrderInput | SortOrder
   }
 
   export type ProposalSessionWhereUniqueInput = Prisma.AtLeast<{
@@ -28617,20 +29835,24 @@ export namespace Prisma {
     AND?: ProposalSessionWhereInput | ProposalSessionWhereInput[]
     OR?: ProposalSessionWhereInput[]
     NOT?: ProposalSessionWhereInput | ProposalSessionWhereInput[]
-    clientId?: IntFilter<"ProposalSession"> | number
+    proposalId?: IntFilter<"ProposalSession"> | number
+    clientId?: IntNullableFilter<"ProposalSession"> | number | null
+    tokenId?: IntNullableFilter<"ProposalSession"> | number | null
     startedAt?: DateTimeFilter<"ProposalSession"> | Date | string
     lastActivityAt?: DateTimeNullableFilter<"ProposalSession"> | Date | string | null
     endedAt?: DateTimeNullableFilter<"ProposalSession"> | Date | string | null
-    durationSeconds?: IntFilter<"ProposalSession"> | number
+    durationSeconds?: IntNullableFilter<"ProposalSession"> | number | null
   }, "sessionId">
 
   export type ProposalSessionOrderByWithAggregationInput = {
     sessionId?: SortOrder
-    clientId?: SortOrder
+    proposalId?: SortOrder
+    clientId?: SortOrderInput | SortOrder
+    tokenId?: SortOrderInput | SortOrder
     startedAt?: SortOrder
     lastActivityAt?: SortOrderInput | SortOrder
     endedAt?: SortOrderInput | SortOrder
-    durationSeconds?: SortOrder
+    durationSeconds?: SortOrderInput | SortOrder
     _count?: ProposalSessionCountOrderByAggregateInput
     _avg?: ProposalSessionAvgOrderByAggregateInput
     _max?: ProposalSessionMaxOrderByAggregateInput
@@ -28643,11 +29865,91 @@ export namespace Prisma {
     OR?: ProposalSessionScalarWhereWithAggregatesInput[]
     NOT?: ProposalSessionScalarWhereWithAggregatesInput | ProposalSessionScalarWhereWithAggregatesInput[]
     sessionId?: IntWithAggregatesFilter<"ProposalSession"> | number
-    clientId?: IntWithAggregatesFilter<"ProposalSession"> | number
+    proposalId?: IntWithAggregatesFilter<"ProposalSession"> | number
+    clientId?: IntNullableWithAggregatesFilter<"ProposalSession"> | number | null
+    tokenId?: IntNullableWithAggregatesFilter<"ProposalSession"> | number | null
     startedAt?: DateTimeWithAggregatesFilter<"ProposalSession"> | Date | string
     lastActivityAt?: DateTimeNullableWithAggregatesFilter<"ProposalSession"> | Date | string | null
     endedAt?: DateTimeNullableWithAggregatesFilter<"ProposalSession"> | Date | string | null
-    durationSeconds?: IntWithAggregatesFilter<"ProposalSession"> | number
+    durationSeconds?: IntNullableWithAggregatesFilter<"ProposalSession"> | number | null
+  }
+
+  export type ProposalShareTokenWhereInput = {
+    AND?: ProposalShareTokenWhereInput | ProposalShareTokenWhereInput[]
+    OR?: ProposalShareTokenWhereInput[]
+    NOT?: ProposalShareTokenWhereInput | ProposalShareTokenWhereInput[]
+    tokenId?: IntFilter<"ProposalShareToken"> | number
+    token?: StringFilter<"ProposalShareToken"> | string
+    proposalId?: IntFilter<"ProposalShareToken"> | number
+    recipientEmail?: StringFilter<"ProposalShareToken"> | string
+    isPortalUser?: BoolFilter<"ProposalShareToken"> | boolean
+    portalUserId?: IntNullableFilter<"ProposalShareToken"> | number | null
+    usedAt?: DateTimeNullableFilter<"ProposalShareToken"> | Date | string | null
+    expiresAt?: DateTimeNullableFilter<"ProposalShareToken"> | Date | string | null
+    createdAt?: DateTimeFilter<"ProposalShareToken"> | Date | string
+    proposal?: XOR<ProposalScalarRelationFilter, ProposalWhereInput>
+  }
+
+  export type ProposalShareTokenOrderByWithRelationInput = {
+    tokenId?: SortOrder
+    token?: SortOrder
+    proposalId?: SortOrder
+    recipientEmail?: SortOrder
+    isPortalUser?: SortOrder
+    portalUserId?: SortOrderInput | SortOrder
+    usedAt?: SortOrderInput | SortOrder
+    expiresAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    proposal?: ProposalOrderByWithRelationInput
+    _relevance?: ProposalShareTokenOrderByRelevanceInput
+  }
+
+  export type ProposalShareTokenWhereUniqueInput = Prisma.AtLeast<{
+    tokenId?: number
+    token?: string
+    AND?: ProposalShareTokenWhereInput | ProposalShareTokenWhereInput[]
+    OR?: ProposalShareTokenWhereInput[]
+    NOT?: ProposalShareTokenWhereInput | ProposalShareTokenWhereInput[]
+    proposalId?: IntFilter<"ProposalShareToken"> | number
+    recipientEmail?: StringFilter<"ProposalShareToken"> | string
+    isPortalUser?: BoolFilter<"ProposalShareToken"> | boolean
+    portalUserId?: IntNullableFilter<"ProposalShareToken"> | number | null
+    usedAt?: DateTimeNullableFilter<"ProposalShareToken"> | Date | string | null
+    expiresAt?: DateTimeNullableFilter<"ProposalShareToken"> | Date | string | null
+    createdAt?: DateTimeFilter<"ProposalShareToken"> | Date | string
+    proposal?: XOR<ProposalScalarRelationFilter, ProposalWhereInput>
+  }, "tokenId" | "token">
+
+  export type ProposalShareTokenOrderByWithAggregationInput = {
+    tokenId?: SortOrder
+    token?: SortOrder
+    proposalId?: SortOrder
+    recipientEmail?: SortOrder
+    isPortalUser?: SortOrder
+    portalUserId?: SortOrderInput | SortOrder
+    usedAt?: SortOrderInput | SortOrder
+    expiresAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    _count?: ProposalShareTokenCountOrderByAggregateInput
+    _avg?: ProposalShareTokenAvgOrderByAggregateInput
+    _max?: ProposalShareTokenMaxOrderByAggregateInput
+    _min?: ProposalShareTokenMinOrderByAggregateInput
+    _sum?: ProposalShareTokenSumOrderByAggregateInput
+  }
+
+  export type ProposalShareTokenScalarWhereWithAggregatesInput = {
+    AND?: ProposalShareTokenScalarWhereWithAggregatesInput | ProposalShareTokenScalarWhereWithAggregatesInput[]
+    OR?: ProposalShareTokenScalarWhereWithAggregatesInput[]
+    NOT?: ProposalShareTokenScalarWhereWithAggregatesInput | ProposalShareTokenScalarWhereWithAggregatesInput[]
+    tokenId?: IntWithAggregatesFilter<"ProposalShareToken"> | number
+    token?: StringWithAggregatesFilter<"ProposalShareToken"> | string
+    proposalId?: IntWithAggregatesFilter<"ProposalShareToken"> | number
+    recipientEmail?: StringWithAggregatesFilter<"ProposalShareToken"> | string
+    isPortalUser?: BoolWithAggregatesFilter<"ProposalShareToken"> | boolean
+    portalUserId?: IntNullableWithAggregatesFilter<"ProposalShareToken"> | number | null
+    usedAt?: DateTimeNullableWithAggregatesFilter<"ProposalShareToken"> | Date | string | null
+    expiresAt?: DateTimeNullableWithAggregatesFilter<"ProposalShareToken"> | Date | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"ProposalShareToken"> | Date | string
   }
 
   export type SelectedMemberWhereInput = {
@@ -30088,6 +31390,7 @@ export namespace Prisma {
     proposalViews?: ProposalViewCreateNestedManyWithoutProposalInput
     selectedMembers?: SelectedMemberCreateNestedManyWithoutProposalInput
     timelines?: TimelineCreateNestedManyWithoutProposalInput
+    shareTokens?: ProposalShareTokenCreateNestedManyWithoutProposalInput
   }
 
   export type ProposalUncheckedCreateInput = {
@@ -30115,6 +31418,7 @@ export namespace Prisma {
     proposalViews?: ProposalViewUncheckedCreateNestedManyWithoutProposalInput
     selectedMembers?: SelectedMemberUncheckedCreateNestedManyWithoutProposalInput
     timelines?: TimelineUncheckedCreateNestedManyWithoutProposalInput
+    shareTokens?: ProposalShareTokenUncheckedCreateNestedManyWithoutProposalInput
   }
 
   export type ProposalUpdateInput = {
@@ -30141,6 +31445,7 @@ export namespace Prisma {
     proposalViews?: ProposalViewUpdateManyWithoutProposalNestedInput
     selectedMembers?: SelectedMemberUpdateManyWithoutProposalNestedInput
     timelines?: TimelineUpdateManyWithoutProposalNestedInput
+    shareTokens?: ProposalShareTokenUpdateManyWithoutProposalNestedInput
   }
 
   export type ProposalUncheckedUpdateInput = {
@@ -30168,6 +31473,7 @@ export namespace Prisma {
     proposalViews?: ProposalViewUncheckedUpdateManyWithoutProposalNestedInput
     selectedMembers?: SelectedMemberUncheckedUpdateManyWithoutProposalNestedInput
     timelines?: TimelineUncheckedUpdateManyWithoutProposalNestedInput
+    shareTokens?: ProposalShareTokenUncheckedUpdateManyWithoutProposalNestedInput
   }
 
   export type ProposalCreateManyInput = {
@@ -30272,7 +31578,8 @@ export namespace Prisma {
   }
 
   export type ProposalViewCreateInput = {
-    clientId: number
+    clientId?: number | null
+    tokenId?: number | null
     dateViewed?: Date | string
     proposal: ProposalCreateNestedOneWithoutProposalViewsInput
   }
@@ -30280,12 +31587,14 @@ export namespace Prisma {
   export type ProposalViewUncheckedCreateInput = {
     viewId?: number
     proposalId: number
-    clientId: number
+    clientId?: number | null
+    tokenId?: number | null
     dateViewed?: Date | string
   }
 
   export type ProposalViewUpdateInput = {
-    clientId?: IntFieldUpdateOperationsInput | number
+    clientId?: NullableIntFieldUpdateOperationsInput | number | null
+    tokenId?: NullableIntFieldUpdateOperationsInput | number | null
     dateViewed?: DateTimeFieldUpdateOperationsInput | Date | string
     proposal?: ProposalUpdateOneRequiredWithoutProposalViewsNestedInput
   }
@@ -30293,87 +31602,185 @@ export namespace Prisma {
   export type ProposalViewUncheckedUpdateInput = {
     viewId?: IntFieldUpdateOperationsInput | number
     proposalId?: IntFieldUpdateOperationsInput | number
-    clientId?: IntFieldUpdateOperationsInput | number
+    clientId?: NullableIntFieldUpdateOperationsInput | number | null
+    tokenId?: NullableIntFieldUpdateOperationsInput | number | null
     dateViewed?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ProposalViewCreateManyInput = {
     viewId?: number
     proposalId: number
-    clientId: number
+    clientId?: number | null
+    tokenId?: number | null
     dateViewed?: Date | string
   }
 
   export type ProposalViewUpdateManyMutationInput = {
-    clientId?: IntFieldUpdateOperationsInput | number
+    clientId?: NullableIntFieldUpdateOperationsInput | number | null
+    tokenId?: NullableIntFieldUpdateOperationsInput | number | null
     dateViewed?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ProposalViewUncheckedUpdateManyInput = {
     viewId?: IntFieldUpdateOperationsInput | number
     proposalId?: IntFieldUpdateOperationsInput | number
-    clientId?: IntFieldUpdateOperationsInput | number
+    clientId?: NullableIntFieldUpdateOperationsInput | number | null
+    tokenId?: NullableIntFieldUpdateOperationsInput | number | null
     dateViewed?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ProposalSessionCreateInput = {
-    clientId: number
+    proposalId: number
+    clientId?: number | null
+    tokenId?: number | null
     startedAt?: Date | string
     lastActivityAt?: Date | string | null
     endedAt?: Date | string | null
-    durationSeconds: number
+    durationSeconds?: number | null
   }
 
   export type ProposalSessionUncheckedCreateInput = {
     sessionId?: number
-    clientId: number
+    proposalId: number
+    clientId?: number | null
+    tokenId?: number | null
     startedAt?: Date | string
     lastActivityAt?: Date | string | null
     endedAt?: Date | string | null
-    durationSeconds: number
+    durationSeconds?: number | null
   }
 
   export type ProposalSessionUpdateInput = {
-    clientId?: IntFieldUpdateOperationsInput | number
+    proposalId?: IntFieldUpdateOperationsInput | number
+    clientId?: NullableIntFieldUpdateOperationsInput | number | null
+    tokenId?: NullableIntFieldUpdateOperationsInput | number | null
     startedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     lastActivityAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    durationSeconds?: IntFieldUpdateOperationsInput | number
+    durationSeconds?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type ProposalSessionUncheckedUpdateInput = {
     sessionId?: IntFieldUpdateOperationsInput | number
-    clientId?: IntFieldUpdateOperationsInput | number
+    proposalId?: IntFieldUpdateOperationsInput | number
+    clientId?: NullableIntFieldUpdateOperationsInput | number | null
+    tokenId?: NullableIntFieldUpdateOperationsInput | number | null
     startedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     lastActivityAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    durationSeconds?: IntFieldUpdateOperationsInput | number
+    durationSeconds?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type ProposalSessionCreateManyInput = {
     sessionId?: number
-    clientId: number
+    proposalId: number
+    clientId?: number | null
+    tokenId?: number | null
     startedAt?: Date | string
     lastActivityAt?: Date | string | null
     endedAt?: Date | string | null
-    durationSeconds: number
+    durationSeconds?: number | null
   }
 
   export type ProposalSessionUpdateManyMutationInput = {
-    clientId?: IntFieldUpdateOperationsInput | number
+    proposalId?: IntFieldUpdateOperationsInput | number
+    clientId?: NullableIntFieldUpdateOperationsInput | number | null
+    tokenId?: NullableIntFieldUpdateOperationsInput | number | null
     startedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     lastActivityAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    durationSeconds?: IntFieldUpdateOperationsInput | number
+    durationSeconds?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type ProposalSessionUncheckedUpdateManyInput = {
     sessionId?: IntFieldUpdateOperationsInput | number
-    clientId?: IntFieldUpdateOperationsInput | number
+    proposalId?: IntFieldUpdateOperationsInput | number
+    clientId?: NullableIntFieldUpdateOperationsInput | number | null
+    tokenId?: NullableIntFieldUpdateOperationsInput | number | null
     startedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     lastActivityAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    durationSeconds?: IntFieldUpdateOperationsInput | number
+    durationSeconds?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
+  export type ProposalShareTokenCreateInput = {
+    token: string
+    recipientEmail: string
+    isPortalUser?: boolean
+    portalUserId?: number | null
+    usedAt?: Date | string | null
+    expiresAt?: Date | string | null
+    createdAt?: Date | string
+    proposal: ProposalCreateNestedOneWithoutShareTokensInput
+  }
+
+  export type ProposalShareTokenUncheckedCreateInput = {
+    tokenId?: number
+    token: string
+    proposalId: number
+    recipientEmail: string
+    isPortalUser?: boolean
+    portalUserId?: number | null
+    usedAt?: Date | string | null
+    expiresAt?: Date | string | null
+    createdAt?: Date | string
+  }
+
+  export type ProposalShareTokenUpdateInput = {
+    token?: StringFieldUpdateOperationsInput | string
+    recipientEmail?: StringFieldUpdateOperationsInput | string
+    isPortalUser?: BoolFieldUpdateOperationsInput | boolean
+    portalUserId?: NullableIntFieldUpdateOperationsInput | number | null
+    usedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    proposal?: ProposalUpdateOneRequiredWithoutShareTokensNestedInput
+  }
+
+  export type ProposalShareTokenUncheckedUpdateInput = {
+    tokenId?: IntFieldUpdateOperationsInput | number
+    token?: StringFieldUpdateOperationsInput | string
+    proposalId?: IntFieldUpdateOperationsInput | number
+    recipientEmail?: StringFieldUpdateOperationsInput | string
+    isPortalUser?: BoolFieldUpdateOperationsInput | boolean
+    portalUserId?: NullableIntFieldUpdateOperationsInput | number | null
+    usedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProposalShareTokenCreateManyInput = {
+    tokenId?: number
+    token: string
+    proposalId: number
+    recipientEmail: string
+    isPortalUser?: boolean
+    portalUserId?: number | null
+    usedAt?: Date | string | null
+    expiresAt?: Date | string | null
+    createdAt?: Date | string
+  }
+
+  export type ProposalShareTokenUpdateManyMutationInput = {
+    token?: StringFieldUpdateOperationsInput | string
+    recipientEmail?: StringFieldUpdateOperationsInput | string
+    isPortalUser?: BoolFieldUpdateOperationsInput | boolean
+    portalUserId?: NullableIntFieldUpdateOperationsInput | number | null
+    usedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProposalShareTokenUncheckedUpdateManyInput = {
+    tokenId?: IntFieldUpdateOperationsInput | number
+    token?: StringFieldUpdateOperationsInput | string
+    proposalId?: IntFieldUpdateOperationsInput | number
+    recipientEmail?: StringFieldUpdateOperationsInput | string
+    isPortalUser?: BoolFieldUpdateOperationsInput | boolean
+    portalUserId?: NullableIntFieldUpdateOperationsInput | number | null
+    usedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type SelectedMemberCreateInput = {
@@ -31985,6 +33392,12 @@ export namespace Prisma {
     none?: TimelineWhereInput
   }
 
+  export type ProposalShareTokenListRelationFilter = {
+    every?: ProposalShareTokenWhereInput
+    some?: ProposalShareTokenWhereInput
+    none?: ProposalShareTokenWhereInput
+  }
+
   export type SlaOfferOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -32002,6 +33415,10 @@ export namespace Prisma {
   }
 
   export type TimelineOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ProposalShareTokenOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -32147,6 +33564,7 @@ export namespace Prisma {
     viewId?: SortOrder
     proposalId?: SortOrder
     clientId?: SortOrder
+    tokenId?: SortOrder
     dateViewed?: SortOrder
   }
 
@@ -32154,12 +33572,14 @@ export namespace Prisma {
     viewId?: SortOrder
     proposalId?: SortOrder
     clientId?: SortOrder
+    tokenId?: SortOrder
   }
 
   export type ProposalViewMaxOrderByAggregateInput = {
     viewId?: SortOrder
     proposalId?: SortOrder
     clientId?: SortOrder
+    tokenId?: SortOrder
     dateViewed?: SortOrder
   }
 
@@ -32167,6 +33587,7 @@ export namespace Prisma {
     viewId?: SortOrder
     proposalId?: SortOrder
     clientId?: SortOrder
+    tokenId?: SortOrder
     dateViewed?: SortOrder
   }
 
@@ -32174,11 +33595,14 @@ export namespace Prisma {
     viewId?: SortOrder
     proposalId?: SortOrder
     clientId?: SortOrder
+    tokenId?: SortOrder
   }
 
   export type ProposalSessionCountOrderByAggregateInput = {
     sessionId?: SortOrder
+    proposalId?: SortOrder
     clientId?: SortOrder
+    tokenId?: SortOrder
     startedAt?: SortOrder
     lastActivityAt?: SortOrder
     endedAt?: SortOrder
@@ -32187,13 +33611,17 @@ export namespace Prisma {
 
   export type ProposalSessionAvgOrderByAggregateInput = {
     sessionId?: SortOrder
+    proposalId?: SortOrder
     clientId?: SortOrder
+    tokenId?: SortOrder
     durationSeconds?: SortOrder
   }
 
   export type ProposalSessionMaxOrderByAggregateInput = {
     sessionId?: SortOrder
+    proposalId?: SortOrder
     clientId?: SortOrder
+    tokenId?: SortOrder
     startedAt?: SortOrder
     lastActivityAt?: SortOrder
     endedAt?: SortOrder
@@ -32202,7 +33630,9 @@ export namespace Prisma {
 
   export type ProposalSessionMinOrderByAggregateInput = {
     sessionId?: SortOrder
+    proposalId?: SortOrder
     clientId?: SortOrder
+    tokenId?: SortOrder
     startedAt?: SortOrder
     lastActivityAt?: SortOrder
     endedAt?: SortOrder
@@ -32211,8 +33641,77 @@ export namespace Prisma {
 
   export type ProposalSessionSumOrderByAggregateInput = {
     sessionId?: SortOrder
+    proposalId?: SortOrder
     clientId?: SortOrder
+    tokenId?: SortOrder
     durationSeconds?: SortOrder
+  }
+
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type ProposalShareTokenOrderByRelevanceInput = {
+    fields: ProposalShareTokenOrderByRelevanceFieldEnum | ProposalShareTokenOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type ProposalShareTokenCountOrderByAggregateInput = {
+    tokenId?: SortOrder
+    token?: SortOrder
+    proposalId?: SortOrder
+    recipientEmail?: SortOrder
+    isPortalUser?: SortOrder
+    portalUserId?: SortOrder
+    usedAt?: SortOrder
+    expiresAt?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type ProposalShareTokenAvgOrderByAggregateInput = {
+    tokenId?: SortOrder
+    proposalId?: SortOrder
+    portalUserId?: SortOrder
+  }
+
+  export type ProposalShareTokenMaxOrderByAggregateInput = {
+    tokenId?: SortOrder
+    token?: SortOrder
+    proposalId?: SortOrder
+    recipientEmail?: SortOrder
+    isPortalUser?: SortOrder
+    portalUserId?: SortOrder
+    usedAt?: SortOrder
+    expiresAt?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type ProposalShareTokenMinOrderByAggregateInput = {
+    tokenId?: SortOrder
+    token?: SortOrder
+    proposalId?: SortOrder
+    recipientEmail?: SortOrder
+    isPortalUser?: SortOrder
+    portalUserId?: SortOrder
+    usedAt?: SortOrder
+    expiresAt?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type ProposalShareTokenSumOrderByAggregateInput = {
+    tokenId?: SortOrder
+    proposalId?: SortOrder
+    portalUserId?: SortOrder
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type TeamMemberScalarRelationFilter = {
@@ -32248,11 +33747,6 @@ export namespace Prisma {
     selectedMemberId?: SortOrder
     proposalId?: SortOrder
     memberId?: SortOrder
-  }
-
-  export type BoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
   export type TeamMemberOrderByRelevanceInput = {
@@ -32303,14 +33797,6 @@ export namespace Prisma {
 
   export type TeamMemberSumOrderByAggregateInput = {
     memberId?: SortOrder
-  }
-
-  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type TimelineScopeItemListRelationFilter = {
@@ -33568,6 +35054,13 @@ export namespace Prisma {
     connect?: TimelineWhereUniqueInput | TimelineWhereUniqueInput[]
   }
 
+  export type ProposalShareTokenCreateNestedManyWithoutProposalInput = {
+    create?: XOR<ProposalShareTokenCreateWithoutProposalInput, ProposalShareTokenUncheckedCreateWithoutProposalInput> | ProposalShareTokenCreateWithoutProposalInput[] | ProposalShareTokenUncheckedCreateWithoutProposalInput[]
+    connectOrCreate?: ProposalShareTokenCreateOrConnectWithoutProposalInput | ProposalShareTokenCreateOrConnectWithoutProposalInput[]
+    createMany?: ProposalShareTokenCreateManyProposalInputEnvelope
+    connect?: ProposalShareTokenWhereUniqueInput | ProposalShareTokenWhereUniqueInput[]
+  }
+
   export type SlaOfferUncheckedCreateNestedManyWithoutProposalInput = {
     create?: XOR<SlaOfferCreateWithoutProposalInput, SlaOfferUncheckedCreateWithoutProposalInput> | SlaOfferCreateWithoutProposalInput[] | SlaOfferUncheckedCreateWithoutProposalInput[]
     connectOrCreate?: SlaOfferCreateOrConnectWithoutProposalInput | SlaOfferCreateOrConnectWithoutProposalInput[]
@@ -33601,6 +35094,13 @@ export namespace Prisma {
     connectOrCreate?: TimelineCreateOrConnectWithoutProposalInput | TimelineCreateOrConnectWithoutProposalInput[]
     createMany?: TimelineCreateManyProposalInputEnvelope
     connect?: TimelineWhereUniqueInput | TimelineWhereUniqueInput[]
+  }
+
+  export type ProposalShareTokenUncheckedCreateNestedManyWithoutProposalInput = {
+    create?: XOR<ProposalShareTokenCreateWithoutProposalInput, ProposalShareTokenUncheckedCreateWithoutProposalInput> | ProposalShareTokenCreateWithoutProposalInput[] | ProposalShareTokenUncheckedCreateWithoutProposalInput[]
+    connectOrCreate?: ProposalShareTokenCreateOrConnectWithoutProposalInput | ProposalShareTokenCreateOrConnectWithoutProposalInput[]
+    createMany?: ProposalShareTokenCreateManyProposalInputEnvelope
+    connect?: ProposalShareTokenWhereUniqueInput | ProposalShareTokenWhereUniqueInput[]
   }
 
   export type NullableIntFieldUpdateOperationsInput = {
@@ -33705,6 +35205,20 @@ export namespace Prisma {
     deleteMany?: TimelineScalarWhereInput | TimelineScalarWhereInput[]
   }
 
+  export type ProposalShareTokenUpdateManyWithoutProposalNestedInput = {
+    create?: XOR<ProposalShareTokenCreateWithoutProposalInput, ProposalShareTokenUncheckedCreateWithoutProposalInput> | ProposalShareTokenCreateWithoutProposalInput[] | ProposalShareTokenUncheckedCreateWithoutProposalInput[]
+    connectOrCreate?: ProposalShareTokenCreateOrConnectWithoutProposalInput | ProposalShareTokenCreateOrConnectWithoutProposalInput[]
+    upsert?: ProposalShareTokenUpsertWithWhereUniqueWithoutProposalInput | ProposalShareTokenUpsertWithWhereUniqueWithoutProposalInput[]
+    createMany?: ProposalShareTokenCreateManyProposalInputEnvelope
+    set?: ProposalShareTokenWhereUniqueInput | ProposalShareTokenWhereUniqueInput[]
+    disconnect?: ProposalShareTokenWhereUniqueInput | ProposalShareTokenWhereUniqueInput[]
+    delete?: ProposalShareTokenWhereUniqueInput | ProposalShareTokenWhereUniqueInput[]
+    connect?: ProposalShareTokenWhereUniqueInput | ProposalShareTokenWhereUniqueInput[]
+    update?: ProposalShareTokenUpdateWithWhereUniqueWithoutProposalInput | ProposalShareTokenUpdateWithWhereUniqueWithoutProposalInput[]
+    updateMany?: ProposalShareTokenUpdateManyWithWhereWithoutProposalInput | ProposalShareTokenUpdateManyWithWhereWithoutProposalInput[]
+    deleteMany?: ProposalShareTokenScalarWhereInput | ProposalShareTokenScalarWhereInput[]
+  }
+
   export type SlaOfferUncheckedUpdateManyWithoutProposalNestedInput = {
     create?: XOR<SlaOfferCreateWithoutProposalInput, SlaOfferUncheckedCreateWithoutProposalInput> | SlaOfferCreateWithoutProposalInput[] | SlaOfferUncheckedCreateWithoutProposalInput[]
     connectOrCreate?: SlaOfferCreateOrConnectWithoutProposalInput | SlaOfferCreateOrConnectWithoutProposalInput[]
@@ -33775,6 +35289,20 @@ export namespace Prisma {
     deleteMany?: TimelineScalarWhereInput | TimelineScalarWhereInput[]
   }
 
+  export type ProposalShareTokenUncheckedUpdateManyWithoutProposalNestedInput = {
+    create?: XOR<ProposalShareTokenCreateWithoutProposalInput, ProposalShareTokenUncheckedCreateWithoutProposalInput> | ProposalShareTokenCreateWithoutProposalInput[] | ProposalShareTokenUncheckedCreateWithoutProposalInput[]
+    connectOrCreate?: ProposalShareTokenCreateOrConnectWithoutProposalInput | ProposalShareTokenCreateOrConnectWithoutProposalInput[]
+    upsert?: ProposalShareTokenUpsertWithWhereUniqueWithoutProposalInput | ProposalShareTokenUpsertWithWhereUniqueWithoutProposalInput[]
+    createMany?: ProposalShareTokenCreateManyProposalInputEnvelope
+    set?: ProposalShareTokenWhereUniqueInput | ProposalShareTokenWhereUniqueInput[]
+    disconnect?: ProposalShareTokenWhereUniqueInput | ProposalShareTokenWhereUniqueInput[]
+    delete?: ProposalShareTokenWhereUniqueInput | ProposalShareTokenWhereUniqueInput[]
+    connect?: ProposalShareTokenWhereUniqueInput | ProposalShareTokenWhereUniqueInput[]
+    update?: ProposalShareTokenUpdateWithWhereUniqueWithoutProposalInput | ProposalShareTokenUpdateWithWhereUniqueWithoutProposalInput[]
+    updateMany?: ProposalShareTokenUpdateManyWithWhereWithoutProposalInput | ProposalShareTokenUpdateManyWithWhereWithoutProposalInput[]
+    deleteMany?: ProposalShareTokenScalarWhereInput | ProposalShareTokenScalarWhereInput[]
+  }
+
   export type ProposalCreateNestedManyWithoutProposalStatusInput = {
     create?: XOR<ProposalCreateWithoutProposalStatusInput, ProposalUncheckedCreateWithoutProposalStatusInput> | ProposalCreateWithoutProposalStatusInput[] | ProposalUncheckedCreateWithoutProposalStatusInput[]
     connectOrCreate?: ProposalCreateOrConnectWithoutProposalStatusInput | ProposalCreateOrConnectWithoutProposalStatusInput[]
@@ -33831,6 +35359,24 @@ export namespace Prisma {
     update?: XOR<XOR<ProposalUpdateToOneWithWhereWithoutProposalViewsInput, ProposalUpdateWithoutProposalViewsInput>, ProposalUncheckedUpdateWithoutProposalViewsInput>
   }
 
+  export type ProposalCreateNestedOneWithoutShareTokensInput = {
+    create?: XOR<ProposalCreateWithoutShareTokensInput, ProposalUncheckedCreateWithoutShareTokensInput>
+    connectOrCreate?: ProposalCreateOrConnectWithoutShareTokensInput
+    connect?: ProposalWhereUniqueInput
+  }
+
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
+  }
+
+  export type ProposalUpdateOneRequiredWithoutShareTokensNestedInput = {
+    create?: XOR<ProposalCreateWithoutShareTokensInput, ProposalUncheckedCreateWithoutShareTokensInput>
+    connectOrCreate?: ProposalCreateOrConnectWithoutShareTokensInput
+    upsert?: ProposalUpsertWithoutShareTokensInput
+    connect?: ProposalWhereUniqueInput
+    update?: XOR<XOR<ProposalUpdateToOneWithWhereWithoutShareTokensInput, ProposalUpdateWithoutShareTokensInput>, ProposalUncheckedUpdateWithoutShareTokensInput>
+  }
+
   export type ProposalCreateNestedOneWithoutSelectedMembersInput = {
     create?: XOR<ProposalCreateWithoutSelectedMembersInput, ProposalUncheckedCreateWithoutSelectedMembersInput>
     connectOrCreate?: ProposalCreateOrConnectWithoutSelectedMembersInput
@@ -33871,10 +35417,6 @@ export namespace Prisma {
     connectOrCreate?: SelectedMemberCreateOrConnectWithoutTeamMemberInput | SelectedMemberCreateOrConnectWithoutTeamMemberInput[]
     createMany?: SelectedMemberCreateManyTeamMemberInputEnvelope
     connect?: SelectedMemberWhereUniqueInput | SelectedMemberWhereUniqueInput[]
-  }
-
-  export type BoolFieldUpdateOperationsInput = {
-    set?: boolean
   }
 
   export type SelectedMemberUpdateManyWithoutTeamMemberNestedInput = {
@@ -34632,6 +36174,7 @@ export namespace Prisma {
     proposalViews?: ProposalViewCreateNestedManyWithoutProposalInput
     selectedMembers?: SelectedMemberCreateNestedManyWithoutProposalInput
     timelines?: TimelineCreateNestedManyWithoutProposalInput
+    shareTokens?: ProposalShareTokenCreateNestedManyWithoutProposalInput
   }
 
   export type ProposalUncheckedCreateWithoutUserInput = {
@@ -34658,6 +36201,7 @@ export namespace Prisma {
     proposalViews?: ProposalViewUncheckedCreateNestedManyWithoutProposalInput
     selectedMembers?: SelectedMemberUncheckedCreateNestedManyWithoutProposalInput
     timelines?: TimelineUncheckedCreateNestedManyWithoutProposalInput
+    shareTokens?: ProposalShareTokenUncheckedCreateNestedManyWithoutProposalInput
   }
 
   export type ProposalCreateOrConnectWithoutUserInput = {
@@ -34950,6 +36494,7 @@ export namespace Prisma {
     proposalViews?: ProposalViewCreateNestedManyWithoutProposalInput
     selectedMembers?: SelectedMemberCreateNestedManyWithoutProposalInput
     timelines?: TimelineCreateNestedManyWithoutProposalInput
+    shareTokens?: ProposalShareTokenCreateNestedManyWithoutProposalInput
   }
 
   export type ProposalUncheckedCreateWithoutClientProfileInput = {
@@ -34976,6 +36521,7 @@ export namespace Prisma {
     proposalViews?: ProposalViewUncheckedCreateNestedManyWithoutProposalInput
     selectedMembers?: SelectedMemberUncheckedCreateNestedManyWithoutProposalInput
     timelines?: TimelineUncheckedCreateNestedManyWithoutProposalInput
+    shareTokens?: ProposalShareTokenUncheckedCreateNestedManyWithoutProposalInput
   }
 
   export type ProposalCreateOrConnectWithoutClientProfileInput = {
@@ -35238,13 +36784,15 @@ export namespace Prisma {
   }
 
   export type ProposalViewCreateWithoutProposalInput = {
-    clientId: number
+    clientId?: number | null
+    tokenId?: number | null
     dateViewed?: Date | string
   }
 
   export type ProposalViewUncheckedCreateWithoutProposalInput = {
     viewId?: number
-    clientId: number
+    clientId?: number | null
+    tokenId?: number | null
     dateViewed?: Date | string
   }
 
@@ -35303,6 +36851,37 @@ export namespace Prisma {
 
   export type TimelineCreateManyProposalInputEnvelope = {
     data: TimelineCreateManyProposalInput | TimelineCreateManyProposalInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ProposalShareTokenCreateWithoutProposalInput = {
+    token: string
+    recipientEmail: string
+    isPortalUser?: boolean
+    portalUserId?: number | null
+    usedAt?: Date | string | null
+    expiresAt?: Date | string | null
+    createdAt?: Date | string
+  }
+
+  export type ProposalShareTokenUncheckedCreateWithoutProposalInput = {
+    tokenId?: number
+    token: string
+    recipientEmail: string
+    isPortalUser?: boolean
+    portalUserId?: number | null
+    usedAt?: Date | string | null
+    expiresAt?: Date | string | null
+    createdAt?: Date | string
+  }
+
+  export type ProposalShareTokenCreateOrConnectWithoutProposalInput = {
+    where: ProposalShareTokenWhereUniqueInput
+    create: XOR<ProposalShareTokenCreateWithoutProposalInput, ProposalShareTokenUncheckedCreateWithoutProposalInput>
+  }
+
+  export type ProposalShareTokenCreateManyProposalInputEnvelope = {
+    data: ProposalShareTokenCreateManyProposalInput | ProposalShareTokenCreateManyProposalInput[]
     skipDuplicates?: boolean
   }
 
@@ -35492,7 +37071,8 @@ export namespace Prisma {
     NOT?: ProposalViewScalarWhereInput | ProposalViewScalarWhereInput[]
     viewId?: IntFilter<"ProposalView"> | number
     proposalId?: IntFilter<"ProposalView"> | number
-    clientId?: IntFilter<"ProposalView"> | number
+    clientId?: IntNullableFilter<"ProposalView"> | number | null
+    tokenId?: IntNullableFilter<"ProposalView"> | number | null
     dateViewed?: DateTimeFilter<"ProposalView"> | Date | string
   }
 
@@ -35550,6 +37130,37 @@ export namespace Prisma {
     dateUpdated?: DateTimeNullableFilter<"Timeline"> | Date | string | null
   }
 
+  export type ProposalShareTokenUpsertWithWhereUniqueWithoutProposalInput = {
+    where: ProposalShareTokenWhereUniqueInput
+    update: XOR<ProposalShareTokenUpdateWithoutProposalInput, ProposalShareTokenUncheckedUpdateWithoutProposalInput>
+    create: XOR<ProposalShareTokenCreateWithoutProposalInput, ProposalShareTokenUncheckedCreateWithoutProposalInput>
+  }
+
+  export type ProposalShareTokenUpdateWithWhereUniqueWithoutProposalInput = {
+    where: ProposalShareTokenWhereUniqueInput
+    data: XOR<ProposalShareTokenUpdateWithoutProposalInput, ProposalShareTokenUncheckedUpdateWithoutProposalInput>
+  }
+
+  export type ProposalShareTokenUpdateManyWithWhereWithoutProposalInput = {
+    where: ProposalShareTokenScalarWhereInput
+    data: XOR<ProposalShareTokenUpdateManyMutationInput, ProposalShareTokenUncheckedUpdateManyWithoutProposalInput>
+  }
+
+  export type ProposalShareTokenScalarWhereInput = {
+    AND?: ProposalShareTokenScalarWhereInput | ProposalShareTokenScalarWhereInput[]
+    OR?: ProposalShareTokenScalarWhereInput[]
+    NOT?: ProposalShareTokenScalarWhereInput | ProposalShareTokenScalarWhereInput[]
+    tokenId?: IntFilter<"ProposalShareToken"> | number
+    token?: StringFilter<"ProposalShareToken"> | string
+    proposalId?: IntFilter<"ProposalShareToken"> | number
+    recipientEmail?: StringFilter<"ProposalShareToken"> | string
+    isPortalUser?: BoolFilter<"ProposalShareToken"> | boolean
+    portalUserId?: IntNullableFilter<"ProposalShareToken"> | number | null
+    usedAt?: DateTimeNullableFilter<"ProposalShareToken"> | Date | string | null
+    expiresAt?: DateTimeNullableFilter<"ProposalShareToken"> | Date | string | null
+    createdAt?: DateTimeFilter<"ProposalShareToken"> | Date | string
+  }
+
   export type ProposalCreateWithoutProposalStatusInput = {
     slug: string
     clientType: string
@@ -35573,6 +37184,7 @@ export namespace Prisma {
     proposalViews?: ProposalViewCreateNestedManyWithoutProposalInput
     selectedMembers?: SelectedMemberCreateNestedManyWithoutProposalInput
     timelines?: TimelineCreateNestedManyWithoutProposalInput
+    shareTokens?: ProposalShareTokenCreateNestedManyWithoutProposalInput
   }
 
   export type ProposalUncheckedCreateWithoutProposalStatusInput = {
@@ -35599,6 +37211,7 @@ export namespace Prisma {
     proposalViews?: ProposalViewUncheckedCreateNestedManyWithoutProposalInput
     selectedMembers?: SelectedMemberUncheckedCreateNestedManyWithoutProposalInput
     timelines?: TimelineUncheckedCreateNestedManyWithoutProposalInput
+    shareTokens?: ProposalShareTokenUncheckedCreateNestedManyWithoutProposalInput
   }
 
   export type ProposalCreateOrConnectWithoutProposalStatusInput = {
@@ -35650,6 +37263,7 @@ export namespace Prisma {
     serviceProductOffers?: ServiceProductOfferCreateNestedManyWithoutProposalInput
     selectedMembers?: SelectedMemberCreateNestedManyWithoutProposalInput
     timelines?: TimelineCreateNestedManyWithoutProposalInput
+    shareTokens?: ProposalShareTokenCreateNestedManyWithoutProposalInput
   }
 
   export type ProposalUncheckedCreateWithoutProposalViewsInput = {
@@ -35676,6 +37290,7 @@ export namespace Prisma {
     serviceProductOffers?: ServiceProductOfferUncheckedCreateNestedManyWithoutProposalInput
     selectedMembers?: SelectedMemberUncheckedCreateNestedManyWithoutProposalInput
     timelines?: TimelineUncheckedCreateNestedManyWithoutProposalInput
+    shareTokens?: ProposalShareTokenUncheckedCreateNestedManyWithoutProposalInput
   }
 
   export type ProposalCreateOrConnectWithoutProposalViewsInput = {
@@ -35717,6 +37332,7 @@ export namespace Prisma {
     serviceProductOffers?: ServiceProductOfferUpdateManyWithoutProposalNestedInput
     selectedMembers?: SelectedMemberUpdateManyWithoutProposalNestedInput
     timelines?: TimelineUpdateManyWithoutProposalNestedInput
+    shareTokens?: ProposalShareTokenUpdateManyWithoutProposalNestedInput
   }
 
   export type ProposalUncheckedUpdateWithoutProposalViewsInput = {
@@ -35741,6 +37357,129 @@ export namespace Prisma {
     viewCount?: NullableIntFieldUpdateOperationsInput | number | null
     slaOffers?: SlaOfferUncheckedUpdateManyWithoutProposalNestedInput
     serviceProductOffers?: ServiceProductOfferUncheckedUpdateManyWithoutProposalNestedInput
+    selectedMembers?: SelectedMemberUncheckedUpdateManyWithoutProposalNestedInput
+    timelines?: TimelineUncheckedUpdateManyWithoutProposalNestedInput
+    shareTokens?: ProposalShareTokenUncheckedUpdateManyWithoutProposalNestedInput
+  }
+
+  export type ProposalCreateWithoutShareTokensInput = {
+    slug: string
+    clientType: string
+    proposalTitle: string
+    proposalType: string
+    executiveSummary: string
+    goalsAndObjectives: string
+    execVideoUrl?: string | null
+    proposedSolution: string
+    proposalDescription?: string | null
+    statusUpdated?: Date | string
+    dateCreated?: Date | string
+    dateUpdated?: Date | string | null
+    firstViewedAt?: Date | string | null
+    lastViewedAt?: Date | string | null
+    viewCount?: number | null
+    clientProfile: ClientProfileCreateNestedOneWithoutProposalsInput
+    proposalStatus: ProposalStatusCreateNestedOneWithoutProposalsInput
+    user: UserCreateNestedOneWithoutProposalsInput
+    slaOffers?: SlaOfferCreateNestedManyWithoutProposalInput
+    serviceProductOffers?: ServiceProductOfferCreateNestedManyWithoutProposalInput
+    proposalViews?: ProposalViewCreateNestedManyWithoutProposalInput
+    selectedMembers?: SelectedMemberCreateNestedManyWithoutProposalInput
+    timelines?: TimelineCreateNestedManyWithoutProposalInput
+  }
+
+  export type ProposalUncheckedCreateWithoutShareTokensInput = {
+    proposalId?: number
+    slug: string
+    clientId: number
+    clientType: string
+    proposalTitle: string
+    proposalType: string
+    executiveSummary: string
+    goalsAndObjectives: string
+    execVideoUrl?: string | null
+    proposedSolution: string
+    proposalDescription?: string | null
+    statusId: number
+    createdBy: number
+    statusUpdated?: Date | string
+    dateCreated?: Date | string
+    dateUpdated?: Date | string | null
+    firstViewedAt?: Date | string | null
+    lastViewedAt?: Date | string | null
+    viewCount?: number | null
+    slaOffers?: SlaOfferUncheckedCreateNestedManyWithoutProposalInput
+    serviceProductOffers?: ServiceProductOfferUncheckedCreateNestedManyWithoutProposalInput
+    proposalViews?: ProposalViewUncheckedCreateNestedManyWithoutProposalInput
+    selectedMembers?: SelectedMemberUncheckedCreateNestedManyWithoutProposalInput
+    timelines?: TimelineUncheckedCreateNestedManyWithoutProposalInput
+  }
+
+  export type ProposalCreateOrConnectWithoutShareTokensInput = {
+    where: ProposalWhereUniqueInput
+    create: XOR<ProposalCreateWithoutShareTokensInput, ProposalUncheckedCreateWithoutShareTokensInput>
+  }
+
+  export type ProposalUpsertWithoutShareTokensInput = {
+    update: XOR<ProposalUpdateWithoutShareTokensInput, ProposalUncheckedUpdateWithoutShareTokensInput>
+    create: XOR<ProposalCreateWithoutShareTokensInput, ProposalUncheckedCreateWithoutShareTokensInput>
+    where?: ProposalWhereInput
+  }
+
+  export type ProposalUpdateToOneWithWhereWithoutShareTokensInput = {
+    where?: ProposalWhereInput
+    data: XOR<ProposalUpdateWithoutShareTokensInput, ProposalUncheckedUpdateWithoutShareTokensInput>
+  }
+
+  export type ProposalUpdateWithoutShareTokensInput = {
+    slug?: StringFieldUpdateOperationsInput | string
+    clientType?: StringFieldUpdateOperationsInput | string
+    proposalTitle?: StringFieldUpdateOperationsInput | string
+    proposalType?: StringFieldUpdateOperationsInput | string
+    executiveSummary?: StringFieldUpdateOperationsInput | string
+    goalsAndObjectives?: StringFieldUpdateOperationsInput | string
+    execVideoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    proposedSolution?: StringFieldUpdateOperationsInput | string
+    proposalDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    statusUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
+    dateCreated?: DateTimeFieldUpdateOperationsInput | Date | string
+    dateUpdated?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    firstViewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastViewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    viewCount?: NullableIntFieldUpdateOperationsInput | number | null
+    clientProfile?: ClientProfileUpdateOneRequiredWithoutProposalsNestedInput
+    proposalStatus?: ProposalStatusUpdateOneRequiredWithoutProposalsNestedInput
+    user?: UserUpdateOneRequiredWithoutProposalsNestedInput
+    slaOffers?: SlaOfferUpdateManyWithoutProposalNestedInput
+    serviceProductOffers?: ServiceProductOfferUpdateManyWithoutProposalNestedInput
+    proposalViews?: ProposalViewUpdateManyWithoutProposalNestedInput
+    selectedMembers?: SelectedMemberUpdateManyWithoutProposalNestedInput
+    timelines?: TimelineUpdateManyWithoutProposalNestedInput
+  }
+
+  export type ProposalUncheckedUpdateWithoutShareTokensInput = {
+    proposalId?: IntFieldUpdateOperationsInput | number
+    slug?: StringFieldUpdateOperationsInput | string
+    clientId?: IntFieldUpdateOperationsInput | number
+    clientType?: StringFieldUpdateOperationsInput | string
+    proposalTitle?: StringFieldUpdateOperationsInput | string
+    proposalType?: StringFieldUpdateOperationsInput | string
+    executiveSummary?: StringFieldUpdateOperationsInput | string
+    goalsAndObjectives?: StringFieldUpdateOperationsInput | string
+    execVideoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    proposedSolution?: StringFieldUpdateOperationsInput | string
+    proposalDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    statusId?: IntFieldUpdateOperationsInput | number
+    createdBy?: IntFieldUpdateOperationsInput | number
+    statusUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
+    dateCreated?: DateTimeFieldUpdateOperationsInput | Date | string
+    dateUpdated?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    firstViewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastViewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    viewCount?: NullableIntFieldUpdateOperationsInput | number | null
+    slaOffers?: SlaOfferUncheckedUpdateManyWithoutProposalNestedInput
+    serviceProductOffers?: ServiceProductOfferUncheckedUpdateManyWithoutProposalNestedInput
+    proposalViews?: ProposalViewUncheckedUpdateManyWithoutProposalNestedInput
     selectedMembers?: SelectedMemberUncheckedUpdateManyWithoutProposalNestedInput
     timelines?: TimelineUncheckedUpdateManyWithoutProposalNestedInput
   }
@@ -35768,6 +37507,7 @@ export namespace Prisma {
     serviceProductOffers?: ServiceProductOfferCreateNestedManyWithoutProposalInput
     proposalViews?: ProposalViewCreateNestedManyWithoutProposalInput
     timelines?: TimelineCreateNestedManyWithoutProposalInput
+    shareTokens?: ProposalShareTokenCreateNestedManyWithoutProposalInput
   }
 
   export type ProposalUncheckedCreateWithoutSelectedMembersInput = {
@@ -35794,6 +37534,7 @@ export namespace Prisma {
     serviceProductOffers?: ServiceProductOfferUncheckedCreateNestedManyWithoutProposalInput
     proposalViews?: ProposalViewUncheckedCreateNestedManyWithoutProposalInput
     timelines?: TimelineUncheckedCreateNestedManyWithoutProposalInput
+    shareTokens?: ProposalShareTokenUncheckedCreateNestedManyWithoutProposalInput
   }
 
   export type ProposalCreateOrConnectWithoutSelectedMembersInput = {
@@ -35863,6 +37604,7 @@ export namespace Prisma {
     serviceProductOffers?: ServiceProductOfferUpdateManyWithoutProposalNestedInput
     proposalViews?: ProposalViewUpdateManyWithoutProposalNestedInput
     timelines?: TimelineUpdateManyWithoutProposalNestedInput
+    shareTokens?: ProposalShareTokenUpdateManyWithoutProposalNestedInput
   }
 
   export type ProposalUncheckedUpdateWithoutSelectedMembersInput = {
@@ -35889,6 +37631,7 @@ export namespace Prisma {
     serviceProductOffers?: ServiceProductOfferUncheckedUpdateManyWithoutProposalNestedInput
     proposalViews?: ProposalViewUncheckedUpdateManyWithoutProposalNestedInput
     timelines?: TimelineUncheckedUpdateManyWithoutProposalNestedInput
+    shareTokens?: ProposalShareTokenUncheckedUpdateManyWithoutProposalNestedInput
   }
 
   export type TeamMemberUpsertWithoutSelectedMembersInput = {
@@ -35983,6 +37726,7 @@ export namespace Prisma {
     serviceProductOffers?: ServiceProductOfferCreateNestedManyWithoutProposalInput
     proposalViews?: ProposalViewCreateNestedManyWithoutProposalInput
     selectedMembers?: SelectedMemberCreateNestedManyWithoutProposalInput
+    shareTokens?: ProposalShareTokenCreateNestedManyWithoutProposalInput
   }
 
   export type ProposalUncheckedCreateWithoutTimelinesInput = {
@@ -36009,6 +37753,7 @@ export namespace Prisma {
     serviceProductOffers?: ServiceProductOfferUncheckedCreateNestedManyWithoutProposalInput
     proposalViews?: ProposalViewUncheckedCreateNestedManyWithoutProposalInput
     selectedMembers?: SelectedMemberUncheckedCreateNestedManyWithoutProposalInput
+    shareTokens?: ProposalShareTokenUncheckedCreateNestedManyWithoutProposalInput
   }
 
   export type ProposalCreateOrConnectWithoutTimelinesInput = {
@@ -36069,6 +37814,7 @@ export namespace Prisma {
     serviceProductOffers?: ServiceProductOfferUpdateManyWithoutProposalNestedInput
     proposalViews?: ProposalViewUpdateManyWithoutProposalNestedInput
     selectedMembers?: SelectedMemberUpdateManyWithoutProposalNestedInput
+    shareTokens?: ProposalShareTokenUpdateManyWithoutProposalNestedInput
   }
 
   export type ProposalUncheckedUpdateWithoutTimelinesInput = {
@@ -36095,6 +37841,7 @@ export namespace Prisma {
     serviceProductOffers?: ServiceProductOfferUncheckedUpdateManyWithoutProposalNestedInput
     proposalViews?: ProposalViewUncheckedUpdateManyWithoutProposalNestedInput
     selectedMembers?: SelectedMemberUncheckedUpdateManyWithoutProposalNestedInput
+    shareTokens?: ProposalShareTokenUncheckedUpdateManyWithoutProposalNestedInput
   }
 
   export type TimelineScopeItemUpsertWithWhereUniqueWithoutTimelineInput = {
@@ -36228,6 +37975,7 @@ export namespace Prisma {
     proposalViews?: ProposalViewCreateNestedManyWithoutProposalInput
     selectedMembers?: SelectedMemberCreateNestedManyWithoutProposalInput
     timelines?: TimelineCreateNestedManyWithoutProposalInput
+    shareTokens?: ProposalShareTokenCreateNestedManyWithoutProposalInput
   }
 
   export type ProposalUncheckedCreateWithoutSlaOffersInput = {
@@ -36254,6 +38002,7 @@ export namespace Prisma {
     proposalViews?: ProposalViewUncheckedCreateNestedManyWithoutProposalInput
     selectedMembers?: SelectedMemberUncheckedCreateNestedManyWithoutProposalInput
     timelines?: TimelineUncheckedCreateNestedManyWithoutProposalInput
+    shareTokens?: ProposalShareTokenUncheckedCreateNestedManyWithoutProposalInput
   }
 
   export type ProposalCreateOrConnectWithoutSlaOffersInput = {
@@ -36324,6 +38073,7 @@ export namespace Prisma {
     proposalViews?: ProposalViewUpdateManyWithoutProposalNestedInput
     selectedMembers?: SelectedMemberUpdateManyWithoutProposalNestedInput
     timelines?: TimelineUpdateManyWithoutProposalNestedInput
+    shareTokens?: ProposalShareTokenUpdateManyWithoutProposalNestedInput
   }
 
   export type ProposalUncheckedUpdateWithoutSlaOffersInput = {
@@ -36350,6 +38100,7 @@ export namespace Prisma {
     proposalViews?: ProposalViewUncheckedUpdateManyWithoutProposalNestedInput
     selectedMembers?: SelectedMemberUncheckedUpdateManyWithoutProposalNestedInput
     timelines?: TimelineUncheckedUpdateManyWithoutProposalNestedInput
+    shareTokens?: ProposalShareTokenUncheckedUpdateManyWithoutProposalNestedInput
   }
 
   export type DealItemCreateWithoutPackageInput = {
@@ -36782,6 +38533,7 @@ export namespace Prisma {
     proposalViews?: ProposalViewCreateNestedManyWithoutProposalInput
     selectedMembers?: SelectedMemberCreateNestedManyWithoutProposalInput
     timelines?: TimelineCreateNestedManyWithoutProposalInput
+    shareTokens?: ProposalShareTokenCreateNestedManyWithoutProposalInput
   }
 
   export type ProposalUncheckedCreateWithoutServiceProductOffersInput = {
@@ -36808,6 +38560,7 @@ export namespace Prisma {
     proposalViews?: ProposalViewUncheckedCreateNestedManyWithoutProposalInput
     selectedMembers?: SelectedMemberUncheckedCreateNestedManyWithoutProposalInput
     timelines?: TimelineUncheckedCreateNestedManyWithoutProposalInput
+    shareTokens?: ProposalShareTokenUncheckedCreateNestedManyWithoutProposalInput
   }
 
   export type ProposalCreateOrConnectWithoutServiceProductOffersInput = {
@@ -36888,6 +38641,7 @@ export namespace Prisma {
     proposalViews?: ProposalViewUpdateManyWithoutProposalNestedInput
     selectedMembers?: SelectedMemberUpdateManyWithoutProposalNestedInput
     timelines?: TimelineUpdateManyWithoutProposalNestedInput
+    shareTokens?: ProposalShareTokenUpdateManyWithoutProposalNestedInput
   }
 
   export type ProposalUncheckedUpdateWithoutServiceProductOffersInput = {
@@ -36914,6 +38668,7 @@ export namespace Prisma {
     proposalViews?: ProposalViewUncheckedUpdateManyWithoutProposalNestedInput
     selectedMembers?: SelectedMemberUncheckedUpdateManyWithoutProposalNestedInput
     timelines?: TimelineUncheckedUpdateManyWithoutProposalNestedInput
+    shareTokens?: ProposalShareTokenUncheckedUpdateManyWithoutProposalNestedInput
   }
 
   export type OfferEntryUpsertWithWhereUniqueWithoutServiceProductOfferInput = {
@@ -37085,6 +38840,7 @@ export namespace Prisma {
     proposalViews?: ProposalViewUpdateManyWithoutProposalNestedInput
     selectedMembers?: SelectedMemberUpdateManyWithoutProposalNestedInput
     timelines?: TimelineUpdateManyWithoutProposalNestedInput
+    shareTokens?: ProposalShareTokenUpdateManyWithoutProposalNestedInput
   }
 
   export type ProposalUncheckedUpdateWithoutUserInput = {
@@ -37111,6 +38867,7 @@ export namespace Prisma {
     proposalViews?: ProposalViewUncheckedUpdateManyWithoutProposalNestedInput
     selectedMembers?: SelectedMemberUncheckedUpdateManyWithoutProposalNestedInput
     timelines?: TimelineUncheckedUpdateManyWithoutProposalNestedInput
+    shareTokens?: ProposalShareTokenUncheckedUpdateManyWithoutProposalNestedInput
   }
 
   export type ProposalUncheckedUpdateManyWithoutUserInput = {
@@ -37280,6 +39037,7 @@ export namespace Prisma {
     proposalViews?: ProposalViewUpdateManyWithoutProposalNestedInput
     selectedMembers?: SelectedMemberUpdateManyWithoutProposalNestedInput
     timelines?: TimelineUpdateManyWithoutProposalNestedInput
+    shareTokens?: ProposalShareTokenUpdateManyWithoutProposalNestedInput
   }
 
   export type ProposalUncheckedUpdateWithoutClientProfileInput = {
@@ -37306,6 +39064,7 @@ export namespace Prisma {
     proposalViews?: ProposalViewUncheckedUpdateManyWithoutProposalNestedInput
     selectedMembers?: SelectedMemberUncheckedUpdateManyWithoutProposalNestedInput
     timelines?: TimelineUncheckedUpdateManyWithoutProposalNestedInput
+    shareTokens?: ProposalShareTokenUncheckedUpdateManyWithoutProposalNestedInput
   }
 
   export type ProposalUncheckedUpdateManyWithoutClientProfileInput = {
@@ -37366,7 +39125,8 @@ export namespace Prisma {
 
   export type ProposalViewCreateManyProposalInput = {
     viewId?: number
-    clientId: number
+    clientId?: number | null
+    tokenId?: number | null
     dateViewed?: Date | string
   }
 
@@ -37382,6 +39142,17 @@ export namespace Prisma {
     assignedTo?: string | null
     dateCreated?: Date | string
     dateUpdated?: Date | string | null
+  }
+
+  export type ProposalShareTokenCreateManyProposalInput = {
+    tokenId?: number
+    token: string
+    recipientEmail: string
+    isPortalUser?: boolean
+    portalUserId?: number | null
+    usedAt?: Date | string | null
+    expiresAt?: Date | string | null
+    createdAt?: Date | string
   }
 
   export type SlaOfferUpdateWithoutProposalInput = {
@@ -37492,19 +39263,22 @@ export namespace Prisma {
   }
 
   export type ProposalViewUpdateWithoutProposalInput = {
-    clientId?: IntFieldUpdateOperationsInput | number
+    clientId?: NullableIntFieldUpdateOperationsInput | number | null
+    tokenId?: NullableIntFieldUpdateOperationsInput | number | null
     dateViewed?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ProposalViewUncheckedUpdateWithoutProposalInput = {
     viewId?: IntFieldUpdateOperationsInput | number
-    clientId?: IntFieldUpdateOperationsInput | number
+    clientId?: NullableIntFieldUpdateOperationsInput | number | null
+    tokenId?: NullableIntFieldUpdateOperationsInput | number | null
     dateViewed?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ProposalViewUncheckedUpdateManyWithoutProposalInput = {
     viewId?: IntFieldUpdateOperationsInput | number
-    clientId?: IntFieldUpdateOperationsInput | number
+    clientId?: NullableIntFieldUpdateOperationsInput | number | null
+    tokenId?: NullableIntFieldUpdateOperationsInput | number | null
     dateViewed?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -37548,6 +39322,38 @@ export namespace Prisma {
     assignedTo?: NullableStringFieldUpdateOperationsInput | string | null
     dateCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateUpdated?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type ProposalShareTokenUpdateWithoutProposalInput = {
+    token?: StringFieldUpdateOperationsInput | string
+    recipientEmail?: StringFieldUpdateOperationsInput | string
+    isPortalUser?: BoolFieldUpdateOperationsInput | boolean
+    portalUserId?: NullableIntFieldUpdateOperationsInput | number | null
+    usedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProposalShareTokenUncheckedUpdateWithoutProposalInput = {
+    tokenId?: IntFieldUpdateOperationsInput | number
+    token?: StringFieldUpdateOperationsInput | string
+    recipientEmail?: StringFieldUpdateOperationsInput | string
+    isPortalUser?: BoolFieldUpdateOperationsInput | boolean
+    portalUserId?: NullableIntFieldUpdateOperationsInput | number | null
+    usedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProposalShareTokenUncheckedUpdateManyWithoutProposalInput = {
+    tokenId?: IntFieldUpdateOperationsInput | number
+    token?: StringFieldUpdateOperationsInput | string
+    recipientEmail?: StringFieldUpdateOperationsInput | string
+    isPortalUser?: BoolFieldUpdateOperationsInput | boolean
+    portalUserId?: NullableIntFieldUpdateOperationsInput | number | null
+    usedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ProposalCreateManyProposalStatusInput = {
@@ -37594,6 +39400,7 @@ export namespace Prisma {
     proposalViews?: ProposalViewUpdateManyWithoutProposalNestedInput
     selectedMembers?: SelectedMemberUpdateManyWithoutProposalNestedInput
     timelines?: TimelineUpdateManyWithoutProposalNestedInput
+    shareTokens?: ProposalShareTokenUpdateManyWithoutProposalNestedInput
   }
 
   export type ProposalUncheckedUpdateWithoutProposalStatusInput = {
@@ -37620,6 +39427,7 @@ export namespace Prisma {
     proposalViews?: ProposalViewUncheckedUpdateManyWithoutProposalNestedInput
     selectedMembers?: SelectedMemberUncheckedUpdateManyWithoutProposalNestedInput
     timelines?: TimelineUncheckedUpdateManyWithoutProposalNestedInput
+    shareTokens?: ProposalShareTokenUncheckedUpdateManyWithoutProposalNestedInput
   }
 
   export type ProposalUncheckedUpdateManyWithoutProposalStatusInput = {

@@ -185,16 +185,31 @@ exports.Prisma.ProposalViewScalarFieldEnum = {
   viewId: 'viewId',
   proposalId: 'proposalId',
   clientId: 'clientId',
+  tokenId: 'tokenId',
   dateViewed: 'dateViewed'
 };
 
 exports.Prisma.ProposalSessionScalarFieldEnum = {
   sessionId: 'sessionId',
+  proposalId: 'proposalId',
   clientId: 'clientId',
+  tokenId: 'tokenId',
   startedAt: 'startedAt',
   lastActivityAt: 'lastActivityAt',
   endedAt: 'endedAt',
   durationSeconds: 'durationSeconds'
+};
+
+exports.Prisma.ProposalShareTokenScalarFieldEnum = {
+  tokenId: 'tokenId',
+  token: 'token',
+  proposalId: 'proposalId',
+  recipientEmail: 'recipientEmail',
+  isPortalUser: 'isPortalUser',
+  portalUserId: 'portalUserId',
+  usedAt: 'usedAt',
+  expiresAt: 'expiresAt',
+  createdAt: 'createdAt'
 };
 
 exports.Prisma.SelectedMemberScalarFieldEnum = {
@@ -428,6 +443,11 @@ exports.Prisma.ProposalStatusOrderByRelevanceFieldEnum = {
   status: 'status'
 };
 
+exports.Prisma.ProposalShareTokenOrderByRelevanceFieldEnum = {
+  token: 'token',
+  recipientEmail: 'recipientEmail'
+};
+
 exports.Prisma.TeamMemberOrderByRelevanceFieldEnum = {
   memberName: 'memberName',
   memberRole: 'memberRole',
@@ -540,6 +560,7 @@ exports.Prisma.ModelName = {
   ProposalStatus: 'ProposalStatus',
   ProposalView: 'ProposalView',
   ProposalSession: 'ProposalSession',
+  ProposalShareToken: 'ProposalShareToken',
   SelectedMember: 'SelectedMember',
   TeamMember: 'TeamMember',
   Timeline: 'Timeline',
