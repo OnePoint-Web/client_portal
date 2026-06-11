@@ -6,8 +6,28 @@ const nextConfig = {
         protocol: 'http',
         hostname: 'localhost',
       },
+      {
+        protocol: 'https',
+        hostname: '*.r2.dev',
+      },
+      {
+        protocol: 'https',
+        hostname: '*.r2.cloudflarestorage.com',
+      },
     ],
   },
-};
 
-export default nextConfig;
+  // Proxy legacy /uploads/* paths to the proposal system so old local images
+  // load correctly in the client portal (which has no public/uploads folder).
+  // New uploads go to R2 and use absolute URLs, so they bypass this entirely.
+  async rewrites() {
+    return [
+      {
+        source: '/uploads/:path*',
+        destination: `${process.env.PROPOSALS_URL}/uploads/:path*`,
+      },
+    ]
+  },
+}
+
+export default nextConfig

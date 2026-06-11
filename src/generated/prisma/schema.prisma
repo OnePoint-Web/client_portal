@@ -339,6 +339,22 @@ model OfferEntry {
   serviceProductOffer ServiceProductOffer @relation(fields: [serviceProductOfferId], references: serviceProductOfferId, onDelete: Cascade)
 }
 
+model Media {
+  mediaId Int @id @default(autoincrement())
+
+  fileName     String
+  originalName String
+
+  bucketKey String
+
+  mimeType String
+  fileSize Int
+
+  uploadedBy Int?
+
+  createdAt DateTime @default(now())
+}
+
 // Notifications
 model Notification {
   notificationId   Int       @id @default(autoincrement())

@@ -365,6 +365,17 @@ exports.Prisma.OfferEntryScalarFieldEnum = {
   dateCreated: 'dateCreated'
 };
 
+exports.Prisma.MediaScalarFieldEnum = {
+  mediaId: 'mediaId',
+  fileName: 'fileName',
+  originalName: 'originalName',
+  bucketKey: 'bucketKey',
+  mimeType: 'mimeType',
+  fileSize: 'fileSize',
+  uploadedBy: 'uploadedBy',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.NotificationScalarFieldEnum = {
   notificationId: 'notificationId',
   userId: 'userId',
@@ -524,6 +535,13 @@ exports.Prisma.OfferEntryOrderByRelevanceFieldEnum = {
   description: 'description'
 };
 
+exports.Prisma.MediaOrderByRelevanceFieldEnum = {
+  fileName: 'fileName',
+  originalName: 'originalName',
+  bucketKey: 'bucketKey',
+  mimeType: 'mimeType'
+};
+
 exports.Prisma.NotificationOrderByRelevanceFieldEnum = {
   title: 'title',
   message: 'message',
@@ -575,6 +593,7 @@ exports.Prisma.ModelName = {
   Service: 'Service',
   Product: 'Product',
   OfferEntry: 'OfferEntry',
+  Media: 'Media',
   Notification: 'Notification',
   ActivityLogs: 'ActivityLogs'
 };
