@@ -6,7 +6,7 @@ type AppRouteHandlerRoutes = "/api/activity" | "/api/auth/login" | "/api/auth/lo
 type PageRoutes = never
 type LayoutRoutes = "/"
 type RedirectRoutes = never
-type RewriteRoutes = never
+type RewriteRoutes = "/uploads/[[...path]]"
 type Routes = AppRoutes | PageRoutes | LayoutRoutes | RedirectRoutes | RewriteRoutes | AppRouteHandlerRoutes
 
 
@@ -25,6 +25,7 @@ interface ParamMap {
   "/api/settings/password": {}
   "/api/view/[token]": { "token": string; }
   "/api/view/[token]/session": { "token": string; }
+  "/uploads/[[...path]]": { "path"?: string[]; }
 }
 
 

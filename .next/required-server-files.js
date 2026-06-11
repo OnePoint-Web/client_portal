@@ -67,6 +67,14 @@ self.__SERVER_FILES_MANIFEST={
         {
           "protocol": "http",
           "hostname": "localhost"
+        },
+        {
+          "protocol": "https",
+          "hostname": "*.r2.dev"
+        },
+        {
+          "protocol": "https",
+          "hostname": "*.r2.cloudflarestorage.com"
         }
       ],
       "qualities": [
@@ -300,7 +308,17 @@ self.__SERVER_FILES_MANIFEST={
     "turbopack": {
       "root": "/Users/onepoint/Desktop/1pt_proposals/client_portal"
     },
-    "distDirRoot": ".next"
+    "distDirRoot": ".next",
+    "_originalRewrites": {
+      "beforeFiles": [],
+      "afterFiles": [
+        {
+          "source": "/uploads/:path*",
+          "destination": "http://localhost:3000/uploads/:path*"
+        }
+      ],
+      "fallback": []
+    }
   },
   "appDir": "/Users/onepoint/Desktop/1pt_proposals/client_portal",
   "relativeAppDir": "",
