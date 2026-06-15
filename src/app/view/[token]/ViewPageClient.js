@@ -486,6 +486,15 @@ export default function ViewPageClient({ token }) {
 
                 {!isSla && serviceOffer && (
                   <>
+                    {serviceOffer.isMultipleChoice && (
+                      <div className="flex items-center gap-2 px-4 py-3 mb-3 rounded-lg border border-amber-200 bg-amber-50">
+                        <RiLockLine className="w-4 h-4 text-amber-600 shrink-0" />
+                        <p className="text-sm text-amber-700 font-medium flex-1">
+                          Multiple choice proposal — sign in to select your desired items and approve.
+                        </p>
+                        <Link href="/login" className="text-sm text-amber-700 font-semibold underline shrink-0">Sign in</Link>
+                      </div>
+                    )}
                     <div className="overflow-x-auto rounded-xl border border-[#E2E8F0]">
                       <table className="w-full text-sm">
                         <thead>
@@ -501,6 +510,9 @@ export default function ViewPageClient({ token }) {
                             )}
                             <th className="text-right px-4 py-3 text-xs font-semibold text-[#718096] uppercase tracking-wide">Discount</th>
                             <th className="text-right px-4 py-3 text-xs font-semibold text-[#718096] uppercase tracking-wide">Total</th>
+                            {serviceOffer.isMultipleChoice && (
+                              <th className="text-center px-4 py-3 text-xs font-semibold text-[#718096] uppercase tracking-wide">Selected</th>
+                            )}
                           </tr>
                         </thead>
                         <tbody className="divide-y divide-[#F0F2F8]">
@@ -510,8 +522,9 @@ export default function ViewPageClient({ token }) {
                               : entry.itemDiscountType === 'Percentage'
                                 ? entry.totalPrice - ((entry.itemDiscountValue / 100) * entry.totalPrice)
                                 : entry.totalPrice
+                            const isEntrySelected = entry.isSelected !== false
                             return (
-                              <tr key={entry.offerEntryId} className="hover:bg-[#FAFBFC]">
+                              <tr key={entry.offerEntryId} className="hover:bg-[#FAFBFC]" style={serviceOffer.isMultipleChoice && !isEntrySelected ? { opacity: 0.4 } : undefined}>
                                 <td className="px-4 py-3 font-medium text-[#1A202C]">{entry.serviceProductItem}</td>
                                 <td className="px-4 py-3 text-[#718096] text-xs max-w-48">{entry.description ?? '—'}</td>
                                 <td className="px-4 py-3 text-right text-[#1A202C]">{formatCurrency(entry.itemPrice)}</td>
@@ -531,6 +544,11 @@ export default function ViewPageClient({ token }) {
                                   )}
                                 </td>
                                 <td className="px-4 py-3 text-right font-semibold text-[#1A202C]">{formatCurrency(discountedTotal)}</td>
+                                {serviceOffer.isMultipleChoice && (
+                                  <td className="px-4 py-3 text-center font-semibold" style={{ color: isEntrySelected ? '#22C55E' : '#A0AEC0' }}>
+                                    {isEntrySelected ? '✓' : '—'}
+                                  </td>
+                                )}
                               </tr>
                             )
                           })}
