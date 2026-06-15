@@ -362,6 +362,7 @@ exports.Prisma.OfferEntryScalarFieldEnum = {
   itemDiscountDescription: 'itemDiscountDescription',
   description: 'description',
   displayOrder: 'displayOrder',
+  isSelected: 'isSelected',
   dateCreated: 'dateCreated'
 };
 

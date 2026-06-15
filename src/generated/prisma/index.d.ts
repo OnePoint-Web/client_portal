@@ -25770,6 +25770,7 @@ export namespace Prisma {
     itemDiscountDescription: string | null
     description: string | null
     displayOrder: number | null
+    isSelected: boolean | null
     dateCreated: Date | null
   }
 
@@ -25786,6 +25787,7 @@ export namespace Prisma {
     itemDiscountDescription: string | null
     description: string | null
     displayOrder: number | null
+    isSelected: boolean | null
     dateCreated: Date | null
   }
 
@@ -25802,6 +25804,7 @@ export namespace Prisma {
     itemDiscountDescription: number
     description: number
     displayOrder: number
+    isSelected: number
     dateCreated: number
     _all: number
   }
@@ -25840,6 +25843,7 @@ export namespace Prisma {
     itemDiscountDescription?: true
     description?: true
     displayOrder?: true
+    isSelected?: true
     dateCreated?: true
   }
 
@@ -25856,6 +25860,7 @@ export namespace Prisma {
     itemDiscountDescription?: true
     description?: true
     displayOrder?: true
+    isSelected?: true
     dateCreated?: true
   }
 
@@ -25872,6 +25877,7 @@ export namespace Prisma {
     itemDiscountDescription?: true
     description?: true
     displayOrder?: true
+    isSelected?: true
     dateCreated?: true
     _all?: true
   }
@@ -25975,6 +25981,7 @@ export namespace Prisma {
     itemDiscountDescription: string | null
     description: string | null
     displayOrder: number
+    isSelected: boolean
     dateCreated: Date
     _count: OfferEntryCountAggregateOutputType | null
     _avg: OfferEntryAvgAggregateOutputType | null
@@ -26010,6 +26017,7 @@ export namespace Prisma {
     itemDiscountDescription?: boolean
     description?: boolean
     displayOrder?: boolean
+    isSelected?: boolean
     dateCreated?: boolean
     serviceProductOffer?: boolean | ServiceProductOfferDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["offerEntry"]>
@@ -26029,10 +26037,11 @@ export namespace Prisma {
     itemDiscountDescription?: boolean
     description?: boolean
     displayOrder?: boolean
+    isSelected?: boolean
     dateCreated?: boolean
   }
 
-  export type OfferEntryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"offerEntryId" | "serviceProductOfferId" | "serviceProductItem" | "itemImage" | "itemPrice" | "quantity" | "totalPrice" | "itemDiscountType" | "itemDiscountValue" | "itemDiscountDescription" | "description" | "displayOrder" | "dateCreated", ExtArgs["result"]["offerEntry"]>
+  export type OfferEntryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"offerEntryId" | "serviceProductOfferId" | "serviceProductItem" | "itemImage" | "itemPrice" | "quantity" | "totalPrice" | "itemDiscountType" | "itemDiscountValue" | "itemDiscountDescription" | "description" | "displayOrder" | "isSelected" | "dateCreated", ExtArgs["result"]["offerEntry"]>
   export type OfferEntryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     serviceProductOffer?: boolean | ServiceProductOfferDefaultArgs<ExtArgs>
   }
@@ -26055,6 +26064,7 @@ export namespace Prisma {
       itemDiscountDescription: string | null
       description: string | null
       displayOrder: number
+      isSelected: boolean
       dateCreated: Date
     }, ExtArgs["result"]["offerEntry"]>
     composites: {}
@@ -26438,6 +26448,7 @@ export namespace Prisma {
     readonly itemDiscountDescription: FieldRef<"OfferEntry", 'String'>
     readonly description: FieldRef<"OfferEntry", 'String'>
     readonly displayOrder: FieldRef<"OfferEntry", 'Int'>
+    readonly isSelected: FieldRef<"OfferEntry", 'Boolean'>
     readonly dateCreated: FieldRef<"OfferEntry", 'DateTime'>
   }
     
@@ -30002,6 +30013,7 @@ export namespace Prisma {
     itemDiscountDescription: 'itemDiscountDescription',
     description: 'description',
     displayOrder: 'displayOrder',
+    isSelected: 'isSelected',
     dateCreated: 'dateCreated'
   };
 
@@ -31962,6 +31974,7 @@ export namespace Prisma {
     itemDiscountDescription?: StringNullableFilter<"OfferEntry"> | string | null
     description?: StringNullableFilter<"OfferEntry"> | string | null
     displayOrder?: IntFilter<"OfferEntry"> | number
+    isSelected?: BoolFilter<"OfferEntry"> | boolean
     dateCreated?: DateTimeFilter<"OfferEntry"> | Date | string
     serviceProductOffer?: XOR<ServiceProductOfferScalarRelationFilter, ServiceProductOfferWhereInput>
   }
@@ -31979,6 +31992,7 @@ export namespace Prisma {
     itemDiscountDescription?: SortOrderInput | SortOrder
     description?: SortOrderInput | SortOrder
     displayOrder?: SortOrder
+    isSelected?: SortOrder
     dateCreated?: SortOrder
     serviceProductOffer?: ServiceProductOfferOrderByWithRelationInput
     _relevance?: OfferEntryOrderByRelevanceInput
@@ -32000,6 +32014,7 @@ export namespace Prisma {
     itemDiscountDescription?: StringNullableFilter<"OfferEntry"> | string | null
     description?: StringNullableFilter<"OfferEntry"> | string | null
     displayOrder?: IntFilter<"OfferEntry"> | number
+    isSelected?: BoolFilter<"OfferEntry"> | boolean
     dateCreated?: DateTimeFilter<"OfferEntry"> | Date | string
     serviceProductOffer?: XOR<ServiceProductOfferScalarRelationFilter, ServiceProductOfferWhereInput>
   }, "offerEntryId">
@@ -32017,6 +32032,7 @@ export namespace Prisma {
     itemDiscountDescription?: SortOrderInput | SortOrder
     description?: SortOrderInput | SortOrder
     displayOrder?: SortOrder
+    isSelected?: SortOrder
     dateCreated?: SortOrder
     _count?: OfferEntryCountOrderByAggregateInput
     _avg?: OfferEntryAvgOrderByAggregateInput
@@ -32041,6 +32057,7 @@ export namespace Prisma {
     itemDiscountDescription?: StringNullableWithAggregatesFilter<"OfferEntry"> | string | null
     description?: StringNullableWithAggregatesFilter<"OfferEntry"> | string | null
     displayOrder?: IntWithAggregatesFilter<"OfferEntry"> | number
+    isSelected?: BoolWithAggregatesFilter<"OfferEntry"> | boolean
     dateCreated?: DateTimeWithAggregatesFilter<"OfferEntry"> | Date | string
   }
 
@@ -33867,6 +33884,7 @@ export namespace Prisma {
     itemDiscountDescription?: string | null
     description?: string | null
     displayOrder: number
+    isSelected?: boolean
     dateCreated?: Date | string
     serviceProductOffer: ServiceProductOfferCreateNestedOneWithoutOfferEntriesInput
   }
@@ -33884,6 +33902,7 @@ export namespace Prisma {
     itemDiscountDescription?: string | null
     description?: string | null
     displayOrder: number
+    isSelected?: boolean
     dateCreated?: Date | string
   }
 
@@ -33898,6 +33917,7 @@ export namespace Prisma {
     itemDiscountDescription?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     displayOrder?: IntFieldUpdateOperationsInput | number
+    isSelected?: BoolFieldUpdateOperationsInput | boolean
     dateCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     serviceProductOffer?: ServiceProductOfferUpdateOneRequiredWithoutOfferEntriesNestedInput
   }
@@ -33915,6 +33935,7 @@ export namespace Prisma {
     itemDiscountDescription?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     displayOrder?: IntFieldUpdateOperationsInput | number
+    isSelected?: BoolFieldUpdateOperationsInput | boolean
     dateCreated?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -33931,6 +33952,7 @@ export namespace Prisma {
     itemDiscountDescription?: string | null
     description?: string | null
     displayOrder: number
+    isSelected?: boolean
     dateCreated?: Date | string
   }
 
@@ -33945,6 +33967,7 @@ export namespace Prisma {
     itemDiscountDescription?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     displayOrder?: IntFieldUpdateOperationsInput | number
+    isSelected?: BoolFieldUpdateOperationsInput | boolean
     dateCreated?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -33961,6 +33984,7 @@ export namespace Prisma {
     itemDiscountDescription?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     displayOrder?: IntFieldUpdateOperationsInput | number
+    isSelected?: BoolFieldUpdateOperationsInput | boolean
     dateCreated?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -35737,6 +35761,7 @@ export namespace Prisma {
     itemDiscountDescription?: SortOrder
     description?: SortOrder
     displayOrder?: SortOrder
+    isSelected?: SortOrder
     dateCreated?: SortOrder
   }
 
@@ -35763,6 +35788,7 @@ export namespace Prisma {
     itemDiscountDescription?: SortOrder
     description?: SortOrder
     displayOrder?: SortOrder
+    isSelected?: SortOrder
     dateCreated?: SortOrder
   }
 
@@ -35779,6 +35805,7 @@ export namespace Prisma {
     itemDiscountDescription?: SortOrder
     description?: SortOrder
     displayOrder?: SortOrder
+    isSelected?: SortOrder
     dateCreated?: SortOrder
   }
 
@@ -39838,6 +39865,7 @@ export namespace Prisma {
     itemDiscountDescription?: string | null
     description?: string | null
     displayOrder: number
+    isSelected?: boolean
     dateCreated?: Date | string
   }
 
@@ -39853,6 +39881,7 @@ export namespace Prisma {
     itemDiscountDescription?: string | null
     description?: string | null
     displayOrder: number
+    isSelected?: boolean
     dateCreated?: Date | string
   }
 
@@ -39962,6 +39991,7 @@ export namespace Prisma {
     itemDiscountDescription?: StringNullableFilter<"OfferEntry"> | string | null
     description?: StringNullableFilter<"OfferEntry"> | string | null
     displayOrder?: IntFilter<"OfferEntry"> | number
+    isSelected?: BoolFilter<"OfferEntry"> | boolean
     dateCreated?: DateTimeFilter<"OfferEntry"> | Date | string
   }
 
@@ -40884,6 +40914,7 @@ export namespace Prisma {
     itemDiscountDescription?: string | null
     description?: string | null
     displayOrder: number
+    isSelected?: boolean
     dateCreated?: Date | string
   }
 
@@ -40898,6 +40929,7 @@ export namespace Prisma {
     itemDiscountDescription?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     displayOrder?: IntFieldUpdateOperationsInput | number
+    isSelected?: BoolFieldUpdateOperationsInput | boolean
     dateCreated?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -40913,6 +40945,7 @@ export namespace Prisma {
     itemDiscountDescription?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     displayOrder?: IntFieldUpdateOperationsInput | number
+    isSelected?: BoolFieldUpdateOperationsInput | boolean
     dateCreated?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -40928,6 +40961,7 @@ export namespace Prisma {
     itemDiscountDescription?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     displayOrder?: IntFieldUpdateOperationsInput | number
+    isSelected?: BoolFieldUpdateOperationsInput | boolean
     dateCreated?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
