@@ -13,14 +13,14 @@ import {
 export const metadata = { title: 'Company Information — OnePoint Client Portal' }
 
 const SERVICES = [
-  'Digital Transformation',
-  'IT Infrastructure',
-  'Managed Services',
-  'Cloud Solutions',
-  'Cybersecurity',
-  'Software Development',
-  'Business Consulting',
-  'Network Management',
+  'Partnership Program',
+  'Strategy Workshop',
+  'Creative Design Services',
+  'Web Design and Development',
+  'Marketing Automation',
+  'Property Marketing',
+  'Merchandising',
+  'Monthly Support Solutions',
 ]
 
 const TEAM_STATS = [
@@ -47,14 +47,14 @@ export default async function CompanyInfoPage() {
         <div className="absolute -bottom-16 right-32 w-32 h-32 rounded-full bg-[#F22044] opacity-6" />
 
         <div className="relative z-10 flex flex-col sm:flex-row items-start sm:items-center gap-5">
-          <div className="w-16 h-16 rounded-2xl bg-[#F22044] flex items-center justify-center flex-shrink-0">
+          {/* <div className="w-16 h-16 rounded-2xl bg-[#F22044] flex items-center justify-center flex-shrink-0">
             <span className="text-white font-bold text-2xl">1P</span>
-          </div>
+          </div> */}
           <div>
             <h2 className="text-white font-bold text-2xl">OnePoint</h2>
-            <p className="text-white/60 text-sm mt-1">Your trusted technology partner</p>
+            <p className="text-white/60 text-sm mt-1">Business Growth Agency</p>
             <div className="flex flex-wrap gap-2 mt-3">
-              {['Technology', 'Innovation', 'Partnership'].map(tag => (
+              {['Marketing', 'Brand Positioning', 'Revenue Growth'].map(tag => (
                 <span key={tag} className="px-2.5 py-1 bg-white/10 rounded-lg text-white/70 text-xs font-medium">
                   {tag}
                 </span>
@@ -71,10 +71,11 @@ export default async function CompanyInfoPage() {
             <h3 className="text-sm font-bold text-[#1A202C] mb-4">Contact Information</h3>
             <div className="space-y-3">
               {[
-                { icon: RiMapPinLine, label: 'Address', value: '123 Business Ave, Sydney NSW 2000, Australia' },
-                { icon: RiMailLine, label: 'Email', value: 'hello@onepoint.com.au' },
-                { icon: RiPhoneLine, label: 'Phone', value: '+61 2 1234 5678' },
-                { icon: RiGlobalLine, label: 'Website', value: 'www.onepoint.com.au' },
+                { icon: RiMapPinLine, label: 'Address 1', value: 'Level 25, 100 Mount Street, North Sydney NSW 2060' },
+                { icon: RiMapPinLine, label: 'Address 2', value: 'Unit 107 Doll Building, 6th Street, Bacolod City, Negross Occidental Philippines 6100' },
+                { icon: RiMailLine, label: 'Email', value: 'info@1pt.com.au' },
+                { icon: RiPhoneLine, label: 'Phone', value: '+61 2 8889 3780' },
+                { icon: RiGlobalLine, label: 'Website', value: 'www.1pt.com.au' },
               ].map(item => {
                 const Icon = item.icon
                 return (
@@ -93,7 +94,7 @@ export default async function CompanyInfoPage() {
           </div>
 
           {/* Business hours */}
-          <div className="bg-white rounded-2xl border border-[#E2E8F0] shadow-[0_1px_3px_rgba(0,0,0,0.06)] p-5">
+          {/* <div className="bg-white rounded-2xl border border-[#E2E8F0] shadow-[0_1px_3px_rgba(0,0,0,0.06)] p-5">
             <div className="flex items-center gap-2 mb-4">
               <RiTimeLine className="w-4 h-4 text-[#F22044]" />
               <h3 className="text-sm font-bold text-[#1A202C]">Business Hours</h3>
@@ -112,7 +113,7 @@ export default async function CompanyInfoPage() {
                 </div>
               ))}
             </div>
-          </div>
+          </div> */}
         </div>
 
         {/* About + Services */}
@@ -122,23 +123,23 @@ export default async function CompanyInfoPage() {
             <h3 className="text-sm font-bold text-[#1A202C] mb-3">About OnePoint</h3>
             <div className="space-y-3 text-sm text-[#718096] leading-relaxed">
               <p>
-                OnePoint is a leading technology solutions provider dedicated to helping businesses achieve their digital transformation goals. With over a decade of experience, we deliver innovative, reliable, and scalable technology solutions tailored to the unique needs of each client.
+                OnePoint brings all your marketing needs together cohesively and economically. We offer a strategic approach based on your commercial goals and objectives. Our managed solutions and marketing services for small to medium sized Australian companies provide a bespoke solution tailored to your needs.
               </p>
               <p>
-                Our team of certified professionals brings deep expertise across infrastructure, cloud, security, and software development. We pride ourselves on building long-lasting partnerships built on trust, transparency, and results.
+                We always look to forge long-term partnerships with our clients, organisations and institutions, delivering consistently high quality, integrated marketing and creative solutions.
               </p>
             </div>
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          {/* <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             {TEAM_STATS.map(stat => (
               <div key={stat.label} className="bg-white rounded-2xl border border-[#E2E8F0] shadow-[0_1px_3px_rgba(0,0,0,0.06)] p-4 text-center">
                 <p className="text-2xl font-bold text-[#F22044]">{stat.value}</p>
                 <p className="text-xs text-[#718096] mt-1 font-medium">{stat.label}</p>
               </div>
             ))}
-          </div>
+          </div> */}
 
           {/* Services */}
           <div className="bg-white rounded-2xl border border-[#E2E8F0] shadow-[0_1px_3px_rgba(0,0,0,0.06)] p-5">
