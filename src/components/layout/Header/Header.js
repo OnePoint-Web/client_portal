@@ -97,9 +97,9 @@ export default function Header() {
 
         {/* Logo */}
         <Link href="/dashboard" className="flex items-center gap-2.5 flex-shrink-0">
-          <div className="w-8 h-8 bg-[#F22044] rounded-lg flex items-center justify-center">
+          {/* <div className="w-8 h-8 bg-[#F22044] rounded-lg flex items-center justify-center">
             <span className="text-white font-bold text-sm">1P</span>
-          </div>
+          </div> */}
           <span className="hidden sm:block text-[#1A1A2E] font-bold text-base tracking-wide">OnePoint</span>
         </Link>
 
