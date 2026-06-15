@@ -28,7 +28,7 @@ export async function POST(req) {
       return NextResponse.json({ error: 'Access denied. Client account required.' }, { status: 403 })
     }
 
-    if (user.accountStatus !== 1) {
+    if (user.accountStatus !== 2) {
       return NextResponse.json({ error: 'Account is inactive. Please contact support.' }, { status: 403 })
     }
 

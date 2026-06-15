@@ -59,6 +59,7 @@ export default function ProposalDetailClient({ slug }) {
   const [approving, setApproving] = useState(false)
   const [declining, setDeclining] = useState(false)
   const [actionFeedback, setActionFeedback] = useState('')
+  const [selections, setSelections] = useState({})
   const sectionRefs = useRef({})
 
   useEffect(() => {
@@ -66,7 +67,16 @@ export default function ProposalDetailClient({ slug }) {
       .then(r => r.json())
       .then(data => {
         if (data.error) setError(data.error)
-        else setProposal(data.proposal)
+        else {
+          setProposal(data.proposal)
+          if (data.proposal?.serviceProductOffers?.[0]?.isMultipleChoice) {
+            const init = {}
+            data.proposal.serviceProductOffers[0].offerEntries.forEach(e => {
+              init[e.offerEntryId] = e.isSelected ?? true
+            })
+            setSelections(init)
+          }
+        }
       })
       .catch(() => setError('Failed to load proposal'))
       .finally(() => setLoading(false))
@@ -127,6 +137,20 @@ export default function ProposalDetailClient({ slug }) {
     }
     setDeclining(false)
     setTimeout(() => setActionFeedback(''), 4000)
+  }
+
+  async function handleSelectionChange(offerEntryId, isSelected) {
+    setSelections(prev => ({ ...prev, [offerEntryId]: isSelected }))
+    try {
+      const res = await fetch(`/api/proposals/${slug}/selections`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ selections: [{ offerEntryId, isSelected }] })
+      })
+      if (!res.ok) throw new Error('Failed to save')
+    } catch {
+      setSelections(prev => ({ ...prev, [offerEntryId]: !isSelected }))
+    }
   }
 
   if (loading) {
@@ -499,10 +523,22 @@ export default function ProposalDetailClient({ slug }) {
 
               {!isSla && serviceOffer && (
                 <>
+                  {serviceOffer.isMultipleChoice && canDecide && (
+                    <div className="flex items-start gap-3 p-4 bg-blue-50 border border-blue-200 rounded-xl mb-2">
+                      <p className="text-sm text-blue-700">
+                        <strong>Multiple choice proposal</strong> — tick the items you want included. Your selection saves automatically.
+                      </p>
+                    </div>
+                  )}
                   <div className="overflow-x-auto rounded-xl border border-[#E2E8F0]">
                     <table className="w-full text-sm">
                       <thead>
                         <tr className="bg-[#F8F9FC] border-b border-[#E2E8F0]">
+                          {serviceOffer.isMultipleChoice && (
+                            <th className="text-center px-4 py-3 text-xs font-semibold text-[#718096] uppercase tracking-wide w-12">
+                              {canDecide ? 'Select' : 'Selected'}
+                            </th>
+                          )}
                           <th className="text-left px-4 py-3 text-xs font-semibold text-[#718096] uppercase tracking-wide">Item</th>
                           <th className="text-left px-4 py-3 text-xs font-semibold text-[#718096] uppercase tracking-wide">Description</th>
                           <th className="text-right px-4 py-3 text-xs font-semibold text-[#718096] uppercase tracking-wide">Price</th>
@@ -518,6 +554,9 @@ export default function ProposalDetailClient({ slug }) {
                       </thead>
                       <tbody className="divide-y divide-[#F0F2F8]">
                         {serviceOffer.offerEntries?.map(entry => {
+                          const isEntrySelected = serviceOffer.isMultipleChoice
+                            ? (selections[entry.offerEntryId] ?? entry.isSelected ?? true)
+                            : true
                           const discountedTotal = entry.itemDiscountType === 'Fixed'
                             ? entry.totalPrice - entry.itemDiscountValue
                             : entry.itemDiscountType === 'Percentage'
@@ -525,7 +564,27 @@ export default function ProposalDetailClient({ slug }) {
                               : entry.totalPrice
 
                           return (
-                            <tr key={entry.offerEntryId} className="hover:bg-[#FAFBFC] transition-colors">
+                            <tr
+                              key={entry.offerEntryId}
+                              className="hover:bg-[#FAFBFC] transition-colors"
+                              style={serviceOffer.isMultipleChoice && !isEntrySelected ? { opacity: 0.4 } : {}}
+                            >
+                              {serviceOffer.isMultipleChoice && (
+                                <td className="px-4 py-3 text-center">
+                                  {canDecide ? (
+                                    <input
+                                      type="checkbox"
+                                      checked={isEntrySelected}
+                                      onChange={e => handleSelectionChange(entry.offerEntryId, e.target.checked)}
+                                      className="w-4 h-4 cursor-pointer accent-[#F22044]"
+                                    />
+                                  ) : (
+                                    <span className={isEntrySelected ? 'text-green-500 font-bold' : 'text-[#A0AEC0]'}>
+                                      {isEntrySelected ? '✓' : '—'}
+                                    </span>
+                                  )}
+                                </td>
+                              )}
                               <td className="px-4 py-3 font-medium text-[#1A202C]">{entry.serviceProductItem}</td>
                               <td className="px-4 py-3 text-[#718096] text-xs max-w-48">{entry.description ?? '—'}</td>
                               <td className="px-4 py-3 text-right text-[#1A202C]">{formatCurrency(entry.itemPrice)}</td>
