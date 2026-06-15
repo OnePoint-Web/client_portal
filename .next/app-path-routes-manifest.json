@@ -16,6 +16,7 @@
   "/api/proposals/[slug]/approve/route": "/api/proposals/[slug]/approve",
   "/api/proposals/[slug]/decline/route": "/api/proposals/[slug]/decline",
   "/api/proposals/[slug]/route": "/api/proposals/[slug]",
+  "/api/proposals/[slug]/selections/route": "/api/proposals/[slug]/selections",
   "/api/proposals/route": "/api/proposals",
   "/api/settings/password/route": "/api/settings/password",
   "/api/view/[token]/route": "/api/view/[token]",

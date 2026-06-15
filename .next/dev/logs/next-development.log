@@ -1,3 +1,100 @@
-[00:00:00.672] Server  LOG     ✓ Ready in 444ms
-[00:00:01.713] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:45:38.630] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:00.547] Server  LOG     ✓ Ready in 382ms
+[00:00:59.455] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:03:52.756] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:04:31.848] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:04:51.592] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:52:20.398] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:53:27.035] Server  LOG     ✓ Compiled in 35ms
+[00:53:32.376] Server  LOG     ✓ Compiled in 16ms
+[01:00:50.456] Browser ERROR   ./src/app/(portal)/company-info/page.js:185:1
+Parsing ecmascript source code failed
+  183 |     </div>
+  184 |   )
+> 185 | }
+      | ^
+  186 |
+
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+[01:00:50.463] Browser ERROR   ./src/app/(portal)/company-info/page.js:185:1
+Parsing ecmascript source code failed
+  183 |     </div>
+  184 |   )
+> 185 | }
+      | ^
+  186 |
+
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+[01:00:52.602] Browser ERROR   ./src/app/(portal)/company-info/page.js:185:1
+Parsing ecmascript source code failed
+  183 |     </div>
+  184 |   )
+> 185 | }
+      | ^
+  186 |
+
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+[01:00:52.923] Browser ERROR   ./src/app/(portal)/company-info/page.js:185:1
+Parsing ecmascript source code failed
+  183 |     </div>
+  184 |   )
+> 185 | }
+      | ^
+  186 |
+
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+[01:00:52.923] Browser ERROR   ./src/app/(portal)/company-info/page.js:185:1
+Parsing ecmascript source code failed
+  183 |     </div>
+  184 |   )
+> 185 | }
+      | ^
+  186 |
+
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+[01:00:53.025] Browser ERROR   ./src/app/(portal)/company-info/page.js:185:1
+Parsing ecmascript source code failed
+  183 |     </div>
+  184 |   )
+> 185 | }
+      | ^
+  186 |
+
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+[01:00:53.465] Browser ERROR   ./src/app/(portal)/company-info/page.js:185:1
+Parsing ecmascript source code failed
+  183 |     </div>
+  184 |   )
+> 185 | }
+      | ^
+  186 |
+
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+[01:00:53.465] Browser ERROR   ./src/app/(portal)/company-info/page.js:185:1
+Parsing ecmascript source code failed
+  183 |     </div>
+  184 |   )
+> 185 | }
+      | ^
+  186 |
+
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+[01:00:53.465] Browser ERROR   ./src/app/(portal)/company-info/page.js:185:1
+Parsing ecmascript source code failed
+  183 |     </div>
+  184 |   )
+> 185 | }
+      | ^
+  186 |
+
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+[01:00:53.465] Browser ERROR   ./src/app/(portal)/company-info/page.js:185:1
+Parsing ecmascript source code failed
+  183 |     </div>
+  184 |   )
+> 185 | }
+      | ^
+  186 |
+
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+[01:03:03.466] Browser ERROR   Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. Address
+[01:08:43.911] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold

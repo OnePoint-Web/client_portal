@@ -240,11 +240,21 @@ function ProposalDetailClient({ slug }) {
     const [approving, setApproving] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
     const [declining, setDeclining] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
     const [actionFeedback, setActionFeedback] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])('');
+    const [selections, setSelections] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])({});
     const sectionRefs = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useRef"])({});
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
         fetch(`/api/proposals/${slug}`).then((r)=>r.json()).then((data)=>{
             if (data.error) setError(data.error);
-            else setProposal(data.proposal);
+            else {
+                setProposal(data.proposal);
+                if (data.proposal?.serviceProductOffers?.[0]?.isMultipleChoice) {
+                    const init = {};
+                    data.proposal.serviceProductOffers[0].offerEntries.forEach((e)=>{
+                        init[e.offerEntryId] = e.isSelected ?? true;
+                    });
+                    setSelections(init);
+                }
+            }
         }).catch(()=>setError('Failed to load proposal')).finally(()=>setLoading(false));
     }, [
         slug
@@ -324,6 +334,34 @@ function ProposalDetailClient({ slug }) {
         setDeclining(false);
         setTimeout(()=>setActionFeedback(''), 4000);
     }
+    async function handleSelectionChange(offerEntryId, isSelected) {
+        setSelections((prev)=>({
+                ...prev,
+                [offerEntryId]: isSelected
+            }));
+        try {
+            const res = await fetch(`/api/proposals/${slug}/selections`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    selections: [
+                        {
+                            offerEntryId,
+                            isSelected
+                        }
+                    ]
+                })
+            });
+            if (!res.ok) throw new Error('Failed to save');
+        } catch  {
+            setSelections((prev)=>({
+                    ...prev,
+                    [offerEntryId]: !isSelected
+                }));
+        }
+    }
     if (loading) {
         return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
             className: "space-y-4 animate-pulse",
@@ -332,27 +370,27 @@ function ProposalDetailClient({ slug }) {
                     className: "h-8 bg-white rounded-2xl w-48"
                 }, void 0, false, {
                     fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                    lineNumber: 135,
+                    lineNumber: 159,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                     className: "h-14 bg-white rounded-2xl"
                 }, void 0, false, {
                     fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                    lineNumber: 136,
+                    lineNumber: 160,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                     className: "h-96 bg-white rounded-2xl"
                 }, void 0, false, {
                     fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                    lineNumber: 137,
+                    lineNumber: 161,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-            lineNumber: 134,
+            lineNumber: 158,
             columnNumber: 7
         }, this);
     }
@@ -366,12 +404,12 @@ function ProposalDetailClient({ slug }) {
                         className: "w-8 h-8 text-red-400"
                     }, void 0, false, {
                         fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                        lineNumber: 146,
+                        lineNumber: 170,
                         columnNumber: 11
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                    lineNumber: 145,
+                    lineNumber: 169,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -379,7 +417,7 @@ function ProposalDetailClient({ slug }) {
                     children: error
                 }, void 0, false, {
                     fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                    lineNumber: 148,
+                    lineNumber: 172,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -388,13 +426,13 @@ function ProposalDetailClient({ slug }) {
                     children: "Back to Proposals"
                 }, void 0, false, {
                     fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                    lineNumber: 149,
+                    lineNumber: 173,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-            lineNumber: 144,
+            lineNumber: 168,
             columnNumber: 7
         }, this);
     }
@@ -423,14 +461,14 @@ function ProposalDetailClient({ slug }) {
                                 className: "w-4 h-4"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                lineNumber: 179,
+                                lineNumber: 203,
                                 columnNumber: 11
                             }, this),
                             "Proposals"
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                        lineNumber: 175,
+                        lineNumber: 199,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -438,7 +476,7 @@ function ProposalDetailClient({ slug }) {
                         children: "/"
                     }, void 0, false, {
                         fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                        lineNumber: 182,
+                        lineNumber: 206,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -446,13 +484,13 @@ function ProposalDetailClient({ slug }) {
                         children: proposal.proposalTitle
                     }, void 0, false, {
                         fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                        lineNumber: 183,
+                        lineNumber: 207,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                lineNumber: 174,
+                lineNumber: 198,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -470,7 +508,7 @@ function ProposalDetailClient({ slug }) {
                                             status: status
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                            lineNumber: 191,
+                                            lineNumber: 215,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -478,13 +516,13 @@ function ProposalDetailClient({ slug }) {
                                             children: proposal.proposalType
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                            lineNumber: 192,
+                                            lineNumber: 216,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                    lineNumber: 190,
+                                    lineNumber: 214,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
@@ -492,7 +530,7 @@ function ProposalDetailClient({ slug }) {
                                     children: proposal.proposalTitle
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                    lineNumber: 194,
+                                    lineNumber: 218,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -504,7 +542,7 @@ function ProposalDetailClient({ slug }) {
                                                 className: "w-3.5 h-3.5"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                lineNumber: 197,
+                                                lineNumber: 221,
                                                 columnNumber: 17
                                             }, this),
                                             "Received ",
@@ -512,18 +550,18 @@ function ProposalDetailClient({ slug }) {
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                        lineNumber: 196,
+                                        lineNumber: 220,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                    lineNumber: 195,
+                                    lineNumber: 219,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                            lineNumber: 189,
+                            lineNumber: 213,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -536,30 +574,30 @@ function ProposalDetailClient({ slug }) {
                                         className: "w-4 h-4"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                        lineNumber: 207,
+                                        lineNumber: 231,
                                         columnNumber: 15
                                     }, this),
                                     "Download PDF"
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                lineNumber: 203,
+                                lineNumber: 227,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                            lineNumber: 202,
+                            lineNumber: 226,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                    lineNumber: 188,
+                    lineNumber: 212,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                lineNumber: 187,
+                lineNumber: 211,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -577,25 +615,25 @@ function ProposalDetailClient({ slug }) {
                                     className: "w-3.5 h-3.5"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                    lineNumber: 230,
+                                    lineNumber: 254,
                                     columnNumber: 17
                                 }, this),
                                 section.label
                             ]
                         }, section.id, true, {
                             fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                            lineNumber: 221,
+                            lineNumber: 245,
                             columnNumber: 15
                         }, this);
                     })
                 }, void 0, false, {
                     fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                    lineNumber: 216,
+                    lineNumber: 240,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                lineNumber: 215,
+                lineNumber: 239,
                 columnNumber: 7
             }, this),
             actionFeedback && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -603,7 +641,7 @@ function ProposalDetailClient({ slug }) {
                 children: actionFeedback
             }, void 0, false, {
                 fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                lineNumber: 240,
+                lineNumber: 264,
                 columnNumber: 9
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -625,12 +663,12 @@ function ProposalDetailClient({ slug }) {
                                             className: "w-4 h-4 text-white"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                            lineNumber: 256,
+                                            lineNumber: 280,
                                             columnNumber: 15
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                        lineNumber: 255,
+                                        lineNumber: 279,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
@@ -638,13 +676,13 @@ function ProposalDetailClient({ slug }) {
                                         children: "Executive Summary"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                        lineNumber: 258,
+                                        lineNumber: 282,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                lineNumber: 254,
+                                lineNumber: 278,
                                 columnNumber: 11
                             }, this),
                             proposal.execVideoUrl && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -659,12 +697,12 @@ function ProposalDetailClient({ slug }) {
                                             title: "Executive Video"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                            lineNumber: 264,
+                                            lineNumber: 288,
                                             columnNumber: 17
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                        lineNumber: 263,
+                                        lineNumber: 287,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -674,7 +712,7 @@ function ProposalDetailClient({ slug }) {
                                                 className: "w-3.5 h-3.5 text-[#A0AEC0]"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                lineNumber: 272,
+                                                lineNumber: 296,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -682,19 +720,19 @@ function ProposalDetailClient({ slug }) {
                                                 children: "Executive video presentation"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                lineNumber: 273,
+                                                lineNumber: 297,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                        lineNumber: 271,
+                                        lineNumber: 295,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                lineNumber: 262,
+                                lineNumber: 286,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -704,13 +742,13 @@ function ProposalDetailClient({ slug }) {
                                 }
                             }, void 0, false, {
                                 fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                lineNumber: 278,
+                                lineNumber: 302,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                        lineNumber: 249,
+                        lineNumber: 273,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -729,12 +767,12 @@ function ProposalDetailClient({ slug }) {
                                             className: "w-4 h-4 text-white"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                            lineNumber: 294,
+                                            lineNumber: 318,
                                             columnNumber: 15
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                        lineNumber: 293,
+                                        lineNumber: 317,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
@@ -742,13 +780,13 @@ function ProposalDetailClient({ slug }) {
                                         children: "Goals and Objectives"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                        lineNumber: 296,
+                                        lineNumber: 320,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                lineNumber: 292,
+                                lineNumber: 316,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -758,13 +796,13 @@ function ProposalDetailClient({ slug }) {
                                 }
                             }, void 0, false, {
                                 fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                lineNumber: 298,
+                                lineNumber: 322,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                        lineNumber: 287,
+                        lineNumber: 311,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -783,12 +821,12 @@ function ProposalDetailClient({ slug }) {
                                             className: "w-4 h-4 text-white"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                            lineNumber: 314,
+                                            lineNumber: 338,
                                             columnNumber: 15
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                        lineNumber: 313,
+                                        lineNumber: 337,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
@@ -796,13 +834,13 @@ function ProposalDetailClient({ slug }) {
                                         children: "Proposed Solution"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                        lineNumber: 316,
+                                        lineNumber: 340,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                lineNumber: 312,
+                                lineNumber: 336,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -812,13 +850,13 @@ function ProposalDetailClient({ slug }) {
                                 }
                             }, void 0, false, {
                                 fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                lineNumber: 318,
+                                lineNumber: 342,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                        lineNumber: 307,
+                        lineNumber: 331,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -837,12 +875,12 @@ function ProposalDetailClient({ slug }) {
                                             className: "w-4 h-4 text-white"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                            lineNumber: 334,
+                                            lineNumber: 358,
                                             columnNumber: 15
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                        lineNumber: 333,
+                                        lineNumber: 357,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
@@ -850,13 +888,13 @@ function ProposalDetailClient({ slug }) {
                                         children: "The Team"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                        lineNumber: 336,
+                                        lineNumber: 360,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                lineNumber: 332,
+                                lineNumber: 356,
                                 columnNumber: 11
                             }, this),
                             proposal.selectedMembers?.length === 0 ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -864,7 +902,7 @@ function ProposalDetailClient({ slug }) {
                                 children: "No team members listed."
                             }, void 0, false, {
                                 fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                lineNumber: 340,
+                                lineNumber: 364,
                                 columnNumber: 13
                             }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 className: "px-6 py-5",
@@ -877,23 +915,23 @@ function ProposalDetailClient({ slug }) {
                                             description: m.teamMember.description
                                         }, i, false, {
                                             fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                            lineNumber: 345,
+                                            lineNumber: 369,
                                             columnNumber: 19
                                         }, this))
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                    lineNumber: 343,
+                                    lineNumber: 367,
                                     columnNumber: 15
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                lineNumber: 342,
+                                lineNumber: 366,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                        lineNumber: 327,
+                        lineNumber: 351,
                         columnNumber: 9
                     }, this),
                     timelines.length > 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -912,12 +950,12 @@ function ProposalDetailClient({ slug }) {
                                             className: "w-4 h-4 text-white"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                            lineNumber: 367,
+                                            lineNumber: 391,
                                             columnNumber: 17
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                        lineNumber: 366,
+                                        lineNumber: 390,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
@@ -925,13 +963,13 @@ function ProposalDetailClient({ slug }) {
                                         children: "Project Timeline"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                        lineNumber: 369,
+                                        lineNumber: 393,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                lineNumber: 365,
+                                lineNumber: 389,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -948,7 +986,7 @@ function ProposalDetailClient({ slug }) {
                                                         children: "Timeframe"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                        lineNumber: 376,
+                                                        lineNumber: 400,
                                                         columnNumber: 21
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -956,7 +994,7 @@ function ProposalDetailClient({ slug }) {
                                                         children: "Assigned To"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                        lineNumber: 377,
+                                                        lineNumber: 401,
                                                         columnNumber: 21
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -964,7 +1002,7 @@ function ProposalDetailClient({ slug }) {
                                                         children: "Progress"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                        lineNumber: 378,
+                                                        lineNumber: 402,
                                                         columnNumber: 21
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -972,18 +1010,18 @@ function ProposalDetailClient({ slug }) {
                                                         children: "Tasks"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                        lineNumber: 379,
+                                                        lineNumber: 403,
                                                         columnNumber: 21
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                lineNumber: 375,
+                                                lineNumber: 399,
                                                 columnNumber: 19
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                            lineNumber: 374,
+                                            lineNumber: 398,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tbody", {
@@ -998,12 +1036,12 @@ function ProposalDetailClient({ slug }) {
                                                                 children: t.timeFrame
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                                lineNumber: 389,
+                                                                lineNumber: 413,
                                                                 columnNumber: 27
                                                             }, this)
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                            lineNumber: 388,
+                                                            lineNumber: 412,
                                                             columnNumber: 25
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1011,7 +1049,7 @@ function ProposalDetailClient({ slug }) {
                                                             children: t.assignedTo || '—'
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                            lineNumber: 391,
+                                                            lineNumber: 415,
                                                             columnNumber: 25
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1029,12 +1067,12 @@ function ProposalDetailClient({ slug }) {
                                                                             }
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                                            lineNumber: 397,
+                                                                            lineNumber: 421,
                                                                             columnNumber: 31
                                                                         }, this)
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                                        lineNumber: 396,
+                                                                        lineNumber: 420,
                                                                         columnNumber: 29
                                                                     }, this),
                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -1045,18 +1083,18 @@ function ProposalDetailClient({ slug }) {
                                                                         ]
                                                                     }, void 0, true, {
                                                                         fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                                        lineNumber: 411,
+                                                                        lineNumber: 435,
                                                                         columnNumber: 29
                                                                     }, this)
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                                lineNumber: 395,
+                                                                lineNumber: 419,
                                                                 columnNumber: 27
                                                             }, this)
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                            lineNumber: 394,
+                                                            lineNumber: 418,
                                                             columnNumber: 25
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1070,59 +1108,59 @@ function ProposalDetailClient({ slug }) {
                                                                                 className: "mt-1.5 w-1.5 h-1.5 rounded-full bg-indigo-400 flex-shrink-0"
                                                                             }, void 0, false, {
                                                                                 fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                                                lineNumber: 421,
+                                                                                lineNumber: 445,
                                                                                 columnNumber: 35
                                                                             }, this),
                                                                             s.scope
                                                                         ]
                                                                     }, s.scopeItemId, true, {
                                                                         fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                                        lineNumber: 420,
+                                                                        lineNumber: 444,
                                                                         columnNumber: 33
                                                                     }, this))
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                                lineNumber: 418,
+                                                                lineNumber: 442,
                                                                 columnNumber: 29
                                                             }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                                 className: "text-[#A0AEC0]",
                                                                 children: "—"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                                lineNumber: 427,
+                                                                lineNumber: 451,
                                                                 columnNumber: 29
                                                             }, this)
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                            lineNumber: 416,
+                                                            lineNumber: 440,
                                                             columnNumber: 25
                                                         }, this)
                                                     ]
                                                 }, t.timelineId, true, {
                                                     fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                    lineNumber: 387,
+                                                    lineNumber: 411,
                                                     columnNumber: 23
                                                 }, this))
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                            lineNumber: 382,
+                                            lineNumber: 406,
                                             columnNumber: 17
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                    lineNumber: 373,
+                                    lineNumber: 397,
                                     columnNumber: 15
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                lineNumber: 372,
+                                lineNumber: 396,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                        lineNumber: 360,
+                        lineNumber: 384,
                         columnNumber: 11
                     }, this),
                     (isSla ? slaOffer : serviceOffer) && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -1141,12 +1179,12 @@ function ProposalDetailClient({ slug }) {
                                             className: "w-4 h-4 text-white"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                            lineNumber: 447,
+                                            lineNumber: 471,
                                             columnNumber: 17
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                        lineNumber: 446,
+                                        lineNumber: 470,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
@@ -1154,13 +1192,13 @@ function ProposalDetailClient({ slug }) {
                                         children: "Proposed Budget"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                        lineNumber: 449,
+                                        lineNumber: 473,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                lineNumber: 445,
+                                lineNumber: 469,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1179,13 +1217,13 @@ function ProposalDetailClient({ slug }) {
                                                                 children: slaOffer.slaPackage
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                                lineNumber: 457,
+                                                                lineNumber: 481,
                                                                 columnNumber: 32
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                        lineNumber: 456,
+                                                        lineNumber: 480,
                                                         columnNumber: 21
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1193,7 +1231,7 @@ function ProposalDetailClient({ slug }) {
                                                         children: "Inclusions may include the following items:"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                        lineNumber: 459,
+                                                        lineNumber: 483,
                                                         columnNumber: 21
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1206,7 +1244,7 @@ function ProposalDetailClient({ slug }) {
                                                                         children: item.item
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                                        lineNumber: 464,
+                                                                        lineNumber: 488,
                                                                         columnNumber: 27
                                                                     }, this),
                                                                     item.itemType === 'Paragraph' ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1214,7 +1252,7 @@ function ProposalDetailClient({ slug }) {
                                                                         children: item.packageDealEntries[0]?.itemEntry
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                                        lineNumber: 466,
+                                                                        lineNumber: 490,
                                                                         columnNumber: 29
                                                                     }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("ul", {
                                                                         className: "space-y-1",
@@ -1225,30 +1263,30 @@ function ProposalDetailClient({ slug }) {
                                                                                         className: "mt-1.5 w-1.5 h-1.5 rounded-full bg-[#F22044] flex-shrink-0"
                                                                                     }, void 0, false, {
                                                                                         fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                                                        lineNumber: 471,
+                                                                                        lineNumber: 495,
                                                                                         columnNumber: 35
                                                                                     }, this),
                                                                                     e.itemEntry
                                                                                 ]
                                                                             }, e.itemEntryId, true, {
                                                                                 fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                                                lineNumber: 470,
+                                                                                lineNumber: 494,
                                                                                 columnNumber: 33
                                                                             }, this))
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                                        lineNumber: 468,
+                                                                        lineNumber: 492,
                                                                         columnNumber: 29
                                                                     }, this)
                                                                 ]
                                                             }, item.packageDealItemId, true, {
                                                                 fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                                lineNumber: 463,
+                                                                lineNumber: 487,
                                                                 columnNumber: 25
                                                             }, this))
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                        lineNumber: 461,
+                                                        lineNumber: 485,
                                                         columnNumber: 21
                                                     }, this),
                                                     proposal.proposalDescription && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1258,18 +1296,18 @@ function ProposalDetailClient({ slug }) {
                                                             children: proposal.proposalDescription
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                            lineNumber: 483,
+                                                            lineNumber: 507,
                                                             columnNumber: 25
                                                         }, this)
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                        lineNumber: 482,
+                                                        lineNumber: 506,
                                                         columnNumber: 23
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                lineNumber: 455,
+                                                lineNumber: 479,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(PriceSummaryTable, {
@@ -1293,13 +1331,37 @@ function ProposalDetailClient({ slug }) {
                                                 paymentTerms: slaOffer.paymentTerms
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                lineNumber: 488,
+                                                lineNumber: 512,
                                                 columnNumber: 19
                                             }, this)
                                         ]
                                     }, void 0, true),
                                     !isSla && serviceOffer && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Fragment"], {
                                         children: [
+                                            serviceOffer.isMultipleChoice && canDecide && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                className: "flex items-start gap-3 p-4 bg-blue-50 border border-blue-200 rounded-xl mb-2",
+                                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                                    className: "text-sm text-blue-700",
+                                                    children: [
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("strong", {
+                                                            children: "Multiple choice proposal"
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
+                                                            lineNumber: 529,
+                                                            columnNumber: 25
+                                                        }, this),
+                                                        " — tick the items you want included. Your selection saves automatically."
+                                                    ]
+                                                }, void 0, true, {
+                                                    fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
+                                                    lineNumber: 528,
+                                                    columnNumber: 23
+                                                }, this)
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
+                                                lineNumber: 527,
+                                                columnNumber: 21
+                                            }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                 className: "overflow-x-auto rounded-xl border border-[#E2E8F0]",
                                                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("table", {
@@ -1309,12 +1371,20 @@ function ProposalDetailClient({ slug }) {
                                                             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tr", {
                                                                 className: "bg-[#F8F9FC] border-b border-[#E2E8F0]",
                                                                 children: [
+                                                                    serviceOffer.isMultipleChoice && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
+                                                                        className: "text-center px-4 py-3 text-xs font-semibold text-[#718096] uppercase tracking-wide w-12",
+                                                                        children: canDecide ? 'Select' : 'Selected'
+                                                                    }, void 0, false, {
+                                                                        fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
+                                                                        lineNumber: 538,
+                                                                        columnNumber: 29
+                                                                    }, this),
                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
                                                                         className: "text-left px-4 py-3 text-xs font-semibold text-[#718096] uppercase tracking-wide",
                                                                         children: "Item"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                                        lineNumber: 506,
+                                                                        lineNumber: 542,
                                                                         columnNumber: 27
                                                                     }, this),
                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -1322,7 +1392,7 @@ function ProposalDetailClient({ slug }) {
                                                                         children: "Description"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                                        lineNumber: 507,
+                                                                        lineNumber: 543,
                                                                         columnNumber: 27
                                                                     }, this),
                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -1330,7 +1400,7 @@ function ProposalDetailClient({ slug }) {
                                                                         children: "Price"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                                        lineNumber: 508,
+                                                                        lineNumber: 544,
                                                                         columnNumber: 27
                                                                     }, this),
                                                                     proposal.proposalType === 'Product Proposal' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Fragment"], {
@@ -1340,7 +1410,7 @@ function ProposalDetailClient({ slug }) {
                                                                                 children: "Qty"
                                                                             }, void 0, false, {
                                                                                 fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                                                lineNumber: 511,
+                                                                                lineNumber: 547,
                                                                                 columnNumber: 31
                                                                             }, this),
                                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -1348,7 +1418,7 @@ function ProposalDetailClient({ slug }) {
                                                                                 children: "Subtotal"
                                                                             }, void 0, false, {
                                                                                 fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                                                lineNumber: 512,
+                                                                                lineNumber: 548,
                                                                                 columnNumber: 31
                                                                             }, this)
                                                                         ]
@@ -1358,7 +1428,7 @@ function ProposalDetailClient({ slug }) {
                                                                         children: "Discount"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                                        lineNumber: 515,
+                                                                        lineNumber: 551,
                                                                         columnNumber: 27
                                                                     }, this),
                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -1366,33 +1436,61 @@ function ProposalDetailClient({ slug }) {
                                                                         children: "Total"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                                        lineNumber: 516,
+                                                                        lineNumber: 552,
                                                                         columnNumber: 27
                                                                     }, this)
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                                lineNumber: 505,
+                                                                lineNumber: 536,
                                                                 columnNumber: 25
                                                             }, this)
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                            lineNumber: 504,
+                                                            lineNumber: 535,
                                                             columnNumber: 23
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tbody", {
                                                             className: "divide-y divide-[#F0F2F8]",
                                                             children: serviceOffer.offerEntries?.map((entry)=>{
+                                                                const isEntrySelected = serviceOffer.isMultipleChoice ? selections[entry.offerEntryId] ?? entry.isSelected ?? true : true;
                                                                 const discountedTotal = entry.itemDiscountType === 'Fixed' ? entry.totalPrice - entry.itemDiscountValue : entry.itemDiscountType === 'Percentage' ? entry.totalPrice - entry.itemDiscountValue / 100 * entry.totalPrice : entry.totalPrice;
                                                                 return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tr", {
                                                                     className: "hover:bg-[#FAFBFC] transition-colors",
+                                                                    style: serviceOffer.isMultipleChoice && !isEntrySelected ? {
+                                                                        opacity: 0.4
+                                                                    } : {},
                                                                     children: [
+                                                                        serviceOffer.isMultipleChoice && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
+                                                                            className: "px-4 py-3 text-center",
+                                                                            children: canDecide ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                                                                type: "checkbox",
+                                                                                checked: isEntrySelected,
+                                                                                onChange: (e)=>handleSelectionChange(entry.offerEntryId, e.target.checked),
+                                                                                className: "w-4 h-4 cursor-pointer accent-[#F22044]"
+                                                                            }, void 0, false, {
+                                                                                fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
+                                                                                lineNumber: 575,
+                                                                                columnNumber: 37
+                                                                            }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                                                className: isEntrySelected ? 'text-green-500 font-bold' : 'text-[#A0AEC0]',
+                                                                                children: isEntrySelected ? '✓' : '—'
+                                                                            }, void 0, false, {
+                                                                                fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
+                                                                                lineNumber: 582,
+                                                                                columnNumber: 37
+                                                                            }, this)
+                                                                        }, void 0, false, {
+                                                                            fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
+                                                                            lineNumber: 573,
+                                                                            columnNumber: 33
+                                                                        }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
                                                                             className: "px-4 py-3 font-medium text-[#1A202C]",
                                                                             children: entry.serviceProductItem
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                                            lineNumber: 529,
+                                                                            lineNumber: 588,
                                                                             columnNumber: 31
                                                                         }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1400,7 +1498,7 @@ function ProposalDetailClient({ slug }) {
                                                                             children: entry.description ?? '—'
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                                            lineNumber: 530,
+                                                                            lineNumber: 589,
                                                                             columnNumber: 31
                                                                         }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1408,7 +1506,7 @@ function ProposalDetailClient({ slug }) {
                                                                             children: formatCurrency(entry.itemPrice)
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                                            lineNumber: 531,
+                                                                            lineNumber: 590,
                                                                             columnNumber: 31
                                                                         }, this),
                                                                         proposal.proposalType === 'Product Proposal' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Fragment"], {
@@ -1418,7 +1516,7 @@ function ProposalDetailClient({ slug }) {
                                                                                     children: entry.quantity
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                                                    lineNumber: 534,
+                                                                                    lineNumber: 593,
                                                                                     columnNumber: 35
                                                                                 }, this),
                                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1426,7 +1524,7 @@ function ProposalDetailClient({ slug }) {
                                                                                     children: formatCurrency(entry.totalPrice)
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                                                    lineNumber: 535,
+                                                                                    lineNumber: 594,
                                                                                     columnNumber: 35
                                                                                 }, this)
                                                                             ]
@@ -1438,19 +1536,19 @@ function ProposalDetailClient({ slug }) {
                                                                                 children: "—"
                                                                             }, void 0, false, {
                                                                                 fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                                                lineNumber: 540,
+                                                                                lineNumber: 599,
                                                                                 columnNumber: 35
                                                                             }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                                                 className: "text-red-500 text-xs",
                                                                                 children: entry.itemDiscountType === 'Fixed' ? `- ${formatCurrency(entry.itemDiscountValue)}` : `- ${entry.itemDiscountValue}%`
                                                                             }, void 0, false, {
                                                                                 fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                                                lineNumber: 542,
+                                                                                lineNumber: 601,
                                                                                 columnNumber: 35
                                                                             }, this)
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                                            lineNumber: 538,
+                                                                            lineNumber: 597,
                                                                             columnNumber: 31
                                                                         }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1458,30 +1556,30 @@ function ProposalDetailClient({ slug }) {
                                                                             children: formatCurrency(discountedTotal)
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                                            lineNumber: 547,
+                                                                            lineNumber: 606,
                                                                             columnNumber: 31
                                                                         }, this)
                                                                     ]
                                                                 }, entry.offerEntryId, true, {
                                                                     fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                                    lineNumber: 528,
+                                                                    lineNumber: 567,
                                                                     columnNumber: 29
                                                                 }, this);
                                                             })
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                            lineNumber: 519,
+                                                            lineNumber: 555,
                                                             columnNumber: 23
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                    lineNumber: 503,
+                                                    lineNumber: 534,
                                                     columnNumber: 21
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                lineNumber: 502,
+                                                lineNumber: 533,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(PriceSummaryTable, {
@@ -1510,7 +1608,7 @@ function ProposalDetailClient({ slug }) {
                                                 paymentTerms: serviceOffer.paymentTerms
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                lineNumber: 555,
+                                                lineNumber: 614,
                                                 columnNumber: 19
                                             }, this)
                                         ]
@@ -1518,13 +1616,13 @@ function ProposalDetailClient({ slug }) {
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                lineNumber: 452,
+                                lineNumber: 476,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                        lineNumber: 440,
+                        lineNumber: 464,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -1543,12 +1641,12 @@ function ProposalDetailClient({ slug }) {
                                             className: "w-4 h-4 text-white"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                            lineNumber: 593,
+                                            lineNumber: 652,
                                             columnNumber: 15
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                        lineNumber: 592,
+                                        lineNumber: 651,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
@@ -1556,13 +1654,13 @@ function ProposalDetailClient({ slug }) {
                                         children: "Approval"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                        lineNumber: 595,
+                                        lineNumber: 654,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                lineNumber: 591,
+                                lineNumber: 650,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1579,7 +1677,7 @@ function ProposalDetailClient({ slug }) {
                                                         children: "Proposal Details"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                        lineNumber: 602,
+                                                        lineNumber: 661,
                                                         columnNumber: 17
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1589,7 +1687,7 @@ function ProposalDetailClient({ slug }) {
                                                                 children: "Title"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                                lineNumber: 604,
+                                                                lineNumber: 663,
                                                                 columnNumber: 19
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1597,13 +1695,13 @@ function ProposalDetailClient({ slug }) {
                                                                 children: proposal.proposalTitle
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                                lineNumber: 605,
+                                                                lineNumber: 664,
                                                                 columnNumber: 19
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                        lineNumber: 603,
+                                                        lineNumber: 662,
                                                         columnNumber: 17
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1613,7 +1711,7 @@ function ProposalDetailClient({ slug }) {
                                                                 children: "Type"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                                lineNumber: 608,
+                                                                lineNumber: 667,
                                                                 columnNumber: 19
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1621,13 +1719,13 @@ function ProposalDetailClient({ slug }) {
                                                                 children: proposal.proposalType
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                                lineNumber: 609,
+                                                                lineNumber: 668,
                                                                 columnNumber: 19
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                        lineNumber: 607,
+                                                        lineNumber: 666,
                                                         columnNumber: 17
                                                     }, this),
                                                     isSla && slaOffer && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1637,7 +1735,7 @@ function ProposalDetailClient({ slug }) {
                                                                 children: "Package"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                                lineNumber: 613,
+                                                                lineNumber: 672,
                                                                 columnNumber: 21
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1645,13 +1743,13 @@ function ProposalDetailClient({ slug }) {
                                                                 children: slaOffer.slaPackage
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                                lineNumber: 614,
+                                                                lineNumber: 673,
                                                                 columnNumber: 21
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                        lineNumber: 612,
+                                                        lineNumber: 671,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1661,7 +1759,7 @@ function ProposalDetailClient({ slug }) {
                                                                 children: "Current Status"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                                lineNumber: 618,
+                                                                lineNumber: 677,
                                                                 columnNumber: 19
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1670,24 +1768,24 @@ function ProposalDetailClient({ slug }) {
                                                                     status: status
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                                    lineNumber: 620,
+                                                                    lineNumber: 679,
                                                                     columnNumber: 21
                                                                 }, this)
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                                lineNumber: 619,
+                                                                lineNumber: 678,
                                                                 columnNumber: 19
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                        lineNumber: 617,
+                                                        lineNumber: 676,
                                                         columnNumber: 17
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                lineNumber: 601,
+                                                lineNumber: 660,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1698,7 +1796,7 @@ function ProposalDetailClient({ slug }) {
                                                         children: "Client Details"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                        lineNumber: 626,
+                                                        lineNumber: 685,
                                                         columnNumber: 17
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1708,7 +1806,7 @@ function ProposalDetailClient({ slug }) {
                                                                 className: "w-3.5 h-3.5 text-[#A0AEC0] mt-0.5"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                                lineNumber: 628,
+                                                                lineNumber: 687,
                                                                 columnNumber: 19
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1718,7 +1816,7 @@ function ProposalDetailClient({ slug }) {
                                                                         children: "Company"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                                        lineNumber: 630,
+                                                                        lineNumber: 689,
                                                                         columnNumber: 21
                                                                     }, this),
                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1726,19 +1824,19 @@ function ProposalDetailClient({ slug }) {
                                                                         children: proposal.clientProfile?.companyName ?? '—'
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                                        lineNumber: 631,
+                                                                        lineNumber: 690,
                                                                         columnNumber: 21
                                                                     }, this)
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                                lineNumber: 629,
+                                                                lineNumber: 688,
                                                                 columnNumber: 19
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                        lineNumber: 627,
+                                                        lineNumber: 686,
                                                         columnNumber: 17
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1748,7 +1846,7 @@ function ProposalDetailClient({ slug }) {
                                                                 className: "w-3.5 h-3.5 text-[#A0AEC0] mt-0.5"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                                lineNumber: 635,
+                                                                lineNumber: 694,
                                                                 columnNumber: 19
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1758,7 +1856,7 @@ function ProposalDetailClient({ slug }) {
                                                                         children: "Client"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                                        lineNumber: 637,
+                                                                        lineNumber: 696,
                                                                         columnNumber: 21
                                                                     }, this),
                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1770,19 +1868,19 @@ function ProposalDetailClient({ slug }) {
                                                                         ]
                                                                     }, void 0, true, {
                                                                         fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                                        lineNumber: 638,
+                                                                        lineNumber: 697,
                                                                         columnNumber: 21
                                                                     }, this)
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                                lineNumber: 636,
+                                                                lineNumber: 695,
                                                                 columnNumber: 19
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                        lineNumber: 634,
+                                                        lineNumber: 693,
                                                         columnNumber: 17
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1792,7 +1890,7 @@ function ProposalDetailClient({ slug }) {
                                                                 className: "w-3.5 h-3.5 text-[#A0AEC0] mt-0.5"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                                lineNumber: 644,
+                                                                lineNumber: 703,
                                                                 columnNumber: 19
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1802,7 +1900,7 @@ function ProposalDetailClient({ slug }) {
                                                                         children: "Email"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                                        lineNumber: 646,
+                                                                        lineNumber: 705,
                                                                         columnNumber: 21
                                                                     }, this),
                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1810,19 +1908,19 @@ function ProposalDetailClient({ slug }) {
                                                                         children: proposal.clientProfile?.user?.userEmail ?? '—'
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                                        lineNumber: 647,
+                                                                        lineNumber: 706,
                                                                         columnNumber: 21
                                                                     }, this)
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                                lineNumber: 645,
+                                                                lineNumber: 704,
                                                                 columnNumber: 19
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                        lineNumber: 643,
+                                                        lineNumber: 702,
                                                         columnNumber: 17
                                                     }, this),
                                                     proposal.clientProfile?.website && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1832,7 +1930,7 @@ function ProposalDetailClient({ slug }) {
                                                                 className: "w-3.5 h-3.5 text-[#A0AEC0] mt-0.5"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                                lineNumber: 652,
+                                                                lineNumber: 711,
                                                                 columnNumber: 21
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1842,7 +1940,7 @@ function ProposalDetailClient({ slug }) {
                                                                         children: "Website"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                                        lineNumber: 654,
+                                                                        lineNumber: 713,
                                                                         columnNumber: 23
                                                                     }, this),
                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1850,31 +1948,31 @@ function ProposalDetailClient({ slug }) {
                                                                         children: proposal.clientProfile.website
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                                        lineNumber: 655,
+                                                                        lineNumber: 714,
                                                                         columnNumber: 23
                                                                     }, this)
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                                lineNumber: 653,
+                                                                lineNumber: 712,
                                                                 columnNumber: 21
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                        lineNumber: 651,
+                                                        lineNumber: 710,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                lineNumber: 625,
+                                                lineNumber: 684,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                        lineNumber: 600,
+                                        lineNumber: 659,
                                         columnNumber: 13
                                     }, this),
                                     !canDecide ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1884,13 +1982,13 @@ function ProposalDetailClient({ slug }) {
                                                 className: "w-5 h-5 text-green-600 flex-shrink-0"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                lineNumber: 670,
+                                                lineNumber: 729,
                                                 columnNumber: 19
                                             }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$icons$2f$ri$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["RiCloseLine"], {
                                                 className: "w-5 h-5 text-red-500 flex-shrink-0"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                lineNumber: 672,
+                                                lineNumber: 731,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1903,7 +2001,7 @@ function ProposalDetailClient({ slug }) {
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                        lineNumber: 675,
+                                                        lineNumber: 734,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1914,19 +2012,19 @@ function ProposalDetailClient({ slug }) {
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                        lineNumber: 678,
+                                                        lineNumber: 737,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                lineNumber: 674,
+                                                lineNumber: 733,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                        lineNumber: 664,
+                                        lineNumber: 723,
                                         columnNumber: 15
                                     }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                         className: "flex flex-col sm:flex-row gap-3",
@@ -1940,14 +2038,14 @@ function ProposalDetailClient({ slug }) {
                                                         className: "w-4 h-4"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                        lineNumber: 690,
+                                                        lineNumber: 749,
                                                         columnNumber: 19
                                                     }, this),
                                                     approving ? 'Approving...' : 'Approve Proposal'
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                lineNumber: 685,
+                                                lineNumber: 744,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -1959,44 +2057,44 @@ function ProposalDetailClient({ slug }) {
                                                         className: "w-4 h-4"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                        lineNumber: 698,
+                                                        lineNumber: 757,
                                                         columnNumber: 19
                                                     }, this),
                                                     declining ? 'Declining...' : 'Decline Proposal'
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                                lineNumber: 693,
+                                                lineNumber: 752,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                        lineNumber: 684,
+                                        lineNumber: 743,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                lineNumber: 598,
+                                lineNumber: 657,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                        lineNumber: 586,
+                        lineNumber: 645,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                lineNumber: 246,
+                lineNumber: 270,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-        lineNumber: 172,
+        lineNumber: 196,
         columnNumber: 5
     }, this);
 }
@@ -2018,7 +2116,7 @@ function PriceSummaryTable({ rows, total, paymentTerms }) {
                                             children: row.label
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                            lineNumber: 718,
+                                            lineNumber: 777,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -2026,13 +2124,13 @@ function PriceSummaryTable({ rows, total, paymentTerms }) {
                                             children: row.value
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                            lineNumber: 719,
+                                            lineNumber: 778,
                                             columnNumber: 17
                                         }, this)
                                     ]
                                 }, i, true, {
                                     fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                    lineNumber: 717,
+                                    lineNumber: 776,
                                     columnNumber: 15
                                 }, this)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tr", {
@@ -2043,7 +2141,7 @@ function PriceSummaryTable({ rows, total, paymentTerms }) {
                                         children: "Total"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                        lineNumber: 723,
+                                        lineNumber: 782,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -2051,29 +2149,29 @@ function PriceSummaryTable({ rows, total, paymentTerms }) {
                                         children: total
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                        lineNumber: 724,
+                                        lineNumber: 783,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                                lineNumber: 722,
+                                lineNumber: 781,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                        lineNumber: 715,
+                        lineNumber: 774,
                         columnNumber: 11
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                    lineNumber: 714,
+                    lineNumber: 773,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                lineNumber: 713,
+                lineNumber: 772,
                 columnNumber: 7
             }, this),
             paymentTerms && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2084,7 +2182,7 @@ function PriceSummaryTable({ rows, total, paymentTerms }) {
                         children: "Payment Terms"
                     }, void 0, false, {
                         fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                        lineNumber: 732,
+                        lineNumber: 791,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2094,19 +2192,19 @@ function PriceSummaryTable({ rows, total, paymentTerms }) {
                         }
                     }, void 0, false, {
                         fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                        lineNumber: 733,
+                        lineNumber: 792,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-                lineNumber: 731,
+                lineNumber: 790,
                 columnNumber: 9
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/(portal)/proposals/[slug]/ProposalDetailClient.js",
-        lineNumber: 712,
+        lineNumber: 771,
         columnNumber: 5
     }, this);
 }

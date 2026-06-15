@@ -1353,6 +1353,39 @@ function ViewPageClient({ token }) {
                                             }, void 0, true),
                                             !isSla && serviceOffer && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Fragment"], {
                                                 children: [
+                                                    serviceOffer.isMultipleChoice && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                        className: "flex items-center gap-2 px-4 py-3 mb-3 rounded-lg border border-amber-200 bg-amber-50",
+                                                        children: [
+                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$icons$2f$ri$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["RiLockLine"], {
+                                                                className: "w-4 h-4 text-amber-600 shrink-0"
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
+                                                                lineNumber: 491,
+                                                                columnNumber: 25
+                                                            }, this),
+                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                                                className: "text-sm text-amber-700 font-medium flex-1",
+                                                                children: "Multiple choice proposal — sign in to select your desired items and approve."
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
+                                                                lineNumber: 492,
+                                                                columnNumber: 25
+                                                            }, this),
+                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
+                                                                href: "/login",
+                                                                className: "text-sm text-amber-700 font-semibold underline shrink-0",
+                                                                children: "Sign in"
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
+                                                                lineNumber: 495,
+                                                                columnNumber: 25
+                                                            }, this)
+                                                        ]
+                                                    }, void 0, true, {
+                                                        fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
+                                                        lineNumber: 490,
+                                                        columnNumber: 23
+                                                    }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                         className: "overflow-x-auto rounded-xl border border-[#E2E8F0]",
                                                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("table", {
@@ -1367,7 +1400,7 @@ function ViewPageClient({ token }) {
                                                                                 children: "Item"
                                                                             }, void 0, false, {
                                                                                 fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                                                                                lineNumber: 493,
+                                                                                lineNumber: 502,
                                                                                 columnNumber: 29
                                                                             }, this),
                                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -1375,7 +1408,7 @@ function ViewPageClient({ token }) {
                                                                                 children: "Description"
                                                                             }, void 0, false, {
                                                                                 fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                                                                                lineNumber: 494,
+                                                                                lineNumber: 503,
                                                                                 columnNumber: 29
                                                                             }, this),
                                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -1383,7 +1416,7 @@ function ViewPageClient({ token }) {
                                                                                 children: "Price"
                                                                             }, void 0, false, {
                                                                                 fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                                                                                lineNumber: 495,
+                                                                                lineNumber: 504,
                                                                                 columnNumber: 29
                                                                             }, this),
                                                                             proposal.proposalType === 'Product Proposal' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Fragment"], {
@@ -1393,7 +1426,7 @@ function ViewPageClient({ token }) {
                                                                                         children: "Qty"
                                                                                     }, void 0, false, {
                                                                                         fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                                                                                        lineNumber: 498,
+                                                                                        lineNumber: 507,
                                                                                         columnNumber: 33
                                                                                     }, this),
                                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -1401,7 +1434,7 @@ function ViewPageClient({ token }) {
                                                                                         children: "Subtotal"
                                                                                     }, void 0, false, {
                                                                                         fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                                                                                        lineNumber: 499,
+                                                                                        lineNumber: 508,
                                                                                         columnNumber: 33
                                                                                     }, this)
                                                                                 ]
@@ -1411,7 +1444,7 @@ function ViewPageClient({ token }) {
                                                                                 children: "Discount"
                                                                             }, void 0, false, {
                                                                                 fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                                                                                lineNumber: 502,
+                                                                                lineNumber: 511,
                                                                                 columnNumber: 29
                                                                             }, this),
                                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -1419,33 +1452,45 @@ function ViewPageClient({ token }) {
                                                                                 children: "Total"
                                                                             }, void 0, false, {
                                                                                 fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                                                                                lineNumber: 503,
+                                                                                lineNumber: 512,
                                                                                 columnNumber: 29
+                                                                            }, this),
+                                                                            serviceOffer.isMultipleChoice && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
+                                                                                className: "text-center px-4 py-3 text-xs font-semibold text-[#718096] uppercase tracking-wide",
+                                                                                children: "Selected"
+                                                                            }, void 0, false, {
+                                                                                fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
+                                                                                lineNumber: 514,
+                                                                                columnNumber: 31
                                                                             }, this)
                                                                         ]
                                                                     }, void 0, true, {
                                                                         fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                                                                        lineNumber: 492,
+                                                                        lineNumber: 501,
                                                                         columnNumber: 27
                                                                     }, this)
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                                                                    lineNumber: 491,
+                                                                    lineNumber: 500,
                                                                     columnNumber: 25
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tbody", {
                                                                     className: "divide-y divide-[#F0F2F8]",
                                                                     children: serviceOffer.offerEntries?.map((entry)=>{
                                                                         const discountedTotal = entry.itemDiscountType === 'Fixed' ? entry.totalPrice - entry.itemDiscountValue : entry.itemDiscountType === 'Percentage' ? entry.totalPrice - entry.itemDiscountValue / 100 * entry.totalPrice : entry.totalPrice;
+                                                                        const isEntrySelected = entry.isSelected !== false;
                                                                         return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tr", {
                                                                             className: "hover:bg-[#FAFBFC]",
+                                                                            style: serviceOffer.isMultipleChoice && !isEntrySelected ? {
+                                                                                opacity: 0.4
+                                                                            } : undefined,
                                                                             children: [
                                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
                                                                                     className: "px-4 py-3 font-medium text-[#1A202C]",
                                                                                     children: entry.serviceProductItem
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                                                                                    lineNumber: 515,
+                                                                                    lineNumber: 528,
                                                                                     columnNumber: 33
                                                                                 }, this),
                                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1453,7 +1498,7 @@ function ViewPageClient({ token }) {
                                                                                     children: entry.description ?? '—'
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                                                                                    lineNumber: 516,
+                                                                                    lineNumber: 529,
                                                                                     columnNumber: 33
                                                                                 }, this),
                                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1461,7 +1506,7 @@ function ViewPageClient({ token }) {
                                                                                     children: formatCurrency(entry.itemPrice)
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                                                                                    lineNumber: 517,
+                                                                                    lineNumber: 530,
                                                                                     columnNumber: 33
                                                                                 }, this),
                                                                                 proposal.proposalType === 'Product Proposal' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Fragment"], {
@@ -1471,7 +1516,7 @@ function ViewPageClient({ token }) {
                                                                                             children: entry.quantity
                                                                                         }, void 0, false, {
                                                                                             fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                                                                                            lineNumber: 520,
+                                                                                            lineNumber: 533,
                                                                                             columnNumber: 37
                                                                                         }, this),
                                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1479,7 +1524,7 @@ function ViewPageClient({ token }) {
                                                                                             children: formatCurrency(entry.totalPrice)
                                                                                         }, void 0, false, {
                                                                                             fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                                                                                            lineNumber: 521,
+                                                                                            lineNumber: 534,
                                                                                             columnNumber: 37
                                                                                         }, this)
                                                                                     ]
@@ -1491,19 +1536,19 @@ function ViewPageClient({ token }) {
                                                                                         children: "—"
                                                                                     }, void 0, false, {
                                                                                         fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                                                                                        lineNumber: 526,
+                                                                                        lineNumber: 539,
                                                                                         columnNumber: 37
                                                                                     }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                                                         className: "text-red-500 text-xs",
                                                                                         children: entry.itemDiscountType === 'Fixed' ? `- ${formatCurrency(entry.itemDiscountValue)}` : `- ${entry.itemDiscountValue}%`
                                                                                     }, void 0, false, {
                                                                                         fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                                                                                        lineNumber: 528,
+                                                                                        lineNumber: 541,
                                                                                         columnNumber: 37
                                                                                     }, this)
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                                                                                    lineNumber: 524,
+                                                                                    lineNumber: 537,
                                                                                     columnNumber: 33
                                                                                 }, this),
                                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1511,30 +1556,41 @@ function ViewPageClient({ token }) {
                                                                                     children: formatCurrency(discountedTotal)
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                                                                                    lineNumber: 533,
+                                                                                    lineNumber: 546,
                                                                                     columnNumber: 33
+                                                                                }, this),
+                                                                                serviceOffer.isMultipleChoice && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
+                                                                                    className: "px-4 py-3 text-center font-semibold",
+                                                                                    style: {
+                                                                                        color: isEntrySelected ? '#22C55E' : '#A0AEC0'
+                                                                                    },
+                                                                                    children: isEntrySelected ? '✓' : '—'
+                                                                                }, void 0, false, {
+                                                                                    fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
+                                                                                    lineNumber: 548,
+                                                                                    columnNumber: 35
                                                                                 }, this)
                                                                             ]
                                                                         }, entry.offerEntryId, true, {
                                                                             fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                                                                            lineNumber: 514,
+                                                                            lineNumber: 527,
                                                                             columnNumber: 31
                                                                         }, this);
                                                                     })
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                                                                    lineNumber: 506,
+                                                                    lineNumber: 518,
                                                                     columnNumber: 25
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                                                            lineNumber: 490,
+                                                            lineNumber: 499,
                                                             columnNumber: 23
                                                         }, this)
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                                                        lineNumber: 489,
+                                                        lineNumber: 498,
                                                         columnNumber: 21
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(PriceSummaryTable, {
@@ -1563,7 +1619,7 @@ function ViewPageClient({ token }) {
                                                         paymentTerms: serviceOffer.paymentTerms
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                                                        lineNumber: 540,
+                                                        lineNumber: 558,
                                                         columnNumber: 21
                                                     }, this)
                                                 ]
@@ -1596,12 +1652,12 @@ function ViewPageClient({ token }) {
                                                     className: "w-4 h-4 text-white"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                                                    lineNumber: 578,
+                                                    lineNumber: 596,
                                                     columnNumber: 17
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                                                lineNumber: 577,
+                                                lineNumber: 595,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
@@ -1609,13 +1665,13 @@ function ViewPageClient({ token }) {
                                                 children: "Proposal Overview"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                                                lineNumber: 580,
+                                                lineNumber: 598,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                                        lineNumber: 576,
+                                        lineNumber: 594,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1632,7 +1688,7 @@ function ViewPageClient({ token }) {
                                                                 children: "Proposal Details"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                                                                lineNumber: 586,
+                                                                lineNumber: 604,
                                                                 columnNumber: 19
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1642,7 +1698,7 @@ function ViewPageClient({ token }) {
                                                                         children: "Title"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                                                                        lineNumber: 588,
+                                                                        lineNumber: 606,
                                                                         columnNumber: 21
                                                                     }, this),
                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1650,13 +1706,13 @@ function ViewPageClient({ token }) {
                                                                         children: proposal.proposalTitle
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                                                                        lineNumber: 589,
+                                                                        lineNumber: 607,
                                                                         columnNumber: 21
                                                                     }, this)
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                                                                lineNumber: 587,
+                                                                lineNumber: 605,
                                                                 columnNumber: 19
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1666,124 +1722,13 @@ function ViewPageClient({ token }) {
                                                                         children: "Type"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                                                                        lineNumber: 592,
+                                                                        lineNumber: 610,
                                                                         columnNumber: 21
                                                                     }, this),
                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                                                         className: "text-sm font-semibold text-[#1A202C]",
                                                                         children: proposal.proposalType
                                                                     }, void 0, false, {
-                                                                        fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                                                                        lineNumber: 593,
-                                                                        columnNumber: 21
-                                                                    }, this)
-                                                                ]
-                                                            }, void 0, true, {
-                                                                fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                                                                lineNumber: 591,
-                                                                columnNumber: 19
-                                                            }, this),
-                                                            isSla && slaOffer && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                                children: [
-                                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                                        className: "text-xs text-[#A0AEC0]",
-                                                                        children: "Package"
-                                                                    }, void 0, false, {
-                                                                        fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                                                                        lineNumber: 597,
-                                                                        columnNumber: 23
-                                                                    }, this),
-                                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                                        className: "text-sm font-semibold text-[#1A202C]",
-                                                                        children: slaOffer.slaPackage
-                                                                    }, void 0, false, {
-                                                                        fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                                                                        lineNumber: 598,
-                                                                        columnNumber: 23
-                                                                    }, this)
-                                                                ]
-                                                            }, void 0, true, {
-                                                                fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                                                                lineNumber: 596,
-                                                                columnNumber: 21
-                                                            }, this),
-                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                                children: [
-                                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                                        className: "text-xs text-[#A0AEC0]",
-                                                                        children: "Status"
-                                                                    }, void 0, false, {
-                                                                        fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                                                                        lineNumber: 602,
-                                                                        columnNumber: 21
-                                                                    }, this),
-                                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                                        className: "mt-1",
-                                                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$StatusBadge$2f$StatusBadge$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
-                                                                            status: status
-                                                                        }, void 0, false, {
-                                                                            fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                                                                            lineNumber: 603,
-                                                                            columnNumber: 43
-                                                                        }, this)
-                                                                    }, void 0, false, {
-                                                                        fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                                                                        lineNumber: 603,
-                                                                        columnNumber: 21
-                                                                    }, this)
-                                                                ]
-                                                            }, void 0, true, {
-                                                                fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                                                                lineNumber: 601,
-                                                                columnNumber: 19
-                                                            }, this)
-                                                        ]
-                                                    }, void 0, true, {
-                                                        fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                                                        lineNumber: 585,
-                                                        columnNumber: 17
-                                                    }, this),
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                        className: "p-4 bg-[#F8F9FC] rounded-xl border border-[#E2E8F0] space-y-2.5",
-                                                        children: [
-                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                                className: "text-xs font-bold text-[#A0AEC0] uppercase tracking-wide",
-                                                                children: "Client Details"
-                                                            }, void 0, false, {
-                                                                fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                                                                lineNumber: 608,
-                                                                columnNumber: 19
-                                                            }, this),
-                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                                className: "flex items-start gap-2",
-                                                                children: [
-                                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$icons$2f$ri$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["RiBuildingLine"], {
-                                                                        className: "w-3.5 h-3.5 text-[#A0AEC0] mt-0.5"
-                                                                    }, void 0, false, {
-                                                                        fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                                                                        lineNumber: 610,
-                                                                        columnNumber: 21
-                                                                    }, this),
-                                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                                        children: [
-                                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                                                className: "text-xs text-[#A0AEC0]",
-                                                                                children: "Company"
-                                                                            }, void 0, false, {
-                                                                                fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                                                                                lineNumber: 612,
-                                                                                columnNumber: 23
-                                                                            }, this),
-                                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                                                className: "text-sm font-semibold text-[#1A202C]",
-                                                                                children: proposal.clientProfile?.companyName ?? '—'
-                                                                            }, void 0, false, {
-                                                                                fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                                                                                lineNumber: 613,
-                                                                                columnNumber: 23
-                                                                            }, this)
-                                                                        ]
-                                                                    }, void 0, true, {
                                                                         fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
                                                                         lineNumber: 611,
                                                                         columnNumber: 21
@@ -1794,6 +1739,117 @@ function ViewPageClient({ token }) {
                                                                 lineNumber: 609,
                                                                 columnNumber: 19
                                                             }, this),
+                                                            isSla && slaOffer && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                                children: [
+                                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                                                        className: "text-xs text-[#A0AEC0]",
+                                                                        children: "Package"
+                                                                    }, void 0, false, {
+                                                                        fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
+                                                                        lineNumber: 615,
+                                                                        columnNumber: 23
+                                                                    }, this),
+                                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                                                        className: "text-sm font-semibold text-[#1A202C]",
+                                                                        children: slaOffer.slaPackage
+                                                                    }, void 0, false, {
+                                                                        fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
+                                                                        lineNumber: 616,
+                                                                        columnNumber: 23
+                                                                    }, this)
+                                                                ]
+                                                            }, void 0, true, {
+                                                                fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
+                                                                lineNumber: 614,
+                                                                columnNumber: 21
+                                                            }, this),
+                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                                children: [
+                                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                                                        className: "text-xs text-[#A0AEC0]",
+                                                                        children: "Status"
+                                                                    }, void 0, false, {
+                                                                        fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
+                                                                        lineNumber: 620,
+                                                                        columnNumber: 21
+                                                                    }, this),
+                                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                                        className: "mt-1",
+                                                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$StatusBadge$2f$StatusBadge$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
+                                                                            status: status
+                                                                        }, void 0, false, {
+                                                                            fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
+                                                                            lineNumber: 621,
+                                                                            columnNumber: 43
+                                                                        }, this)
+                                                                    }, void 0, false, {
+                                                                        fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
+                                                                        lineNumber: 621,
+                                                                        columnNumber: 21
+                                                                    }, this)
+                                                                ]
+                                                            }, void 0, true, {
+                                                                fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
+                                                                lineNumber: 619,
+                                                                columnNumber: 19
+                                                            }, this)
+                                                        ]
+                                                    }, void 0, true, {
+                                                        fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
+                                                        lineNumber: 603,
+                                                        columnNumber: 17
+                                                    }, this),
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                        className: "p-4 bg-[#F8F9FC] rounded-xl border border-[#E2E8F0] space-y-2.5",
+                                                        children: [
+                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                                                className: "text-xs font-bold text-[#A0AEC0] uppercase tracking-wide",
+                                                                children: "Client Details"
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
+                                                                lineNumber: 626,
+                                                                columnNumber: 19
+                                                            }, this),
+                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                                className: "flex items-start gap-2",
+                                                                children: [
+                                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$icons$2f$ri$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["RiBuildingLine"], {
+                                                                        className: "w-3.5 h-3.5 text-[#A0AEC0] mt-0.5"
+                                                                    }, void 0, false, {
+                                                                        fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
+                                                                        lineNumber: 628,
+                                                                        columnNumber: 21
+                                                                    }, this),
+                                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                                        children: [
+                                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                                                                className: "text-xs text-[#A0AEC0]",
+                                                                                children: "Company"
+                                                                            }, void 0, false, {
+                                                                                fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
+                                                                                lineNumber: 630,
+                                                                                columnNumber: 23
+                                                                            }, this),
+                                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                                                                className: "text-sm font-semibold text-[#1A202C]",
+                                                                                children: proposal.clientProfile?.companyName ?? '—'
+                                                                            }, void 0, false, {
+                                                                                fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
+                                                                                lineNumber: 631,
+                                                                                columnNumber: 23
+                                                                            }, this)
+                                                                        ]
+                                                                    }, void 0, true, {
+                                                                        fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
+                                                                        lineNumber: 629,
+                                                                        columnNumber: 21
+                                                                    }, this)
+                                                                ]
+                                                            }, void 0, true, {
+                                                                fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
+                                                                lineNumber: 627,
+                                                                columnNumber: 19
+                                                            }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                                 className: "flex items-start gap-2",
                                                                 children: [
@@ -1801,7 +1857,7 @@ function ViewPageClient({ token }) {
                                                                         className: "w-3.5 h-3.5 text-[#A0AEC0] mt-0.5"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                                                                        lineNumber: 617,
+                                                                        lineNumber: 635,
                                                                         columnNumber: 21
                                                                     }, this),
                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1811,7 +1867,7 @@ function ViewPageClient({ token }) {
                                                                                 children: "Client"
                                                                             }, void 0, false, {
                                                                                 fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                                                                                lineNumber: 619,
+                                                                                lineNumber: 637,
                                                                                 columnNumber: 23
                                                                             }, this),
                                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1823,19 +1879,19 @@ function ViewPageClient({ token }) {
                                                                                 ]
                                                                             }, void 0, true, {
                                                                                 fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                                                                                lineNumber: 620,
+                                                                                lineNumber: 638,
                                                                                 columnNumber: 23
                                                                             }, this)
                                                                         ]
                                                                     }, void 0, true, {
                                                                         fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                                                                        lineNumber: 618,
+                                                                        lineNumber: 636,
                                                                         columnNumber: 21
                                                                     }, this)
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                                                                lineNumber: 616,
+                                                                lineNumber: 634,
                                                                 columnNumber: 19
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1845,7 +1901,7 @@ function ViewPageClient({ token }) {
                                                                         className: "w-3.5 h-3.5 text-[#A0AEC0] mt-0.5"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                                                                        lineNumber: 626,
+                                                                        lineNumber: 644,
                                                                         columnNumber: 21
                                                                     }, this),
                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1855,7 +1911,7 @@ function ViewPageClient({ token }) {
                                                                                 children: "Email"
                                                                             }, void 0, false, {
                                                                                 fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                                                                                lineNumber: 628,
+                                                                                lineNumber: 646,
                                                                                 columnNumber: 23
                                                                             }, this),
                                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1863,19 +1919,19 @@ function ViewPageClient({ token }) {
                                                                                 children: proposal.clientProfile?.user?.userEmail ?? '—'
                                                                             }, void 0, false, {
                                                                                 fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                                                                                lineNumber: 629,
+                                                                                lineNumber: 647,
                                                                                 columnNumber: 23
                                                                             }, this)
                                                                         ]
                                                                     }, void 0, true, {
                                                                         fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                                                                        lineNumber: 627,
+                                                                        lineNumber: 645,
                                                                         columnNumber: 21
                                                                     }, this)
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                                                                lineNumber: 625,
+                                                                lineNumber: 643,
                                                                 columnNumber: 19
                                                             }, this),
                                                             proposal.clientProfile?.website && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1885,7 +1941,7 @@ function ViewPageClient({ token }) {
                                                                         className: "w-3.5 h-3.5 text-[#A0AEC0] mt-0.5"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                                                                        lineNumber: 634,
+                                                                        lineNumber: 652,
                                                                         columnNumber: 23
                                                                     }, this),
                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1895,7 +1951,7 @@ function ViewPageClient({ token }) {
                                                                                 children: "Website"
                                                                             }, void 0, false, {
                                                                                 fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                                                                                lineNumber: 636,
+                                                                                lineNumber: 654,
                                                                                 columnNumber: 25
                                                                             }, this),
                                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1903,31 +1959,31 @@ function ViewPageClient({ token }) {
                                                                                 children: proposal.clientProfile.website
                                                                             }, void 0, false, {
                                                                                 fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                                                                                lineNumber: 637,
+                                                                                lineNumber: 655,
                                                                                 columnNumber: 25
                                                                             }, this)
                                                                         ]
                                                                     }, void 0, true, {
                                                                         fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                                                                        lineNumber: 635,
+                                                                        lineNumber: 653,
                                                                         columnNumber: 23
                                                                     }, this)
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                                                                lineNumber: 633,
+                                                                lineNumber: 651,
                                                                 columnNumber: 21
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                                                        lineNumber: 607,
+                                                        lineNumber: 625,
                                                         columnNumber: 17
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                                                lineNumber: 584,
+                                                lineNumber: 602,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1937,7 +1993,7 @@ function ViewPageClient({ token }) {
                                                         className: "w-4 h-4 text-blue-500 mt-0.5 flex-shrink-0"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                                                        lineNumber: 646,
+                                                        lineNumber: 664,
                                                         columnNumber: 17
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1947,7 +2003,7 @@ function ViewPageClient({ token }) {
                                                                 children: "Read-only view"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                                                                lineNumber: 648,
+                                                                lineNumber: 666,
                                                                 columnNumber: 19
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1961,38 +2017,38 @@ function ViewPageClient({ token }) {
                                                                         children: "sign in to your client portal"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                                                                        lineNumber: 651,
+                                                                        lineNumber: 669,
                                                                         columnNumber: 21
                                                                     }, this),
                                                                     "."
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                                                                lineNumber: 649,
+                                                                lineNumber: 667,
                                                                 columnNumber: 19
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                                                        lineNumber: 647,
+                                                        lineNumber: 665,
                                                         columnNumber: 17
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                                                lineNumber: 645,
+                                                lineNumber: 663,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                                        lineNumber: 583,
+                                        lineNumber: 601,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                                lineNumber: 571,
+                                lineNumber: 589,
                                 columnNumber: 11
                             }, this)
                         ]
@@ -2014,12 +2070,12 @@ function ViewPageClient({ token }) {
                                             children: "1P"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                                            lineNumber: 666,
+                                            lineNumber: 684,
                                             columnNumber: 15
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                                        lineNumber: 665,
+                                        lineNumber: 683,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2027,13 +2083,13 @@ function ViewPageClient({ token }) {
                                         children: "OnePoint"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                                        lineNumber: 668,
+                                        lineNumber: 686,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                                lineNumber: 664,
+                                lineNumber: 682,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2041,13 +2097,13 @@ function ViewPageClient({ token }) {
                                 children: "This proposal was prepared exclusively for you. Please do not share this link."
                             }, void 0, false, {
                                 fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                                lineNumber: 670,
+                                lineNumber: 688,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                        lineNumber: 663,
+                        lineNumber: 681,
                         columnNumber: 9
                     }, this)
                 ]
@@ -2081,7 +2137,7 @@ function PriceSummaryTable({ rows, total, paymentTerms }) {
                                             children: row.label
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                                            lineNumber: 688,
+                                            lineNumber: 706,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -2089,13 +2145,13 @@ function PriceSummaryTable({ rows, total, paymentTerms }) {
                                             children: row.value
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                                            lineNumber: 689,
+                                            lineNumber: 707,
                                             columnNumber: 17
                                         }, this)
                                     ]
                                 }, i, true, {
                                     fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                                    lineNumber: 687,
+                                    lineNumber: 705,
                                     columnNumber: 15
                                 }, this)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tr", {
@@ -2106,7 +2162,7 @@ function PriceSummaryTable({ rows, total, paymentTerms }) {
                                         children: "Total"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                                        lineNumber: 693,
+                                        lineNumber: 711,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -2114,29 +2170,29 @@ function PriceSummaryTable({ rows, total, paymentTerms }) {
                                         children: total
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                                        lineNumber: 694,
+                                        lineNumber: 712,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                                lineNumber: 692,
+                                lineNumber: 710,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                        lineNumber: 685,
+                        lineNumber: 703,
                         columnNumber: 11
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                    lineNumber: 684,
+                    lineNumber: 702,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                lineNumber: 683,
+                lineNumber: 701,
                 columnNumber: 7
             }, this),
             paymentTerms && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2147,7 +2203,7 @@ function PriceSummaryTable({ rows, total, paymentTerms }) {
                         children: "Payment Terms"
                     }, void 0, false, {
                         fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                        lineNumber: 701,
+                        lineNumber: 719,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2157,19 +2213,19 @@ function PriceSummaryTable({ rows, total, paymentTerms }) {
                         }
                     }, void 0, false, {
                         fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                        lineNumber: 702,
+                        lineNumber: 720,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-                lineNumber: 700,
+                lineNumber: 718,
                 columnNumber: 9
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/view/[token]/ViewPageClient.js",
-        lineNumber: 682,
+        lineNumber: 700,
         columnNumber: 5
     }, this);
 }

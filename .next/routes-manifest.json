@@ -52,6 +52,14 @@
       "namedRegex": "^/api/proposals/(?<nxtPslug>[^/]+?)/decline(?:/)?$"
     },
     {
+      "page": "/api/proposals/[slug]/selections",
+      "regex": "^/api/proposals/([^/]+?)/selections(?:/)?$",
+      "routeKeys": {
+        "nxtPslug": "nxtPslug"
+      },
+      "namedRegex": "^/api/proposals/(?<nxtPslug>[^/]+?)/selections(?:/)?$"
+    },
+    {
       "page": "/api/view/[token]",
       "regex": "^/api/view/([^/]+?)(?:/)?$",
       "routeKeys": {

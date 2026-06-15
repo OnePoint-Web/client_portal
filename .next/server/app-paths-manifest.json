@@ -16,6 +16,7 @@
   "/api/proposals/[slug]/approve/route": "app/api/proposals/[slug]/approve/route.js",
   "/api/proposals/[slug]/decline/route": "app/api/proposals/[slug]/decline/route.js",
   "/api/proposals/[slug]/route": "app/api/proposals/[slug]/route.js",
+  "/api/proposals/[slug]/selections/route": "app/api/proposals/[slug]/selections/route.js",
   "/api/proposals/route": "app/api/proposals/route.js",
   "/api/settings/password/route": "app/api/settings/password/route.js",
   "/api/view/[token]/route": "app/api/view/[token]/route.js",
