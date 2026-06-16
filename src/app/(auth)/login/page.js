@@ -8,6 +8,7 @@ export default function LoginPage() {
   const router = useRouter()
   const { setUser } = useAuth()
   const [form, setForm] = useState({ username: '', password: '' })
+  const [rememberMe, setRememberMe] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
@@ -21,7 +22,7 @@ export default function LoginPage() {
       const res = await fetch('/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, rememberMe }),
       })
 
       const data = await res.json()
@@ -152,6 +153,30 @@ export default function LoginPage() {
                   </button>
                 </div>
               </div>
+
+              {/* Remember me */}
+              <label className="flex items-center gap-2.5 cursor-pointer select-none w-fit">
+                <div
+                  className={`w-4 h-4 rounded border flex items-center justify-center flex-shrink-0 transition-colors ${
+                    rememberMe
+                      ? 'bg-[#F22044] border-[#F22044]'
+                      : 'bg-[#F8F9FC] border-[#E2E8F0]'
+                  }`}
+                  onClick={() => setRememberMe(v => !v)}
+                >
+                  {rememberMe && (
+                    <svg className="w-2.5 h-2.5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                  )}
+                </div>
+                <span
+                  className="text-sm text-[#4A5568]"
+                  onClick={() => setRememberMe(v => !v)}
+                >
+                  Remember me for 30 days
+                </span>
+              </label>
 
               {/* Error */}
               {error && (

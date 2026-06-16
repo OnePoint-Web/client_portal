@@ -5,7 +5,7 @@ import prisma from '@/lib/prisma'
 
 export async function POST(req) {
   try {
-    const { username, password } = await req.json()
+    const { username, password, rememberMe = false } = await req.json()
 
     if (!username || !password) {
       return NextResponse.json({ error: 'Username and password are required' }, { status: 400 })
@@ -37,6 +37,8 @@ export async function POST(req) {
       return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 })
     }
 
+    const sessionDuration = rememberMe ? '30d' : '1d'
+
     const token = await new SignJWT({
       userId: user.userId,
       username: user.username,
@@ -48,7 +50,7 @@ export async function POST(req) {
       companyName: user.clientProfile?.companyName ?? null,
     })
       .setProtectedHeader({ alg: 'HS256' })
-      .setExpirationTime('7d')
+      .setExpirationTime(sessionDuration)
       .sign(new TextEncoder().encode(process.env.JWT_SECRET))
 
     const response = NextResponse.json({
@@ -67,8 +69,8 @@ export async function POST(req) {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'strict',
-      maxAge: 60 * 60 * 24 * 7,
       path: '/',
+      ...(rememberMe && { maxAge: 60 * 60 * 24 * 30 }),
     })
 
     return response

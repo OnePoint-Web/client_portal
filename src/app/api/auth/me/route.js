@@ -14,6 +14,10 @@ export async function GET() {
       new TextEncoder().encode(process.env.JWT_SECRET)
     )
 
+    if (payload.accountRole !== 3) {
+      return NextResponse.json({ user: null }, { status: 403 })
+    }
+
     return NextResponse.json({ user: payload })
   } catch {
     return NextResponse.json({ user: null }, { status: 401 })
