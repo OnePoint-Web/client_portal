@@ -46,7 +46,7 @@ export default function ProposalCard({ slug, title, type, status, dateCreated, s
       {/* Actions */}
       <div className="px-5 pb-5 mt-auto pt-3 flex gap-2">
         <button
-          onClick={() => window.open(`/api/proposals/${slug}/pdf`, '_blank')}
+          onClick={() => window.open(`${process.env.PROPOSALS_URL}/api/proposals/${slug}/pdf`, '_blank')}
           className="flex items-center gap-1.5 px-3 py-2 border border-[#E2E8F0] rounded-xl text-xs font-medium text-[#718096] hover:border-[#F22044] hover:text-[#F22044] hover:bg-[#FFF0F3] transition-all"
         >
           <RiFilePdfLine className="w-3.5 h-3.5" />
