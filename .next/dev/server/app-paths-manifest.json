@@ -1,6 +1,0 @@
-{
-  "/(portal)/proposals/page": "app/(portal)/proposals/page.js",
-  "/api/auth/me/route": "app/api/auth/me/route.js",
-  "/api/notifications/route": "app/api/notifications/route.js",
-  "/api/proposals/route": "app/api/proposals/route.js"
-}
