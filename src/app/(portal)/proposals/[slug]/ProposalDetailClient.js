@@ -585,7 +585,18 @@ export default function ProposalDetailClient({ slug }) {
                                   )}
                                 </td>
                               )}
-                              <td className="px-4 py-3 font-medium text-[#1A202C]">{entry.serviceProductItem}</td>
+                              <td className="px-4 py-3">
+                                <div className="flex items-center gap-3">
+                                  {entry.itemImage && (
+                                    <img
+                                      src={entry.itemImage}
+                                      alt={entry.serviceProductItem}
+                                      className="w-10 h-10 rounded-lg object-cover flex-shrink-0 border border-[#E2E8F0]"
+                                    />
+                                  )}
+                                  <span className="font-medium text-[#1A202C]">{entry.serviceProductItem}</span>
+                                </div>
+                              </td>
                               <td className="px-4 py-3 text-[#718096] text-xs max-w-48">{entry.description ?? '—'}</td>
                               <td className="px-4 py-3 text-right text-[#1A202C]">{formatCurrency(entry.itemPrice)}</td>
                               {proposal.proposalType === 'Product Proposal' && (
