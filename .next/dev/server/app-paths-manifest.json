@@ -1,17 +1,6 @@
 {
-  "/(portal)/dashboard/page": "app/(portal)/dashboard/page.js",
-  "/(portal)/proposals/[slug]/page": "app/(portal)/proposals/[slug]/page.js",
   "/(portal)/proposals/page": "app/(portal)/proposals/page.js",
-  "/api/activity/route": "app/api/activity/route.js",
   "/api/auth/me/route": "app/api/auth/me/route.js",
-  "/api/dashboard/stats/route": "app/api/dashboard/stats/route.js",
   "/api/notifications/route": "app/api/notifications/route.js",
-  "/api/proposals/[slug]/approve/route": "app/api/proposals/[slug]/approve/route.js",
-  "/api/proposals/[slug]/route": "app/api/proposals/[slug]/route.js",
-  "/api/proposals/[slug]/selections/route": "app/api/proposals/[slug]/selections/route.js",
-  "/api/proposals/route": "app/api/proposals/route.js",
-  "/api/view/[token]/route": "app/api/view/[token]/route.js",
-  "/api/view/[token]/session/route": "app/api/view/[token]/session/route.js",
-  "/page": "app/page.js",
-  "/view/[token]/page": "app/view/[token]/page.js"
+  "/api/proposals/route": "app/api/proposals/route.js"
 }
