@@ -156,6 +156,8 @@ export async function POST(req, { params }) {
     const proposalsDomain = process.env.NEXT_PUBLIC_PROPOSALS_DOMAIN ?? 'http://localhost:3000'
     const pdfUrl = `${proposalsDomain}/api/proposals/${slug}/pdf`
 
+    const mainEmailRecepient = 'webmaster@1pt.com.au'
+    const mainRecepientName = 'OnePoint'
     const creatorEmail = proposal.user?.userEmail
     const clientEmail = proposal.clientProfile?.user?.userEmail ?? payload.email
     const creatorName = proposal.user ? `${proposal.user.firstName} ${proposal.user.lastName}` : 'Team'
@@ -164,6 +166,12 @@ export async function POST(req, { params }) {
     const fromAddress = `${process.env.RESEND_FROM_NAME} <${process.env.RESEND_FROM_EMAIL}>`
 
     await Promise.allSettled([
+      mainEmailRecepient && resend.emails.send({
+        from: fromAddress,
+        to: mainEmailRecepient,
+        subject: `Proposal Approved: ${proposal.proposalTitle}`,
+        html: creatorNotificationHtml(mainRecepientName, `${payload.firstName} ${payload.lastName}`, companyName, proposal.proposalTitle, pdfUrl),
+      }),
       creatorEmail && resend.emails.send({
         from: fromAddress,
         to: creatorEmail,

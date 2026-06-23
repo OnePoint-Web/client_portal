@@ -228,7 +228,7 @@ export default function ProposalDetailClient({ slug }) {
           </div>
           <div className="flex items-center gap-2 flex-shrink-0">
             <button
-              onClick={() => window.open(`/api/proposals/${slug}/pdf`, '_blank')}
+              onClick={() => window.open(`${process.env.NEXT_PUBLIC_PROPOSALS_DOMAIN}/api/proposals/${slug}/pdf`, '_blank')}
               className="flex items-center gap-1.5 px-3.5 py-2 border border-[#E2E8F0] rounded-xl text-xs font-medium text-[#718096] hover:border-[#F22044] hover:text-[#F22044] hover:bg-[#FFF0F3] transition-all"
             >
               <RiFilePdfLine className="w-4 h-4" />
