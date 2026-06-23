@@ -116,12 +116,15 @@ export default function ProposalDetailClient({ slug }) {
     const data = await res.json()
     if (res.ok) {
       setProposal(prev => ({ ...prev, statusId: 5, proposalStatus: { ...prev.proposalStatus, status: 'Approved' } }))
-      setActionFeedback('Proposal approved successfully!')
+      setActionFeedback('Proposal approved! Opening your copy…')
+      if (data.pdfUrl) {
+        setTimeout(() => window.open(data.pdfUrl, '_blank'), 800)
+      }
     } else {
       setActionFeedback(data.error || 'Failed to approve')
     }
     setApproving(false)
-    setTimeout(() => setActionFeedback(''), 4000)
+    setTimeout(() => setActionFeedback(''), 5000)
   }
 
   async function handleDecline() {
