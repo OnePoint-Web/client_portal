@@ -21,6 +21,12 @@ COPY . .
 
 # Build script is `next build` only — prisma generate must be run explicitly
 RUN npx prisma generate
+
+ARG NEXT_PUBLIC_PROPOSALS_DOMAIN
+ENV NEXT_PUBLIC_PROPOSALS_DOMAIN=$NEXT_PUBLIC_PROPOSALS_DOMAIN
+ARG RESEND_API_KEY
+ENV RESEND_API_KEY=$RESEND_API_KEY
+
 RUN npm run build
 
 # ---------- Stage 3: Production image ----------
