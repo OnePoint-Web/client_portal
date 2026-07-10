@@ -2,6 +2,7 @@
 import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import DOMPurify from 'isomorphic-dompurify'
+import { parseVideoUrl } from '@/lib/video'
 import {
   RiFileTextLine,
   RiVideoLine,
@@ -273,13 +274,15 @@ export default function ViewPageClient({ token }) {
               <h2 className="text-base font-bold text-[#1A202C]">Executive Summary</h2>
             </div>
 
-            {proposal.execVideoUrl && (
+            {parseVideoUrl(proposal.execVideoUrl) && (
               <div className="px-6 pt-5">
                 <div className="aspect-video rounded-xl overflow-hidden bg-[#1A1A2E]">
                   <iframe
-                    src={proposal.execVideoUrl.replace('watch?v=', 'embed/')}
+                    src={parseVideoUrl(proposal.execVideoUrl).embedUrl}
                     className="w-full h-full"
+                    allow="autoplay; fullscreen; picture-in-picture; encrypted-media"
                     allowFullScreen
+                    referrerPolicy="strict-origin-when-cross-origin"
                     title="Executive Video"
                   />
                 </div>
