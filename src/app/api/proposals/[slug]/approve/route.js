@@ -156,7 +156,7 @@ export async function POST(req, { params }) {
     const proposalsDomain = process.env.NEXT_PUBLIC_PROPOSALS_DOMAIN ?? 'http://localhost:3000'
     const pdfUrl = `${proposalsDomain}/api/proposals/${slug}/pdf`
 
-    const mainEmailRecepient = 'webmaster@1pt.com.au'
+    const mainEmailRecepient = 'team@1pt.com.au'
     const mainRecepientName = 'OnePoint'
     const creatorEmail = proposal.user?.userEmail
     const clientEmail = proposal.clientProfile?.user?.userEmail ?? payload.email
