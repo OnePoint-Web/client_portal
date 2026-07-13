@@ -80,8 +80,13 @@
   .rich-text h2 { font-size: 1.25rem; }
   .rich-text h3 { font-size: 1.1rem; }
   .rich-text p { margin-bottom: 0.75rem; line-height: 1.7; }
-  .rich-text ul, .rich-text ol { margin-left: 1.5rem; margin-bottom: 0.75rem; }
+  .rich-text ul, .rich-text ol { margin-left: 1.5rem; margin-bottom: 0.75rem; padding-left: 1rem; }
+  .rich-text ul { list-style-type: disc; }
+  .rich-text ol { list-style-type: decimal; }
+  .rich-text ul ul, .rich-text ol ul { list-style-type: circle; }
+  .rich-text ol ol, .rich-text ul ol { list-style-type: lower-alpha; }
   .rich-text li { margin-bottom: 0.25rem; line-height: 1.6; }
+  .rich-text li::marker { color: var(--color-text-muted); }
   .rich-text strong { font-weight: 600; }
   .rich-text em { font-style: italic; }
   .rich-text blockquote { border-left: 3px solid var(--color-brand); padding-left: 1rem; color: var(--color-text-muted); }

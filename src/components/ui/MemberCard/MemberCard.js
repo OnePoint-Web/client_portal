@@ -13,8 +13,6 @@ export default function MemberCard({ name, role, image, description }) {
         className="absolute bottom-0 left-0 right-0 h-[55%]"
         style={{
           background: 'linear-gradient(to top, rgba(178,0,0,1) 0%, rgba(178,0,0,0.85) 40%, rgba(178,0,0,0.3) 75%, rgba(178,0,0,0) 100%)',
-          backdropFilter: 'blur(8px)',
-          WebkitBackdropFilter: 'blur(8px)',
         }}
       />
 

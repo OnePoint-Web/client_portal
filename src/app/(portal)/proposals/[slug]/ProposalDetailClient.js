@@ -23,6 +23,7 @@ import {
 } from 'react-icons/ri'
 import StatusBadge from '@/components/ui/StatusBadge/StatusBadge'
 import MemberCard from '@/components/ui/MemberCard/MemberCard'
+import TermsAndConditions from '@/components/ui/TermsAndConditions/TermsAndConditions'
 
 const SECTIONS = [
   { id: 'executive-summary', label: 'Summary', icon: RiFileTextLine },
@@ -32,6 +33,7 @@ const SECTIONS = [
   { id: 'timeline', label: 'Timeline', icon: RiTimelineView },
   { id: 'budget', label: 'Budget', icon: RiMoneyDollarCircleLine },
   { id: 'approval', label: 'Approval', icon: RiCheckboxCircleLine },
+  { id: 'terms', label: 'Terms', icon: RiFileTextLine },
 ]
 
 function formatDate(d) {
@@ -777,6 +779,14 @@ export default function ProposalDetailClient({ slug }) {
               </div>
             )}
           </div>
+        </section>
+
+        <section
+          id="terms"
+          ref={el => { sectionRefs.current['terms'] = el }}
+          className="mt-6"
+        >
+          <TermsAndConditions />
         </section>
       </div>
     </div>
