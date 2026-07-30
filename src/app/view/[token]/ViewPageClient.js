@@ -485,6 +485,7 @@ export default function ViewPageClient({ token }) {
                       ].filter(Boolean)}
                       total={formatCurrency(slaOffer.finalPrice)}
                       paymentTerms={slaOffer.paymentTerms}
+                      totalLabel="Total (per month)"
                     />
                   </>
                 )}
@@ -707,7 +708,7 @@ export default function ViewPageClient({ token }) {
   )
 }
 
-function PriceSummaryTable({ rows, total, paymentTerms }) {
+function PriceSummaryTable({ rows, total, paymentTerms, totalLabel = 'Total' }) {
   return (
     <div className="space-y-3">
       <div className="border border-[#E2E8F0] rounded-xl overflow-hidden">
@@ -720,7 +721,7 @@ function PriceSummaryTable({ rows, total, paymentTerms }) {
               </tr>
             ))}
             <tr className="bg-[#1A1A2E]">
-              <td className="px-4 py-4 font-bold text-white">Total</td>
+              <td className="px-4 py-4 font-bold text-white">{totalLabel}</td>
               <td className="px-4 py-4 text-right font-bold text-white text-base">{total}</td>
             </tr>
           </tbody>
