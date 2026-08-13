@@ -373,7 +373,18 @@ exports.Prisma.MediaScalarFieldEnum = {
   bucketKey: 'bucketKey',
   mimeType: 'mimeType',
   fileSize: 'fileSize',
+  folder: 'folder',
   uploadedBy: 'uploadedBy',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.ProposalAttachmentScalarFieldEnum = {
+  attachmentId: 'attachmentId',
+  proposalId: 'proposalId',
+  mediaId: 'mediaId',
+  label: 'label',
+  displayOrder: 'displayOrder',
+  addedBy: 'addedBy',
   createdAt: 'createdAt'
 };
 
@@ -540,7 +551,12 @@ exports.Prisma.MediaOrderByRelevanceFieldEnum = {
   fileName: 'fileName',
   originalName: 'originalName',
   bucketKey: 'bucketKey',
-  mimeType: 'mimeType'
+  mimeType: 'mimeType',
+  folder: 'folder'
+};
+
+exports.Prisma.ProposalAttachmentOrderByRelevanceFieldEnum = {
+  label: 'label'
 };
 
 exports.Prisma.NotificationOrderByRelevanceFieldEnum = {
@@ -595,6 +611,7 @@ exports.Prisma.ModelName = {
   Product: 'Product',
   OfferEntry: 'OfferEntry',
   Media: 'Media',
+  ProposalAttachment: 'ProposalAttachment',
   Notification: 'Notification',
   ActivityLogs: 'ActivityLogs'
 };

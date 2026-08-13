@@ -32,6 +32,7 @@ model User {
 
   proposals Proposal[]
   clientProfile ClientProfile?
+  proposalAttachments ProposalAttachment[]
 }
 
 model AccountStatus {
@@ -101,6 +102,7 @@ model Proposal {
   selectedMembers SelectedMember[]
   timelines Timeline[]
   shareTokens ProposalShareToken[]
+  attachments ProposalAttachment[]
 }
 
 model ProposalStatus {
@@ -352,10 +354,29 @@ model Media {
 
   mimeType String
   fileSize Int
+  folder String?
 
   uploadedBy Int?
 
   createdAt DateTime @default(now())
+
+  attachments ProposalAttachment[]
+}
+
+model ProposalAttachment {
+  attachmentId Int      @id @default(autoincrement())
+  proposalId   Int
+  mediaId      Int
+  label        String?
+  displayOrder Int?
+  addedBy      Int
+  createdAt    DateTime @default(now())
+
+  proposal Proposal @relation(fields: [proposalId], references: [proposalId], onDelete: Cascade)
+  media    Media    @relation(fields: [mediaId], references: [mediaId])
+  user     User     @relation(fields: [addedBy], references: [userId])
+
+  @@unique([proposalId, mediaId])
 }
 
 // Notifications

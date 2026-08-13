@@ -134,6 +134,11 @@ export type OfferEntry = $Result.DefaultSelection<Prisma.$OfferEntryPayload>
  */
 export type Media = $Result.DefaultSelection<Prisma.$MediaPayload>
 /**
+ * Model ProposalAttachment
+ * 
+ */
+export type ProposalAttachment = $Result.DefaultSelection<Prisma.$ProposalAttachmentPayload>
+/**
  * Model Notification
  * 
  */
@@ -501,6 +506,16 @@ export class PrismaClient<
     * ```
     */
   get media(): Prisma.MediaDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.proposalAttachment`: Exposes CRUD operations for the **ProposalAttachment** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ProposalAttachments
+    * const proposalAttachments = await prisma.proposalAttachment.findMany()
+    * ```
+    */
+  get proposalAttachment(): Prisma.ProposalAttachmentDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.notification`: Exposes CRUD operations for the **Notification** model.
@@ -986,6 +1001,7 @@ export namespace Prisma {
     Product: 'Product',
     OfferEntry: 'OfferEntry',
     Media: 'Media',
+    ProposalAttachment: 'ProposalAttachment',
     Notification: 'Notification',
     ActivityLogs: 'ActivityLogs'
   };
@@ -1006,7 +1022,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "accountStatus" | "role" | "clientProfile" | "proposal" | "proposalStatus" | "proposalView" | "proposalSession" | "proposalShareToken" | "selectedMember" | "teamMember" | "timeline" | "timelineScopeItem" | "slaOffer" | "package" | "dealItem" | "dealEntry" | "packageDealItem" | "packageDealEntry" | "serviceProductOffer" | "service" | "product" | "offerEntry" | "media" | "notification" | "activityLogs"
+      modelProps: "user" | "accountStatus" | "role" | "clientProfile" | "proposal" | "proposalStatus" | "proposalView" | "proposalSession" | "proposalShareToken" | "selectedMember" | "teamMember" | "timeline" | "timelineScopeItem" | "slaOffer" | "package" | "dealItem" | "dealEntry" | "packageDealItem" | "packageDealEntry" | "serviceProductOffer" | "service" | "product" | "offerEntry" | "media" | "proposalAttachment" | "notification" | "activityLogs"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2594,6 +2610,72 @@ export namespace Prisma {
           }
         }
       }
+      ProposalAttachment: {
+        payload: Prisma.$ProposalAttachmentPayload<ExtArgs>
+        fields: Prisma.ProposalAttachmentFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ProposalAttachmentFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProposalAttachmentPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ProposalAttachmentFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProposalAttachmentPayload>
+          }
+          findFirst: {
+            args: Prisma.ProposalAttachmentFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProposalAttachmentPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ProposalAttachmentFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProposalAttachmentPayload>
+          }
+          findMany: {
+            args: Prisma.ProposalAttachmentFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProposalAttachmentPayload>[]
+          }
+          create: {
+            args: Prisma.ProposalAttachmentCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProposalAttachmentPayload>
+          }
+          createMany: {
+            args: Prisma.ProposalAttachmentCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.ProposalAttachmentDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProposalAttachmentPayload>
+          }
+          update: {
+            args: Prisma.ProposalAttachmentUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProposalAttachmentPayload>
+          }
+          deleteMany: {
+            args: Prisma.ProposalAttachmentDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ProposalAttachmentUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.ProposalAttachmentUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProposalAttachmentPayload>
+          }
+          aggregate: {
+            args: Prisma.ProposalAttachmentAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateProposalAttachment>
+          }
+          groupBy: {
+            args: Prisma.ProposalAttachmentGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ProposalAttachmentGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ProposalAttachmentCountArgs<ExtArgs>
+            result: $Utils.Optional<ProposalAttachmentCountAggregateOutputType> | number
+          }
+        }
+      }
       Notification: {
         payload: Prisma.$NotificationPayload<ExtArgs>
         fields: Prisma.NotificationFieldRefs
@@ -2846,6 +2928,7 @@ export namespace Prisma {
     product?: ProductOmit
     offerEntry?: OfferEntryOmit
     media?: MediaOmit
+    proposalAttachment?: ProposalAttachmentOmit
     notification?: NotificationOmit
     activityLogs?: ActivityLogsOmit
   }
@@ -2929,10 +3012,12 @@ export namespace Prisma {
 
   export type UserCountOutputType = {
     proposals: number
+    proposalAttachments: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     proposals?: boolean | UserCountOutputTypeCountProposalsArgs
+    proposalAttachments?: boolean | UserCountOutputTypeCountProposalAttachmentsArgs
   }
 
   // Custom InputTypes
@@ -2951,6 +3036,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountProposalsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ProposalWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountProposalAttachmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ProposalAttachmentWhereInput
   }
 
 
@@ -3058,6 +3150,7 @@ export namespace Prisma {
     selectedMembers: number
     timelines: number
     shareTokens: number
+    attachments: number
   }
 
   export type ProposalCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3067,6 +3160,7 @@ export namespace Prisma {
     selectedMembers?: boolean | ProposalCountOutputTypeCountSelectedMembersArgs
     timelines?: boolean | ProposalCountOutputTypeCountTimelinesArgs
     shareTokens?: boolean | ProposalCountOutputTypeCountShareTokensArgs
+    attachments?: boolean | ProposalCountOutputTypeCountAttachmentsArgs
   }
 
   // Custom InputTypes
@@ -3120,6 +3214,13 @@ export namespace Prisma {
    */
   export type ProposalCountOutputTypeCountShareTokensArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ProposalShareTokenWhereInput
+  }
+
+  /**
+   * ProposalCountOutputType without action
+   */
+  export type ProposalCountOutputTypeCountAttachmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ProposalAttachmentWhereInput
   }
 
 
@@ -3368,6 +3469,37 @@ export namespace Prisma {
    */
   export type ServiceProductOfferCountOutputTypeCountOfferEntriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: OfferEntryWhereInput
+  }
+
+
+  /**
+   * Count Type MediaCountOutputType
+   */
+
+  export type MediaCountOutputType = {
+    attachments: number
+  }
+
+  export type MediaCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    attachments?: boolean | MediaCountOutputTypeCountAttachmentsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * MediaCountOutputType without action
+   */
+  export type MediaCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MediaCountOutputType
+     */
+    select?: MediaCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * MediaCountOutputType without action
+   */
+  export type MediaCountOutputTypeCountAttachmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ProposalAttachmentWhereInput
   }
 
 
@@ -3625,6 +3757,7 @@ export namespace Prisma {
     userStatus?: boolean | AccountStatusDefaultArgs<ExtArgs>
     proposals?: boolean | User$proposalsArgs<ExtArgs>
     clientProfile?: boolean | User$clientProfileArgs<ExtArgs>
+    proposalAttachments?: boolean | User$proposalAttachmentsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -3649,6 +3782,7 @@ export namespace Prisma {
     userStatus?: boolean | AccountStatusDefaultArgs<ExtArgs>
     proposals?: boolean | User$proposalsArgs<ExtArgs>
     clientProfile?: boolean | User$clientProfileArgs<ExtArgs>
+    proposalAttachments?: boolean | User$proposalAttachmentsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -3659,6 +3793,7 @@ export namespace Prisma {
       userStatus: Prisma.$AccountStatusPayload<ExtArgs>
       proposals: Prisma.$ProposalPayload<ExtArgs>[]
       clientProfile: Prisma.$ClientProfilePayload<ExtArgs> | null
+      proposalAttachments: Prisma.$ProposalAttachmentPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       userId: number
@@ -4015,6 +4150,7 @@ export namespace Prisma {
     userStatus<T extends AccountStatusDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AccountStatusDefaultArgs<ExtArgs>>): Prisma__AccountStatusClient<$Result.GetResult<Prisma.$AccountStatusPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     proposals<T extends User$proposalsArgs<ExtArgs> = {}>(args?: Subset<T, User$proposalsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProposalPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     clientProfile<T extends User$clientProfileArgs<ExtArgs> = {}>(args?: Subset<T, User$clientProfileArgs<ExtArgs>>): Prisma__ClientProfileClient<$Result.GetResult<Prisma.$ClientProfilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    proposalAttachments<T extends User$proposalAttachmentsArgs<ExtArgs> = {}>(args?: Subset<T, User$proposalAttachmentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProposalAttachmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4437,6 +4573,30 @@ export namespace Prisma {
      */
     include?: ClientProfileInclude<ExtArgs> | null
     where?: ClientProfileWhereInput
+  }
+
+  /**
+   * User.proposalAttachments
+   */
+  export type User$proposalAttachmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProposalAttachment
+     */
+    select?: ProposalAttachmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProposalAttachment
+     */
+    omit?: ProposalAttachmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProposalAttachmentInclude<ExtArgs> | null
+    where?: ProposalAttachmentWhereInput
+    orderBy?: ProposalAttachmentOrderByWithRelationInput | ProposalAttachmentOrderByWithRelationInput[]
+    cursor?: ProposalAttachmentWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ProposalAttachmentScalarFieldEnum | ProposalAttachmentScalarFieldEnum[]
   }
 
   /**
@@ -7724,6 +7884,7 @@ export namespace Prisma {
     selectedMembers?: boolean | Proposal$selectedMembersArgs<ExtArgs>
     timelines?: boolean | Proposal$timelinesArgs<ExtArgs>
     shareTokens?: boolean | Proposal$shareTokensArgs<ExtArgs>
+    attachments?: boolean | Proposal$attachmentsArgs<ExtArgs>
     _count?: boolean | ProposalCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["proposal"]>
 
@@ -7762,6 +7923,7 @@ export namespace Prisma {
     selectedMembers?: boolean | Proposal$selectedMembersArgs<ExtArgs>
     timelines?: boolean | Proposal$timelinesArgs<ExtArgs>
     shareTokens?: boolean | Proposal$shareTokensArgs<ExtArgs>
+    attachments?: boolean | Proposal$attachmentsArgs<ExtArgs>
     _count?: boolean | ProposalCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -7777,6 +7939,7 @@ export namespace Prisma {
       selectedMembers: Prisma.$SelectedMemberPayload<ExtArgs>[]
       timelines: Prisma.$TimelinePayload<ExtArgs>[]
       shareTokens: Prisma.$ProposalShareTokenPayload<ExtArgs>[]
+      attachments: Prisma.$ProposalAttachmentPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       proposalId: number
@@ -8147,6 +8310,7 @@ export namespace Prisma {
     selectedMembers<T extends Proposal$selectedMembersArgs<ExtArgs> = {}>(args?: Subset<T, Proposal$selectedMembersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SelectedMemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     timelines<T extends Proposal$timelinesArgs<ExtArgs> = {}>(args?: Subset<T, Proposal$timelinesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TimelinePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     shareTokens<T extends Proposal$shareTokensArgs<ExtArgs> = {}>(args?: Subset<T, Proposal$shareTokensArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProposalShareTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    attachments<T extends Proposal$attachmentsArgs<ExtArgs> = {}>(args?: Subset<T, Proposal$attachmentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProposalAttachmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -8679,6 +8843,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ProposalShareTokenScalarFieldEnum | ProposalShareTokenScalarFieldEnum[]
+  }
+
+  /**
+   * Proposal.attachments
+   */
+  export type Proposal$attachmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProposalAttachment
+     */
+    select?: ProposalAttachmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProposalAttachment
+     */
+    omit?: ProposalAttachmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProposalAttachmentInclude<ExtArgs> | null
+    where?: ProposalAttachmentWhereInput
+    orderBy?: ProposalAttachmentOrderByWithRelationInput | ProposalAttachmentOrderByWithRelationInput[]
+    cursor?: ProposalAttachmentWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ProposalAttachmentScalarFieldEnum | ProposalAttachmentScalarFieldEnum[]
   }
 
   /**
@@ -26842,6 +27030,7 @@ export namespace Prisma {
     bucketKey: string | null
     mimeType: string | null
     fileSize: number | null
+    folder: string | null
     uploadedBy: number | null
     createdAt: Date | null
   }
@@ -26853,6 +27042,7 @@ export namespace Prisma {
     bucketKey: string | null
     mimeType: string | null
     fileSize: number | null
+    folder: string | null
     uploadedBy: number | null
     createdAt: Date | null
   }
@@ -26864,6 +27054,7 @@ export namespace Prisma {
     bucketKey: number
     mimeType: number
     fileSize: number
+    folder: number
     uploadedBy: number
     createdAt: number
     _all: number
@@ -26889,6 +27080,7 @@ export namespace Prisma {
     bucketKey?: true
     mimeType?: true
     fileSize?: true
+    folder?: true
     uploadedBy?: true
     createdAt?: true
   }
@@ -26900,6 +27092,7 @@ export namespace Prisma {
     bucketKey?: true
     mimeType?: true
     fileSize?: true
+    folder?: true
     uploadedBy?: true
     createdAt?: true
   }
@@ -26911,6 +27104,7 @@ export namespace Prisma {
     bucketKey?: true
     mimeType?: true
     fileSize?: true
+    folder?: true
     uploadedBy?: true
     createdAt?: true
     _all?: true
@@ -27009,6 +27203,7 @@ export namespace Prisma {
     bucketKey: string
     mimeType: string
     fileSize: number
+    folder: string | null
     uploadedBy: number | null
     createdAt: Date
     _count: MediaCountAggregateOutputType | null
@@ -27039,8 +27234,11 @@ export namespace Prisma {
     bucketKey?: boolean
     mimeType?: boolean
     fileSize?: boolean
+    folder?: boolean
     uploadedBy?: boolean
     createdAt?: boolean
+    attachments?: boolean | Media$attachmentsArgs<ExtArgs>
+    _count?: boolean | MediaCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["media"]>
 
 
@@ -27052,15 +27250,22 @@ export namespace Prisma {
     bucketKey?: boolean
     mimeType?: boolean
     fileSize?: boolean
+    folder?: boolean
     uploadedBy?: boolean
     createdAt?: boolean
   }
 
-  export type MediaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"mediaId" | "fileName" | "originalName" | "bucketKey" | "mimeType" | "fileSize" | "uploadedBy" | "createdAt", ExtArgs["result"]["media"]>
+  export type MediaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"mediaId" | "fileName" | "originalName" | "bucketKey" | "mimeType" | "fileSize" | "folder" | "uploadedBy" | "createdAt", ExtArgs["result"]["media"]>
+  export type MediaInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    attachments?: boolean | Media$attachmentsArgs<ExtArgs>
+    _count?: boolean | MediaCountOutputTypeDefaultArgs<ExtArgs>
+  }
 
   export type $MediaPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Media"
-    objects: {}
+    objects: {
+      attachments: Prisma.$ProposalAttachmentPayload<ExtArgs>[]
+    }
     scalars: $Extensions.GetPayloadResult<{
       mediaId: number
       fileName: string
@@ -27068,6 +27273,7 @@ export namespace Prisma {
       bucketKey: string
       mimeType: string
       fileSize: number
+      folder: string | null
       uploadedBy: number | null
       createdAt: Date
     }, ExtArgs["result"]["media"]>
@@ -27410,6 +27616,7 @@ export namespace Prisma {
    */
   export interface Prisma__MediaClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    attachments<T extends Media$attachmentsArgs<ExtArgs> = {}>(args?: Subset<T, Media$attachmentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProposalAttachmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -27445,6 +27652,7 @@ export namespace Prisma {
     readonly bucketKey: FieldRef<"Media", 'String'>
     readonly mimeType: FieldRef<"Media", 'String'>
     readonly fileSize: FieldRef<"Media", 'Int'>
+    readonly folder: FieldRef<"Media", 'String'>
     readonly uploadedBy: FieldRef<"Media", 'Int'>
     readonly createdAt: FieldRef<"Media", 'DateTime'>
   }
@@ -27464,6 +27672,10 @@ export namespace Prisma {
      */
     omit?: MediaOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaInclude<ExtArgs> | null
+    /**
      * Filter, which Media to fetch.
      */
     where: MediaWhereUniqueInput
@@ -27482,6 +27694,10 @@ export namespace Prisma {
      */
     omit?: MediaOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaInclude<ExtArgs> | null
+    /**
      * Filter, which Media to fetch.
      */
     where: MediaWhereUniqueInput
@@ -27499,6 +27715,10 @@ export namespace Prisma {
      * Omit specific fields from the Media
      */
     omit?: MediaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaInclude<ExtArgs> | null
     /**
      * Filter, which Media to fetch.
      */
@@ -27548,6 +27768,10 @@ export namespace Prisma {
      */
     omit?: MediaOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaInclude<ExtArgs> | null
+    /**
      * Filter, which Media to fetch.
      */
     where?: MediaWhereInput
@@ -27596,6 +27820,10 @@ export namespace Prisma {
      */
     omit?: MediaOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaInclude<ExtArgs> | null
+    /**
      * Filter, which Media to fetch.
      */
     where?: MediaWhereInput
@@ -27639,6 +27867,10 @@ export namespace Prisma {
      */
     omit?: MediaOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaInclude<ExtArgs> | null
+    /**
      * The data needed to create a Media.
      */
     data: XOR<MediaCreateInput, MediaUncheckedCreateInput>
@@ -27667,6 +27899,10 @@ export namespace Prisma {
      * Omit specific fields from the Media
      */
     omit?: MediaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaInclude<ExtArgs> | null
     /**
      * The data needed to update a Media.
      */
@@ -27708,6 +27944,10 @@ export namespace Prisma {
      */
     omit?: MediaOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaInclude<ExtArgs> | null
+    /**
      * The filter to search for the Media to update in case it exists.
      */
     where: MediaWhereUniqueInput
@@ -27734,6 +27974,10 @@ export namespace Prisma {
      */
     omit?: MediaOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaInclude<ExtArgs> | null
+    /**
      * Filter which Media to delete.
      */
     where: MediaWhereUniqueInput
@@ -27754,6 +27998,30 @@ export namespace Prisma {
   }
 
   /**
+   * Media.attachments
+   */
+  export type Media$attachmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProposalAttachment
+     */
+    select?: ProposalAttachmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProposalAttachment
+     */
+    omit?: ProposalAttachmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProposalAttachmentInclude<ExtArgs> | null
+    where?: ProposalAttachmentWhereInput
+    orderBy?: ProposalAttachmentOrderByWithRelationInput | ProposalAttachmentOrderByWithRelationInput[]
+    cursor?: ProposalAttachmentWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ProposalAttachmentScalarFieldEnum | ProposalAttachmentScalarFieldEnum[]
+  }
+
+  /**
    * Media without action
    */
   export type MediaDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -27765,6 +28033,1019 @@ export namespace Prisma {
      * Omit specific fields from the Media
      */
     omit?: MediaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ProposalAttachment
+   */
+
+  export type AggregateProposalAttachment = {
+    _count: ProposalAttachmentCountAggregateOutputType | null
+    _avg: ProposalAttachmentAvgAggregateOutputType | null
+    _sum: ProposalAttachmentSumAggregateOutputType | null
+    _min: ProposalAttachmentMinAggregateOutputType | null
+    _max: ProposalAttachmentMaxAggregateOutputType | null
+  }
+
+  export type ProposalAttachmentAvgAggregateOutputType = {
+    attachmentId: number | null
+    proposalId: number | null
+    mediaId: number | null
+    displayOrder: number | null
+    addedBy: number | null
+  }
+
+  export type ProposalAttachmentSumAggregateOutputType = {
+    attachmentId: number | null
+    proposalId: number | null
+    mediaId: number | null
+    displayOrder: number | null
+    addedBy: number | null
+  }
+
+  export type ProposalAttachmentMinAggregateOutputType = {
+    attachmentId: number | null
+    proposalId: number | null
+    mediaId: number | null
+    label: string | null
+    displayOrder: number | null
+    addedBy: number | null
+    createdAt: Date | null
+  }
+
+  export type ProposalAttachmentMaxAggregateOutputType = {
+    attachmentId: number | null
+    proposalId: number | null
+    mediaId: number | null
+    label: string | null
+    displayOrder: number | null
+    addedBy: number | null
+    createdAt: Date | null
+  }
+
+  export type ProposalAttachmentCountAggregateOutputType = {
+    attachmentId: number
+    proposalId: number
+    mediaId: number
+    label: number
+    displayOrder: number
+    addedBy: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type ProposalAttachmentAvgAggregateInputType = {
+    attachmentId?: true
+    proposalId?: true
+    mediaId?: true
+    displayOrder?: true
+    addedBy?: true
+  }
+
+  export type ProposalAttachmentSumAggregateInputType = {
+    attachmentId?: true
+    proposalId?: true
+    mediaId?: true
+    displayOrder?: true
+    addedBy?: true
+  }
+
+  export type ProposalAttachmentMinAggregateInputType = {
+    attachmentId?: true
+    proposalId?: true
+    mediaId?: true
+    label?: true
+    displayOrder?: true
+    addedBy?: true
+    createdAt?: true
+  }
+
+  export type ProposalAttachmentMaxAggregateInputType = {
+    attachmentId?: true
+    proposalId?: true
+    mediaId?: true
+    label?: true
+    displayOrder?: true
+    addedBy?: true
+    createdAt?: true
+  }
+
+  export type ProposalAttachmentCountAggregateInputType = {
+    attachmentId?: true
+    proposalId?: true
+    mediaId?: true
+    label?: true
+    displayOrder?: true
+    addedBy?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type ProposalAttachmentAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ProposalAttachment to aggregate.
+     */
+    where?: ProposalAttachmentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ProposalAttachments to fetch.
+     */
+    orderBy?: ProposalAttachmentOrderByWithRelationInput | ProposalAttachmentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ProposalAttachmentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ProposalAttachments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ProposalAttachments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ProposalAttachments
+    **/
+    _count?: true | ProposalAttachmentCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ProposalAttachmentAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ProposalAttachmentSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ProposalAttachmentMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ProposalAttachmentMaxAggregateInputType
+  }
+
+  export type GetProposalAttachmentAggregateType<T extends ProposalAttachmentAggregateArgs> = {
+        [P in keyof T & keyof AggregateProposalAttachment]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateProposalAttachment[P]>
+      : GetScalarType<T[P], AggregateProposalAttachment[P]>
+  }
+
+
+
+
+  export type ProposalAttachmentGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ProposalAttachmentWhereInput
+    orderBy?: ProposalAttachmentOrderByWithAggregationInput | ProposalAttachmentOrderByWithAggregationInput[]
+    by: ProposalAttachmentScalarFieldEnum[] | ProposalAttachmentScalarFieldEnum
+    having?: ProposalAttachmentScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ProposalAttachmentCountAggregateInputType | true
+    _avg?: ProposalAttachmentAvgAggregateInputType
+    _sum?: ProposalAttachmentSumAggregateInputType
+    _min?: ProposalAttachmentMinAggregateInputType
+    _max?: ProposalAttachmentMaxAggregateInputType
+  }
+
+  export type ProposalAttachmentGroupByOutputType = {
+    attachmentId: number
+    proposalId: number
+    mediaId: number
+    label: string | null
+    displayOrder: number | null
+    addedBy: number
+    createdAt: Date
+    _count: ProposalAttachmentCountAggregateOutputType | null
+    _avg: ProposalAttachmentAvgAggregateOutputType | null
+    _sum: ProposalAttachmentSumAggregateOutputType | null
+    _min: ProposalAttachmentMinAggregateOutputType | null
+    _max: ProposalAttachmentMaxAggregateOutputType | null
+  }
+
+  type GetProposalAttachmentGroupByPayload<T extends ProposalAttachmentGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ProposalAttachmentGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ProposalAttachmentGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ProposalAttachmentGroupByOutputType[P]>
+            : GetScalarType<T[P], ProposalAttachmentGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ProposalAttachmentSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    attachmentId?: boolean
+    proposalId?: boolean
+    mediaId?: boolean
+    label?: boolean
+    displayOrder?: boolean
+    addedBy?: boolean
+    createdAt?: boolean
+    proposal?: boolean | ProposalDefaultArgs<ExtArgs>
+    media?: boolean | MediaDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["proposalAttachment"]>
+
+
+
+  export type ProposalAttachmentSelectScalar = {
+    attachmentId?: boolean
+    proposalId?: boolean
+    mediaId?: boolean
+    label?: boolean
+    displayOrder?: boolean
+    addedBy?: boolean
+    createdAt?: boolean
+  }
+
+  export type ProposalAttachmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"attachmentId" | "proposalId" | "mediaId" | "label" | "displayOrder" | "addedBy" | "createdAt", ExtArgs["result"]["proposalAttachment"]>
+  export type ProposalAttachmentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    proposal?: boolean | ProposalDefaultArgs<ExtArgs>
+    media?: boolean | MediaDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $ProposalAttachmentPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ProposalAttachment"
+    objects: {
+      proposal: Prisma.$ProposalPayload<ExtArgs>
+      media: Prisma.$MediaPayload<ExtArgs>
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      attachmentId: number
+      proposalId: number
+      mediaId: number
+      label: string | null
+      displayOrder: number | null
+      addedBy: number
+      createdAt: Date
+    }, ExtArgs["result"]["proposalAttachment"]>
+    composites: {}
+  }
+
+  type ProposalAttachmentGetPayload<S extends boolean | null | undefined | ProposalAttachmentDefaultArgs> = $Result.GetResult<Prisma.$ProposalAttachmentPayload, S>
+
+  type ProposalAttachmentCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ProposalAttachmentFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ProposalAttachmentCountAggregateInputType | true
+    }
+
+  export interface ProposalAttachmentDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ProposalAttachment'], meta: { name: 'ProposalAttachment' } }
+    /**
+     * Find zero or one ProposalAttachment that matches the filter.
+     * @param {ProposalAttachmentFindUniqueArgs} args - Arguments to find a ProposalAttachment
+     * @example
+     * // Get one ProposalAttachment
+     * const proposalAttachment = await prisma.proposalAttachment.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ProposalAttachmentFindUniqueArgs>(args: SelectSubset<T, ProposalAttachmentFindUniqueArgs<ExtArgs>>): Prisma__ProposalAttachmentClient<$Result.GetResult<Prisma.$ProposalAttachmentPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ProposalAttachment that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ProposalAttachmentFindUniqueOrThrowArgs} args - Arguments to find a ProposalAttachment
+     * @example
+     * // Get one ProposalAttachment
+     * const proposalAttachment = await prisma.proposalAttachment.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ProposalAttachmentFindUniqueOrThrowArgs>(args: SelectSubset<T, ProposalAttachmentFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ProposalAttachmentClient<$Result.GetResult<Prisma.$ProposalAttachmentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ProposalAttachment that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProposalAttachmentFindFirstArgs} args - Arguments to find a ProposalAttachment
+     * @example
+     * // Get one ProposalAttachment
+     * const proposalAttachment = await prisma.proposalAttachment.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ProposalAttachmentFindFirstArgs>(args?: SelectSubset<T, ProposalAttachmentFindFirstArgs<ExtArgs>>): Prisma__ProposalAttachmentClient<$Result.GetResult<Prisma.$ProposalAttachmentPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ProposalAttachment that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProposalAttachmentFindFirstOrThrowArgs} args - Arguments to find a ProposalAttachment
+     * @example
+     * // Get one ProposalAttachment
+     * const proposalAttachment = await prisma.proposalAttachment.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ProposalAttachmentFindFirstOrThrowArgs>(args?: SelectSubset<T, ProposalAttachmentFindFirstOrThrowArgs<ExtArgs>>): Prisma__ProposalAttachmentClient<$Result.GetResult<Prisma.$ProposalAttachmentPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ProposalAttachments that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProposalAttachmentFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ProposalAttachments
+     * const proposalAttachments = await prisma.proposalAttachment.findMany()
+     * 
+     * // Get first 10 ProposalAttachments
+     * const proposalAttachments = await prisma.proposalAttachment.findMany({ take: 10 })
+     * 
+     * // Only select the `attachmentId`
+     * const proposalAttachmentWithAttachmentIdOnly = await prisma.proposalAttachment.findMany({ select: { attachmentId: true } })
+     * 
+     */
+    findMany<T extends ProposalAttachmentFindManyArgs>(args?: SelectSubset<T, ProposalAttachmentFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProposalAttachmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ProposalAttachment.
+     * @param {ProposalAttachmentCreateArgs} args - Arguments to create a ProposalAttachment.
+     * @example
+     * // Create one ProposalAttachment
+     * const ProposalAttachment = await prisma.proposalAttachment.create({
+     *   data: {
+     *     // ... data to create a ProposalAttachment
+     *   }
+     * })
+     * 
+     */
+    create<T extends ProposalAttachmentCreateArgs>(args: SelectSubset<T, ProposalAttachmentCreateArgs<ExtArgs>>): Prisma__ProposalAttachmentClient<$Result.GetResult<Prisma.$ProposalAttachmentPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ProposalAttachments.
+     * @param {ProposalAttachmentCreateManyArgs} args - Arguments to create many ProposalAttachments.
+     * @example
+     * // Create many ProposalAttachments
+     * const proposalAttachment = await prisma.proposalAttachment.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ProposalAttachmentCreateManyArgs>(args?: SelectSubset<T, ProposalAttachmentCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a ProposalAttachment.
+     * @param {ProposalAttachmentDeleteArgs} args - Arguments to delete one ProposalAttachment.
+     * @example
+     * // Delete one ProposalAttachment
+     * const ProposalAttachment = await prisma.proposalAttachment.delete({
+     *   where: {
+     *     // ... filter to delete one ProposalAttachment
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ProposalAttachmentDeleteArgs>(args: SelectSubset<T, ProposalAttachmentDeleteArgs<ExtArgs>>): Prisma__ProposalAttachmentClient<$Result.GetResult<Prisma.$ProposalAttachmentPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ProposalAttachment.
+     * @param {ProposalAttachmentUpdateArgs} args - Arguments to update one ProposalAttachment.
+     * @example
+     * // Update one ProposalAttachment
+     * const proposalAttachment = await prisma.proposalAttachment.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ProposalAttachmentUpdateArgs>(args: SelectSubset<T, ProposalAttachmentUpdateArgs<ExtArgs>>): Prisma__ProposalAttachmentClient<$Result.GetResult<Prisma.$ProposalAttachmentPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ProposalAttachments.
+     * @param {ProposalAttachmentDeleteManyArgs} args - Arguments to filter ProposalAttachments to delete.
+     * @example
+     * // Delete a few ProposalAttachments
+     * const { count } = await prisma.proposalAttachment.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ProposalAttachmentDeleteManyArgs>(args?: SelectSubset<T, ProposalAttachmentDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ProposalAttachments.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProposalAttachmentUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ProposalAttachments
+     * const proposalAttachment = await prisma.proposalAttachment.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ProposalAttachmentUpdateManyArgs>(args: SelectSubset<T, ProposalAttachmentUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one ProposalAttachment.
+     * @param {ProposalAttachmentUpsertArgs} args - Arguments to update or create a ProposalAttachment.
+     * @example
+     * // Update or create a ProposalAttachment
+     * const proposalAttachment = await prisma.proposalAttachment.upsert({
+     *   create: {
+     *     // ... data to create a ProposalAttachment
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ProposalAttachment we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ProposalAttachmentUpsertArgs>(args: SelectSubset<T, ProposalAttachmentUpsertArgs<ExtArgs>>): Prisma__ProposalAttachmentClient<$Result.GetResult<Prisma.$ProposalAttachmentPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ProposalAttachments.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProposalAttachmentCountArgs} args - Arguments to filter ProposalAttachments to count.
+     * @example
+     * // Count the number of ProposalAttachments
+     * const count = await prisma.proposalAttachment.count({
+     *   where: {
+     *     // ... the filter for the ProposalAttachments we want to count
+     *   }
+     * })
+    **/
+    count<T extends ProposalAttachmentCountArgs>(
+      args?: Subset<T, ProposalAttachmentCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ProposalAttachmentCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ProposalAttachment.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProposalAttachmentAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ProposalAttachmentAggregateArgs>(args: Subset<T, ProposalAttachmentAggregateArgs>): Prisma.PrismaPromise<GetProposalAttachmentAggregateType<T>>
+
+    /**
+     * Group by ProposalAttachment.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProposalAttachmentGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ProposalAttachmentGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ProposalAttachmentGroupByArgs['orderBy'] }
+        : { orderBy?: ProposalAttachmentGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ProposalAttachmentGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetProposalAttachmentGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ProposalAttachment model
+   */
+  readonly fields: ProposalAttachmentFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ProposalAttachment.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ProposalAttachmentClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    proposal<T extends ProposalDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProposalDefaultArgs<ExtArgs>>): Prisma__ProposalClient<$Result.GetResult<Prisma.$ProposalPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    media<T extends MediaDefaultArgs<ExtArgs> = {}>(args?: Subset<T, MediaDefaultArgs<ExtArgs>>): Prisma__MediaClient<$Result.GetResult<Prisma.$MediaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ProposalAttachment model
+   */
+  interface ProposalAttachmentFieldRefs {
+    readonly attachmentId: FieldRef<"ProposalAttachment", 'Int'>
+    readonly proposalId: FieldRef<"ProposalAttachment", 'Int'>
+    readonly mediaId: FieldRef<"ProposalAttachment", 'Int'>
+    readonly label: FieldRef<"ProposalAttachment", 'String'>
+    readonly displayOrder: FieldRef<"ProposalAttachment", 'Int'>
+    readonly addedBy: FieldRef<"ProposalAttachment", 'Int'>
+    readonly createdAt: FieldRef<"ProposalAttachment", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ProposalAttachment findUnique
+   */
+  export type ProposalAttachmentFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProposalAttachment
+     */
+    select?: ProposalAttachmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProposalAttachment
+     */
+    omit?: ProposalAttachmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProposalAttachmentInclude<ExtArgs> | null
+    /**
+     * Filter, which ProposalAttachment to fetch.
+     */
+    where: ProposalAttachmentWhereUniqueInput
+  }
+
+  /**
+   * ProposalAttachment findUniqueOrThrow
+   */
+  export type ProposalAttachmentFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProposalAttachment
+     */
+    select?: ProposalAttachmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProposalAttachment
+     */
+    omit?: ProposalAttachmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProposalAttachmentInclude<ExtArgs> | null
+    /**
+     * Filter, which ProposalAttachment to fetch.
+     */
+    where: ProposalAttachmentWhereUniqueInput
+  }
+
+  /**
+   * ProposalAttachment findFirst
+   */
+  export type ProposalAttachmentFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProposalAttachment
+     */
+    select?: ProposalAttachmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProposalAttachment
+     */
+    omit?: ProposalAttachmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProposalAttachmentInclude<ExtArgs> | null
+    /**
+     * Filter, which ProposalAttachment to fetch.
+     */
+    where?: ProposalAttachmentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ProposalAttachments to fetch.
+     */
+    orderBy?: ProposalAttachmentOrderByWithRelationInput | ProposalAttachmentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ProposalAttachments.
+     */
+    cursor?: ProposalAttachmentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ProposalAttachments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ProposalAttachments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ProposalAttachments.
+     */
+    distinct?: ProposalAttachmentScalarFieldEnum | ProposalAttachmentScalarFieldEnum[]
+  }
+
+  /**
+   * ProposalAttachment findFirstOrThrow
+   */
+  export type ProposalAttachmentFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProposalAttachment
+     */
+    select?: ProposalAttachmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProposalAttachment
+     */
+    omit?: ProposalAttachmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProposalAttachmentInclude<ExtArgs> | null
+    /**
+     * Filter, which ProposalAttachment to fetch.
+     */
+    where?: ProposalAttachmentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ProposalAttachments to fetch.
+     */
+    orderBy?: ProposalAttachmentOrderByWithRelationInput | ProposalAttachmentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ProposalAttachments.
+     */
+    cursor?: ProposalAttachmentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ProposalAttachments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ProposalAttachments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ProposalAttachments.
+     */
+    distinct?: ProposalAttachmentScalarFieldEnum | ProposalAttachmentScalarFieldEnum[]
+  }
+
+  /**
+   * ProposalAttachment findMany
+   */
+  export type ProposalAttachmentFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProposalAttachment
+     */
+    select?: ProposalAttachmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProposalAttachment
+     */
+    omit?: ProposalAttachmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProposalAttachmentInclude<ExtArgs> | null
+    /**
+     * Filter, which ProposalAttachments to fetch.
+     */
+    where?: ProposalAttachmentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ProposalAttachments to fetch.
+     */
+    orderBy?: ProposalAttachmentOrderByWithRelationInput | ProposalAttachmentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ProposalAttachments.
+     */
+    cursor?: ProposalAttachmentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ProposalAttachments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ProposalAttachments.
+     */
+    skip?: number
+    distinct?: ProposalAttachmentScalarFieldEnum | ProposalAttachmentScalarFieldEnum[]
+  }
+
+  /**
+   * ProposalAttachment create
+   */
+  export type ProposalAttachmentCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProposalAttachment
+     */
+    select?: ProposalAttachmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProposalAttachment
+     */
+    omit?: ProposalAttachmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProposalAttachmentInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ProposalAttachment.
+     */
+    data: XOR<ProposalAttachmentCreateInput, ProposalAttachmentUncheckedCreateInput>
+  }
+
+  /**
+   * ProposalAttachment createMany
+   */
+  export type ProposalAttachmentCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ProposalAttachments.
+     */
+    data: ProposalAttachmentCreateManyInput | ProposalAttachmentCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ProposalAttachment update
+   */
+  export type ProposalAttachmentUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProposalAttachment
+     */
+    select?: ProposalAttachmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProposalAttachment
+     */
+    omit?: ProposalAttachmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProposalAttachmentInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ProposalAttachment.
+     */
+    data: XOR<ProposalAttachmentUpdateInput, ProposalAttachmentUncheckedUpdateInput>
+    /**
+     * Choose, which ProposalAttachment to update.
+     */
+    where: ProposalAttachmentWhereUniqueInput
+  }
+
+  /**
+   * ProposalAttachment updateMany
+   */
+  export type ProposalAttachmentUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ProposalAttachments.
+     */
+    data: XOR<ProposalAttachmentUpdateManyMutationInput, ProposalAttachmentUncheckedUpdateManyInput>
+    /**
+     * Filter which ProposalAttachments to update
+     */
+    where?: ProposalAttachmentWhereInput
+    /**
+     * Limit how many ProposalAttachments to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ProposalAttachment upsert
+   */
+  export type ProposalAttachmentUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProposalAttachment
+     */
+    select?: ProposalAttachmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProposalAttachment
+     */
+    omit?: ProposalAttachmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProposalAttachmentInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ProposalAttachment to update in case it exists.
+     */
+    where: ProposalAttachmentWhereUniqueInput
+    /**
+     * In case the ProposalAttachment found by the `where` argument doesn't exist, create a new ProposalAttachment with this data.
+     */
+    create: XOR<ProposalAttachmentCreateInput, ProposalAttachmentUncheckedCreateInput>
+    /**
+     * In case the ProposalAttachment was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ProposalAttachmentUpdateInput, ProposalAttachmentUncheckedUpdateInput>
+  }
+
+  /**
+   * ProposalAttachment delete
+   */
+  export type ProposalAttachmentDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProposalAttachment
+     */
+    select?: ProposalAttachmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProposalAttachment
+     */
+    omit?: ProposalAttachmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProposalAttachmentInclude<ExtArgs> | null
+    /**
+     * Filter which ProposalAttachment to delete.
+     */
+    where: ProposalAttachmentWhereUniqueInput
+  }
+
+  /**
+   * ProposalAttachment deleteMany
+   */
+  export type ProposalAttachmentDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ProposalAttachments to delete
+     */
+    where?: ProposalAttachmentWhereInput
+    /**
+     * Limit how many ProposalAttachments to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ProposalAttachment without action
+   */
+  export type ProposalAttachmentDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProposalAttachment
+     */
+    select?: ProposalAttachmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProposalAttachment
+     */
+    omit?: ProposalAttachmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProposalAttachmentInclude<ExtArgs> | null
   }
 
 
@@ -30027,11 +31308,25 @@ export namespace Prisma {
     bucketKey: 'bucketKey',
     mimeType: 'mimeType',
     fileSize: 'fileSize',
+    folder: 'folder',
     uploadedBy: 'uploadedBy',
     createdAt: 'createdAt'
   };
 
   export type MediaScalarFieldEnum = (typeof MediaScalarFieldEnum)[keyof typeof MediaScalarFieldEnum]
+
+
+  export const ProposalAttachmentScalarFieldEnum: {
+    attachmentId: 'attachmentId',
+    proposalId: 'proposalId',
+    mediaId: 'mediaId',
+    label: 'label',
+    displayOrder: 'displayOrder',
+    addedBy: 'addedBy',
+    createdAt: 'createdAt'
+  };
+
+  export type ProposalAttachmentScalarFieldEnum = (typeof ProposalAttachmentScalarFieldEnum)[keyof typeof ProposalAttachmentScalarFieldEnum]
 
 
   export const NotificationScalarFieldEnum: {
@@ -30272,10 +31567,18 @@ export namespace Prisma {
     fileName: 'fileName',
     originalName: 'originalName',
     bucketKey: 'bucketKey',
-    mimeType: 'mimeType'
+    mimeType: 'mimeType',
+    folder: 'folder'
   };
 
   export type MediaOrderByRelevanceFieldEnum = (typeof MediaOrderByRelevanceFieldEnum)[keyof typeof MediaOrderByRelevanceFieldEnum]
+
+
+  export const ProposalAttachmentOrderByRelevanceFieldEnum: {
+    label: 'label'
+  };
+
+  export type ProposalAttachmentOrderByRelevanceFieldEnum = (typeof ProposalAttachmentOrderByRelevanceFieldEnum)[keyof typeof ProposalAttachmentOrderByRelevanceFieldEnum]
 
 
   export const NotificationOrderByRelevanceFieldEnum: {
@@ -30398,6 +31701,7 @@ export namespace Prisma {
     userStatus?: XOR<AccountStatusScalarRelationFilter, AccountStatusWhereInput>
     proposals?: ProposalListRelationFilter
     clientProfile?: XOR<ClientProfileNullableScalarRelationFilter, ClientProfileWhereInput> | null
+    proposalAttachments?: ProposalAttachmentListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -30415,6 +31719,7 @@ export namespace Prisma {
     userStatus?: AccountStatusOrderByWithRelationInput
     proposals?: ProposalOrderByRelationAggregateInput
     clientProfile?: ClientProfileOrderByWithRelationInput
+    proposalAttachments?: ProposalAttachmentOrderByRelationAggregateInput
     _relevance?: UserOrderByRelevanceInput
   }
 
@@ -30436,6 +31741,7 @@ export namespace Prisma {
     userStatus?: XOR<AccountStatusScalarRelationFilter, AccountStatusWhereInput>
     proposals?: ProposalListRelationFilter
     clientProfile?: XOR<ClientProfileNullableScalarRelationFilter, ClientProfileWhereInput> | null
+    proposalAttachments?: ProposalAttachmentListRelationFilter
   }, "userId" | "username" | "userEmail">
 
   export type UserOrderByWithAggregationInput = {
@@ -30661,6 +31967,7 @@ export namespace Prisma {
     selectedMembers?: SelectedMemberListRelationFilter
     timelines?: TimelineListRelationFilter
     shareTokens?: ProposalShareTokenListRelationFilter
+    attachments?: ProposalAttachmentListRelationFilter
   }
 
   export type ProposalOrderByWithRelationInput = {
@@ -30692,6 +31999,7 @@ export namespace Prisma {
     selectedMembers?: SelectedMemberOrderByRelationAggregateInput
     timelines?: TimelineOrderByRelationAggregateInput
     shareTokens?: ProposalShareTokenOrderByRelationAggregateInput
+    attachments?: ProposalAttachmentOrderByRelationAggregateInput
     _relevance?: ProposalOrderByRelevanceInput
   }
 
@@ -30727,6 +32035,7 @@ export namespace Prisma {
     selectedMembers?: SelectedMemberListRelationFilter
     timelines?: TimelineListRelationFilter
     shareTokens?: ProposalShareTokenListRelationFilter
+    attachments?: ProposalAttachmentListRelationFilter
   }, "proposalId" | "slug">
 
   export type ProposalOrderByWithAggregationInput = {
@@ -32071,8 +33380,10 @@ export namespace Prisma {
     bucketKey?: StringFilter<"Media"> | string
     mimeType?: StringFilter<"Media"> | string
     fileSize?: IntFilter<"Media"> | number
+    folder?: StringNullableFilter<"Media"> | string | null
     uploadedBy?: IntNullableFilter<"Media"> | number | null
     createdAt?: DateTimeFilter<"Media"> | Date | string
+    attachments?: ProposalAttachmentListRelationFilter
   }
 
   export type MediaOrderByWithRelationInput = {
@@ -32082,8 +33393,10 @@ export namespace Prisma {
     bucketKey?: SortOrder
     mimeType?: SortOrder
     fileSize?: SortOrder
+    folder?: SortOrderInput | SortOrder
     uploadedBy?: SortOrderInput | SortOrder
     createdAt?: SortOrder
+    attachments?: ProposalAttachmentOrderByRelationAggregateInput
     _relevance?: MediaOrderByRelevanceInput
   }
 
@@ -32097,8 +33410,10 @@ export namespace Prisma {
     bucketKey?: StringFilter<"Media"> | string
     mimeType?: StringFilter<"Media"> | string
     fileSize?: IntFilter<"Media"> | number
+    folder?: StringNullableFilter<"Media"> | string | null
     uploadedBy?: IntNullableFilter<"Media"> | number | null
     createdAt?: DateTimeFilter<"Media"> | Date | string
+    attachments?: ProposalAttachmentListRelationFilter
   }, "mediaId">
 
   export type MediaOrderByWithAggregationInput = {
@@ -32108,6 +33423,7 @@ export namespace Prisma {
     bucketKey?: SortOrder
     mimeType?: SortOrder
     fileSize?: SortOrder
+    folder?: SortOrderInput | SortOrder
     uploadedBy?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     _count?: MediaCountOrderByAggregateInput
@@ -32127,8 +33443,84 @@ export namespace Prisma {
     bucketKey?: StringWithAggregatesFilter<"Media"> | string
     mimeType?: StringWithAggregatesFilter<"Media"> | string
     fileSize?: IntWithAggregatesFilter<"Media"> | number
+    folder?: StringNullableWithAggregatesFilter<"Media"> | string | null
     uploadedBy?: IntNullableWithAggregatesFilter<"Media"> | number | null
     createdAt?: DateTimeWithAggregatesFilter<"Media"> | Date | string
+  }
+
+  export type ProposalAttachmentWhereInput = {
+    AND?: ProposalAttachmentWhereInput | ProposalAttachmentWhereInput[]
+    OR?: ProposalAttachmentWhereInput[]
+    NOT?: ProposalAttachmentWhereInput | ProposalAttachmentWhereInput[]
+    attachmentId?: IntFilter<"ProposalAttachment"> | number
+    proposalId?: IntFilter<"ProposalAttachment"> | number
+    mediaId?: IntFilter<"ProposalAttachment"> | number
+    label?: StringNullableFilter<"ProposalAttachment"> | string | null
+    displayOrder?: IntNullableFilter<"ProposalAttachment"> | number | null
+    addedBy?: IntFilter<"ProposalAttachment"> | number
+    createdAt?: DateTimeFilter<"ProposalAttachment"> | Date | string
+    proposal?: XOR<ProposalScalarRelationFilter, ProposalWhereInput>
+    media?: XOR<MediaScalarRelationFilter, MediaWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type ProposalAttachmentOrderByWithRelationInput = {
+    attachmentId?: SortOrder
+    proposalId?: SortOrder
+    mediaId?: SortOrder
+    label?: SortOrderInput | SortOrder
+    displayOrder?: SortOrderInput | SortOrder
+    addedBy?: SortOrder
+    createdAt?: SortOrder
+    proposal?: ProposalOrderByWithRelationInput
+    media?: MediaOrderByWithRelationInput
+    user?: UserOrderByWithRelationInput
+    _relevance?: ProposalAttachmentOrderByRelevanceInput
+  }
+
+  export type ProposalAttachmentWhereUniqueInput = Prisma.AtLeast<{
+    attachmentId?: number
+    proposalId_mediaId?: ProposalAttachmentProposalIdMediaIdCompoundUniqueInput
+    AND?: ProposalAttachmentWhereInput | ProposalAttachmentWhereInput[]
+    OR?: ProposalAttachmentWhereInput[]
+    NOT?: ProposalAttachmentWhereInput | ProposalAttachmentWhereInput[]
+    proposalId?: IntFilter<"ProposalAttachment"> | number
+    mediaId?: IntFilter<"ProposalAttachment"> | number
+    label?: StringNullableFilter<"ProposalAttachment"> | string | null
+    displayOrder?: IntNullableFilter<"ProposalAttachment"> | number | null
+    addedBy?: IntFilter<"ProposalAttachment"> | number
+    createdAt?: DateTimeFilter<"ProposalAttachment"> | Date | string
+    proposal?: XOR<ProposalScalarRelationFilter, ProposalWhereInput>
+    media?: XOR<MediaScalarRelationFilter, MediaWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "attachmentId" | "proposalId_mediaId">
+
+  export type ProposalAttachmentOrderByWithAggregationInput = {
+    attachmentId?: SortOrder
+    proposalId?: SortOrder
+    mediaId?: SortOrder
+    label?: SortOrderInput | SortOrder
+    displayOrder?: SortOrderInput | SortOrder
+    addedBy?: SortOrder
+    createdAt?: SortOrder
+    _count?: ProposalAttachmentCountOrderByAggregateInput
+    _avg?: ProposalAttachmentAvgOrderByAggregateInput
+    _max?: ProposalAttachmentMaxOrderByAggregateInput
+    _min?: ProposalAttachmentMinOrderByAggregateInput
+    _sum?: ProposalAttachmentSumOrderByAggregateInput
+  }
+
+  export type ProposalAttachmentScalarWhereWithAggregatesInput = {
+    AND?: ProposalAttachmentScalarWhereWithAggregatesInput | ProposalAttachmentScalarWhereWithAggregatesInput[]
+    OR?: ProposalAttachmentScalarWhereWithAggregatesInput[]
+    NOT?: ProposalAttachmentScalarWhereWithAggregatesInput | ProposalAttachmentScalarWhereWithAggregatesInput[]
+    attachmentId?: IntWithAggregatesFilter<"ProposalAttachment"> | number
+    proposalId?: IntWithAggregatesFilter<"ProposalAttachment"> | number
+    mediaId?: IntWithAggregatesFilter<"ProposalAttachment"> | number
+    label?: StringNullableWithAggregatesFilter<"ProposalAttachment"> | string | null
+    displayOrder?: IntNullableWithAggregatesFilter<"ProposalAttachment"> | number | null
+    addedBy?: IntWithAggregatesFilter<"ProposalAttachment"> | number
+    createdAt?: DateTimeWithAggregatesFilter<"ProposalAttachment"> | Date | string
   }
 
   export type NotificationWhereInput = {
@@ -32293,6 +33685,7 @@ export namespace Prisma {
     userStatus?: AccountStatusCreateNestedOneWithoutUsersInput
     proposals?: ProposalCreateNestedManyWithoutUserInput
     clientProfile?: ClientProfileCreateNestedOneWithoutUserInput
+    proposalAttachments?: ProposalAttachmentCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -32308,6 +33701,7 @@ export namespace Prisma {
     dateUpdated?: Date | string | null
     proposals?: ProposalUncheckedCreateNestedManyWithoutUserInput
     clientProfile?: ClientProfileUncheckedCreateNestedOneWithoutUserInput
+    proposalAttachments?: ProposalAttachmentUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -32322,6 +33716,7 @@ export namespace Prisma {
     userStatus?: AccountStatusUpdateOneRequiredWithoutUsersNestedInput
     proposals?: ProposalUpdateManyWithoutUserNestedInput
     clientProfile?: ClientProfileUpdateOneWithoutUserNestedInput
+    proposalAttachments?: ProposalAttachmentUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -32337,6 +33732,7 @@ export namespace Prisma {
     dateUpdated?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     proposals?: ProposalUncheckedUpdateManyWithoutUserNestedInput
     clientProfile?: ClientProfileUncheckedUpdateOneWithoutUserNestedInput
+    proposalAttachments?: ProposalAttachmentUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -32542,6 +33938,7 @@ export namespace Prisma {
     selectedMembers?: SelectedMemberCreateNestedManyWithoutProposalInput
     timelines?: TimelineCreateNestedManyWithoutProposalInput
     shareTokens?: ProposalShareTokenCreateNestedManyWithoutProposalInput
+    attachments?: ProposalAttachmentCreateNestedManyWithoutProposalInput
   }
 
   export type ProposalUncheckedCreateInput = {
@@ -32570,6 +33967,7 @@ export namespace Prisma {
     selectedMembers?: SelectedMemberUncheckedCreateNestedManyWithoutProposalInput
     timelines?: TimelineUncheckedCreateNestedManyWithoutProposalInput
     shareTokens?: ProposalShareTokenUncheckedCreateNestedManyWithoutProposalInput
+    attachments?: ProposalAttachmentUncheckedCreateNestedManyWithoutProposalInput
   }
 
   export type ProposalUpdateInput = {
@@ -32597,6 +33995,7 @@ export namespace Prisma {
     selectedMembers?: SelectedMemberUpdateManyWithoutProposalNestedInput
     timelines?: TimelineUpdateManyWithoutProposalNestedInput
     shareTokens?: ProposalShareTokenUpdateManyWithoutProposalNestedInput
+    attachments?: ProposalAttachmentUpdateManyWithoutProposalNestedInput
   }
 
   export type ProposalUncheckedUpdateInput = {
@@ -32625,6 +34024,7 @@ export namespace Prisma {
     selectedMembers?: SelectedMemberUncheckedUpdateManyWithoutProposalNestedInput
     timelines?: TimelineUncheckedUpdateManyWithoutProposalNestedInput
     shareTokens?: ProposalShareTokenUncheckedUpdateManyWithoutProposalNestedInput
+    attachments?: ProposalAttachmentUncheckedUpdateManyWithoutProposalNestedInput
   }
 
   export type ProposalCreateManyInput = {
@@ -33994,8 +35394,10 @@ export namespace Prisma {
     bucketKey: string
     mimeType: string
     fileSize: number
+    folder?: string | null
     uploadedBy?: number | null
     createdAt?: Date | string
+    attachments?: ProposalAttachmentCreateNestedManyWithoutMediaInput
   }
 
   export type MediaUncheckedCreateInput = {
@@ -34005,8 +35407,10 @@ export namespace Prisma {
     bucketKey: string
     mimeType: string
     fileSize: number
+    folder?: string | null
     uploadedBy?: number | null
     createdAt?: Date | string
+    attachments?: ProposalAttachmentUncheckedCreateNestedManyWithoutMediaInput
   }
 
   export type MediaUpdateInput = {
@@ -34015,8 +35419,10 @@ export namespace Prisma {
     bucketKey?: StringFieldUpdateOperationsInput | string
     mimeType?: StringFieldUpdateOperationsInput | string
     fileSize?: IntFieldUpdateOperationsInput | number
+    folder?: NullableStringFieldUpdateOperationsInput | string | null
     uploadedBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    attachments?: ProposalAttachmentUpdateManyWithoutMediaNestedInput
   }
 
   export type MediaUncheckedUpdateInput = {
@@ -34026,8 +35432,10 @@ export namespace Prisma {
     bucketKey?: StringFieldUpdateOperationsInput | string
     mimeType?: StringFieldUpdateOperationsInput | string
     fileSize?: IntFieldUpdateOperationsInput | number
+    folder?: NullableStringFieldUpdateOperationsInput | string | null
     uploadedBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    attachments?: ProposalAttachmentUncheckedUpdateManyWithoutMediaNestedInput
   }
 
   export type MediaCreateManyInput = {
@@ -34037,6 +35445,7 @@ export namespace Prisma {
     bucketKey: string
     mimeType: string
     fileSize: number
+    folder?: string | null
     uploadedBy?: number | null
     createdAt?: Date | string
   }
@@ -34047,6 +35456,7 @@ export namespace Prisma {
     bucketKey?: StringFieldUpdateOperationsInput | string
     mimeType?: StringFieldUpdateOperationsInput | string
     fileSize?: IntFieldUpdateOperationsInput | number
+    folder?: NullableStringFieldUpdateOperationsInput | string | null
     uploadedBy?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -34058,7 +35468,72 @@ export namespace Prisma {
     bucketKey?: StringFieldUpdateOperationsInput | string
     mimeType?: StringFieldUpdateOperationsInput | string
     fileSize?: IntFieldUpdateOperationsInput | number
+    folder?: NullableStringFieldUpdateOperationsInput | string | null
     uploadedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProposalAttachmentCreateInput = {
+    label?: string | null
+    displayOrder?: number | null
+    createdAt?: Date | string
+    proposal: ProposalCreateNestedOneWithoutAttachmentsInput
+    media: MediaCreateNestedOneWithoutAttachmentsInput
+    user: UserCreateNestedOneWithoutProposalAttachmentsInput
+  }
+
+  export type ProposalAttachmentUncheckedCreateInput = {
+    attachmentId?: number
+    proposalId: number
+    mediaId: number
+    label?: string | null
+    displayOrder?: number | null
+    addedBy: number
+    createdAt?: Date | string
+  }
+
+  export type ProposalAttachmentUpdateInput = {
+    label?: NullableStringFieldUpdateOperationsInput | string | null
+    displayOrder?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    proposal?: ProposalUpdateOneRequiredWithoutAttachmentsNestedInput
+    media?: MediaUpdateOneRequiredWithoutAttachmentsNestedInput
+    user?: UserUpdateOneRequiredWithoutProposalAttachmentsNestedInput
+  }
+
+  export type ProposalAttachmentUncheckedUpdateInput = {
+    attachmentId?: IntFieldUpdateOperationsInput | number
+    proposalId?: IntFieldUpdateOperationsInput | number
+    mediaId?: IntFieldUpdateOperationsInput | number
+    label?: NullableStringFieldUpdateOperationsInput | string | null
+    displayOrder?: NullableIntFieldUpdateOperationsInput | number | null
+    addedBy?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProposalAttachmentCreateManyInput = {
+    attachmentId?: number
+    proposalId: number
+    mediaId: number
+    label?: string | null
+    displayOrder?: number | null
+    addedBy: number
+    createdAt?: Date | string
+  }
+
+  export type ProposalAttachmentUpdateManyMutationInput = {
+    label?: NullableStringFieldUpdateOperationsInput | string | null
+    displayOrder?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProposalAttachmentUncheckedUpdateManyInput = {
+    attachmentId?: IntFieldUpdateOperationsInput | number
+    proposalId?: IntFieldUpdateOperationsInput | number
+    mediaId?: IntFieldUpdateOperationsInput | number
+    label?: NullableStringFieldUpdateOperationsInput | string | null
+    displayOrder?: NullableIntFieldUpdateOperationsInput | number | null
+    addedBy?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -34293,12 +35768,22 @@ export namespace Prisma {
     isNot?: ClientProfileWhereInput | null
   }
 
+  export type ProposalAttachmentListRelationFilter = {
+    every?: ProposalAttachmentWhereInput
+    some?: ProposalAttachmentWhereInput
+    none?: ProposalAttachmentWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
   }
 
   export type ProposalOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ProposalAttachmentOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -35832,6 +37317,7 @@ export namespace Prisma {
     bucketKey?: SortOrder
     mimeType?: SortOrder
     fileSize?: SortOrder
+    folder?: SortOrder
     uploadedBy?: SortOrder
     createdAt?: SortOrder
   }
@@ -35849,6 +37335,7 @@ export namespace Prisma {
     bucketKey?: SortOrder
     mimeType?: SortOrder
     fileSize?: SortOrder
+    folder?: SortOrder
     uploadedBy?: SortOrder
     createdAt?: SortOrder
   }
@@ -35860,6 +37347,7 @@ export namespace Prisma {
     bucketKey?: SortOrder
     mimeType?: SortOrder
     fileSize?: SortOrder
+    folder?: SortOrder
     uploadedBy?: SortOrder
     createdAt?: SortOrder
   }
@@ -35868,6 +37356,68 @@ export namespace Prisma {
     mediaId?: SortOrder
     fileSize?: SortOrder
     uploadedBy?: SortOrder
+  }
+
+  export type MediaScalarRelationFilter = {
+    is?: MediaWhereInput
+    isNot?: MediaWhereInput
+  }
+
+  export type ProposalAttachmentOrderByRelevanceInput = {
+    fields: ProposalAttachmentOrderByRelevanceFieldEnum | ProposalAttachmentOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type ProposalAttachmentProposalIdMediaIdCompoundUniqueInput = {
+    proposalId: number
+    mediaId: number
+  }
+
+  export type ProposalAttachmentCountOrderByAggregateInput = {
+    attachmentId?: SortOrder
+    proposalId?: SortOrder
+    mediaId?: SortOrder
+    label?: SortOrder
+    displayOrder?: SortOrder
+    addedBy?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type ProposalAttachmentAvgOrderByAggregateInput = {
+    attachmentId?: SortOrder
+    proposalId?: SortOrder
+    mediaId?: SortOrder
+    displayOrder?: SortOrder
+    addedBy?: SortOrder
+  }
+
+  export type ProposalAttachmentMaxOrderByAggregateInput = {
+    attachmentId?: SortOrder
+    proposalId?: SortOrder
+    mediaId?: SortOrder
+    label?: SortOrder
+    displayOrder?: SortOrder
+    addedBy?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type ProposalAttachmentMinOrderByAggregateInput = {
+    attachmentId?: SortOrder
+    proposalId?: SortOrder
+    mediaId?: SortOrder
+    label?: SortOrder
+    displayOrder?: SortOrder
+    addedBy?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type ProposalAttachmentSumOrderByAggregateInput = {
+    attachmentId?: SortOrder
+    proposalId?: SortOrder
+    mediaId?: SortOrder
+    displayOrder?: SortOrder
+    addedBy?: SortOrder
   }
 
   export type NotificationOrderByRelevanceInput = {
@@ -36046,6 +37596,13 @@ export namespace Prisma {
     connect?: ClientProfileWhereUniqueInput
   }
 
+  export type ProposalAttachmentCreateNestedManyWithoutUserInput = {
+    create?: XOR<ProposalAttachmentCreateWithoutUserInput, ProposalAttachmentUncheckedCreateWithoutUserInput> | ProposalAttachmentCreateWithoutUserInput[] | ProposalAttachmentUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ProposalAttachmentCreateOrConnectWithoutUserInput | ProposalAttachmentCreateOrConnectWithoutUserInput[]
+    createMany?: ProposalAttachmentCreateManyUserInputEnvelope
+    connect?: ProposalAttachmentWhereUniqueInput | ProposalAttachmentWhereUniqueInput[]
+  }
+
   export type ProposalUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<ProposalCreateWithoutUserInput, ProposalUncheckedCreateWithoutUserInput> | ProposalCreateWithoutUserInput[] | ProposalUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ProposalCreateOrConnectWithoutUserInput | ProposalCreateOrConnectWithoutUserInput[]
@@ -36057,6 +37614,13 @@ export namespace Prisma {
     create?: XOR<ClientProfileCreateWithoutUserInput, ClientProfileUncheckedCreateWithoutUserInput>
     connectOrCreate?: ClientProfileCreateOrConnectWithoutUserInput
     connect?: ClientProfileWhereUniqueInput
+  }
+
+  export type ProposalAttachmentUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<ProposalAttachmentCreateWithoutUserInput, ProposalAttachmentUncheckedCreateWithoutUserInput> | ProposalAttachmentCreateWithoutUserInput[] | ProposalAttachmentUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ProposalAttachmentCreateOrConnectWithoutUserInput | ProposalAttachmentCreateOrConnectWithoutUserInput[]
+    createMany?: ProposalAttachmentCreateManyUserInputEnvelope
+    connect?: ProposalAttachmentWhereUniqueInput | ProposalAttachmentWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -36111,6 +37675,20 @@ export namespace Prisma {
     update?: XOR<XOR<ClientProfileUpdateToOneWithWhereWithoutUserInput, ClientProfileUpdateWithoutUserInput>, ClientProfileUncheckedUpdateWithoutUserInput>
   }
 
+  export type ProposalAttachmentUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ProposalAttachmentCreateWithoutUserInput, ProposalAttachmentUncheckedCreateWithoutUserInput> | ProposalAttachmentCreateWithoutUserInput[] | ProposalAttachmentUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ProposalAttachmentCreateOrConnectWithoutUserInput | ProposalAttachmentCreateOrConnectWithoutUserInput[]
+    upsert?: ProposalAttachmentUpsertWithWhereUniqueWithoutUserInput | ProposalAttachmentUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ProposalAttachmentCreateManyUserInputEnvelope
+    set?: ProposalAttachmentWhereUniqueInput | ProposalAttachmentWhereUniqueInput[]
+    disconnect?: ProposalAttachmentWhereUniqueInput | ProposalAttachmentWhereUniqueInput[]
+    delete?: ProposalAttachmentWhereUniqueInput | ProposalAttachmentWhereUniqueInput[]
+    connect?: ProposalAttachmentWhereUniqueInput | ProposalAttachmentWhereUniqueInput[]
+    update?: ProposalAttachmentUpdateWithWhereUniqueWithoutUserInput | ProposalAttachmentUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ProposalAttachmentUpdateManyWithWhereWithoutUserInput | ProposalAttachmentUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ProposalAttachmentScalarWhereInput | ProposalAttachmentScalarWhereInput[]
+  }
+
   export type IntFieldUpdateOperationsInput = {
     set?: number
     increment?: number
@@ -36141,6 +37719,20 @@ export namespace Prisma {
     delete?: ClientProfileWhereInput | boolean
     connect?: ClientProfileWhereUniqueInput
     update?: XOR<XOR<ClientProfileUpdateToOneWithWhereWithoutUserInput, ClientProfileUpdateWithoutUserInput>, ClientProfileUncheckedUpdateWithoutUserInput>
+  }
+
+  export type ProposalAttachmentUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ProposalAttachmentCreateWithoutUserInput, ProposalAttachmentUncheckedCreateWithoutUserInput> | ProposalAttachmentCreateWithoutUserInput[] | ProposalAttachmentUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ProposalAttachmentCreateOrConnectWithoutUserInput | ProposalAttachmentCreateOrConnectWithoutUserInput[]
+    upsert?: ProposalAttachmentUpsertWithWhereUniqueWithoutUserInput | ProposalAttachmentUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ProposalAttachmentCreateManyUserInputEnvelope
+    set?: ProposalAttachmentWhereUniqueInput | ProposalAttachmentWhereUniqueInput[]
+    disconnect?: ProposalAttachmentWhereUniqueInput | ProposalAttachmentWhereUniqueInput[]
+    delete?: ProposalAttachmentWhereUniqueInput | ProposalAttachmentWhereUniqueInput[]
+    connect?: ProposalAttachmentWhereUniqueInput | ProposalAttachmentWhereUniqueInput[]
+    update?: ProposalAttachmentUpdateWithWhereUniqueWithoutUserInput | ProposalAttachmentUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ProposalAttachmentUpdateManyWithWhereWithoutUserInput | ProposalAttachmentUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ProposalAttachmentScalarWhereInput | ProposalAttachmentScalarWhereInput[]
   }
 
   export type UserCreateNestedManyWithoutUserStatusInput = {
@@ -36347,6 +37939,13 @@ export namespace Prisma {
     connect?: ProposalShareTokenWhereUniqueInput | ProposalShareTokenWhereUniqueInput[]
   }
 
+  export type ProposalAttachmentCreateNestedManyWithoutProposalInput = {
+    create?: XOR<ProposalAttachmentCreateWithoutProposalInput, ProposalAttachmentUncheckedCreateWithoutProposalInput> | ProposalAttachmentCreateWithoutProposalInput[] | ProposalAttachmentUncheckedCreateWithoutProposalInput[]
+    connectOrCreate?: ProposalAttachmentCreateOrConnectWithoutProposalInput | ProposalAttachmentCreateOrConnectWithoutProposalInput[]
+    createMany?: ProposalAttachmentCreateManyProposalInputEnvelope
+    connect?: ProposalAttachmentWhereUniqueInput | ProposalAttachmentWhereUniqueInput[]
+  }
+
   export type SlaOfferUncheckedCreateNestedManyWithoutProposalInput = {
     create?: XOR<SlaOfferCreateWithoutProposalInput, SlaOfferUncheckedCreateWithoutProposalInput> | SlaOfferCreateWithoutProposalInput[] | SlaOfferUncheckedCreateWithoutProposalInput[]
     connectOrCreate?: SlaOfferCreateOrConnectWithoutProposalInput | SlaOfferCreateOrConnectWithoutProposalInput[]
@@ -36387,6 +37986,13 @@ export namespace Prisma {
     connectOrCreate?: ProposalShareTokenCreateOrConnectWithoutProposalInput | ProposalShareTokenCreateOrConnectWithoutProposalInput[]
     createMany?: ProposalShareTokenCreateManyProposalInputEnvelope
     connect?: ProposalShareTokenWhereUniqueInput | ProposalShareTokenWhereUniqueInput[]
+  }
+
+  export type ProposalAttachmentUncheckedCreateNestedManyWithoutProposalInput = {
+    create?: XOR<ProposalAttachmentCreateWithoutProposalInput, ProposalAttachmentUncheckedCreateWithoutProposalInput> | ProposalAttachmentCreateWithoutProposalInput[] | ProposalAttachmentUncheckedCreateWithoutProposalInput[]
+    connectOrCreate?: ProposalAttachmentCreateOrConnectWithoutProposalInput | ProposalAttachmentCreateOrConnectWithoutProposalInput[]
+    createMany?: ProposalAttachmentCreateManyProposalInputEnvelope
+    connect?: ProposalAttachmentWhereUniqueInput | ProposalAttachmentWhereUniqueInput[]
   }
 
   export type NullableIntFieldUpdateOperationsInput = {
@@ -36505,6 +38111,20 @@ export namespace Prisma {
     deleteMany?: ProposalShareTokenScalarWhereInput | ProposalShareTokenScalarWhereInput[]
   }
 
+  export type ProposalAttachmentUpdateManyWithoutProposalNestedInput = {
+    create?: XOR<ProposalAttachmentCreateWithoutProposalInput, ProposalAttachmentUncheckedCreateWithoutProposalInput> | ProposalAttachmentCreateWithoutProposalInput[] | ProposalAttachmentUncheckedCreateWithoutProposalInput[]
+    connectOrCreate?: ProposalAttachmentCreateOrConnectWithoutProposalInput | ProposalAttachmentCreateOrConnectWithoutProposalInput[]
+    upsert?: ProposalAttachmentUpsertWithWhereUniqueWithoutProposalInput | ProposalAttachmentUpsertWithWhereUniqueWithoutProposalInput[]
+    createMany?: ProposalAttachmentCreateManyProposalInputEnvelope
+    set?: ProposalAttachmentWhereUniqueInput | ProposalAttachmentWhereUniqueInput[]
+    disconnect?: ProposalAttachmentWhereUniqueInput | ProposalAttachmentWhereUniqueInput[]
+    delete?: ProposalAttachmentWhereUniqueInput | ProposalAttachmentWhereUniqueInput[]
+    connect?: ProposalAttachmentWhereUniqueInput | ProposalAttachmentWhereUniqueInput[]
+    update?: ProposalAttachmentUpdateWithWhereUniqueWithoutProposalInput | ProposalAttachmentUpdateWithWhereUniqueWithoutProposalInput[]
+    updateMany?: ProposalAttachmentUpdateManyWithWhereWithoutProposalInput | ProposalAttachmentUpdateManyWithWhereWithoutProposalInput[]
+    deleteMany?: ProposalAttachmentScalarWhereInput | ProposalAttachmentScalarWhereInput[]
+  }
+
   export type SlaOfferUncheckedUpdateManyWithoutProposalNestedInput = {
     create?: XOR<SlaOfferCreateWithoutProposalInput, SlaOfferUncheckedCreateWithoutProposalInput> | SlaOfferCreateWithoutProposalInput[] | SlaOfferUncheckedCreateWithoutProposalInput[]
     connectOrCreate?: SlaOfferCreateOrConnectWithoutProposalInput | SlaOfferCreateOrConnectWithoutProposalInput[]
@@ -36587,6 +38207,20 @@ export namespace Prisma {
     update?: ProposalShareTokenUpdateWithWhereUniqueWithoutProposalInput | ProposalShareTokenUpdateWithWhereUniqueWithoutProposalInput[]
     updateMany?: ProposalShareTokenUpdateManyWithWhereWithoutProposalInput | ProposalShareTokenUpdateManyWithWhereWithoutProposalInput[]
     deleteMany?: ProposalShareTokenScalarWhereInput | ProposalShareTokenScalarWhereInput[]
+  }
+
+  export type ProposalAttachmentUncheckedUpdateManyWithoutProposalNestedInput = {
+    create?: XOR<ProposalAttachmentCreateWithoutProposalInput, ProposalAttachmentUncheckedCreateWithoutProposalInput> | ProposalAttachmentCreateWithoutProposalInput[] | ProposalAttachmentUncheckedCreateWithoutProposalInput[]
+    connectOrCreate?: ProposalAttachmentCreateOrConnectWithoutProposalInput | ProposalAttachmentCreateOrConnectWithoutProposalInput[]
+    upsert?: ProposalAttachmentUpsertWithWhereUniqueWithoutProposalInput | ProposalAttachmentUpsertWithWhereUniqueWithoutProposalInput[]
+    createMany?: ProposalAttachmentCreateManyProposalInputEnvelope
+    set?: ProposalAttachmentWhereUniqueInput | ProposalAttachmentWhereUniqueInput[]
+    disconnect?: ProposalAttachmentWhereUniqueInput | ProposalAttachmentWhereUniqueInput[]
+    delete?: ProposalAttachmentWhereUniqueInput | ProposalAttachmentWhereUniqueInput[]
+    connect?: ProposalAttachmentWhereUniqueInput | ProposalAttachmentWhereUniqueInput[]
+    update?: ProposalAttachmentUpdateWithWhereUniqueWithoutProposalInput | ProposalAttachmentUpdateWithWhereUniqueWithoutProposalInput[]
+    updateMany?: ProposalAttachmentUpdateManyWithWhereWithoutProposalInput | ProposalAttachmentUpdateManyWithWhereWithoutProposalInput[]
+    deleteMany?: ProposalAttachmentScalarWhereInput | ProposalAttachmentScalarWhereInput[]
   }
 
   export type ProposalCreateNestedManyWithoutProposalStatusInput = {
@@ -37127,6 +38761,90 @@ export namespace Prisma {
     update?: XOR<XOR<ServiceProductOfferUpdateToOneWithWhereWithoutOfferEntriesInput, ServiceProductOfferUpdateWithoutOfferEntriesInput>, ServiceProductOfferUncheckedUpdateWithoutOfferEntriesInput>
   }
 
+  export type ProposalAttachmentCreateNestedManyWithoutMediaInput = {
+    create?: XOR<ProposalAttachmentCreateWithoutMediaInput, ProposalAttachmentUncheckedCreateWithoutMediaInput> | ProposalAttachmentCreateWithoutMediaInput[] | ProposalAttachmentUncheckedCreateWithoutMediaInput[]
+    connectOrCreate?: ProposalAttachmentCreateOrConnectWithoutMediaInput | ProposalAttachmentCreateOrConnectWithoutMediaInput[]
+    createMany?: ProposalAttachmentCreateManyMediaInputEnvelope
+    connect?: ProposalAttachmentWhereUniqueInput | ProposalAttachmentWhereUniqueInput[]
+  }
+
+  export type ProposalAttachmentUncheckedCreateNestedManyWithoutMediaInput = {
+    create?: XOR<ProposalAttachmentCreateWithoutMediaInput, ProposalAttachmentUncheckedCreateWithoutMediaInput> | ProposalAttachmentCreateWithoutMediaInput[] | ProposalAttachmentUncheckedCreateWithoutMediaInput[]
+    connectOrCreate?: ProposalAttachmentCreateOrConnectWithoutMediaInput | ProposalAttachmentCreateOrConnectWithoutMediaInput[]
+    createMany?: ProposalAttachmentCreateManyMediaInputEnvelope
+    connect?: ProposalAttachmentWhereUniqueInput | ProposalAttachmentWhereUniqueInput[]
+  }
+
+  export type ProposalAttachmentUpdateManyWithoutMediaNestedInput = {
+    create?: XOR<ProposalAttachmentCreateWithoutMediaInput, ProposalAttachmentUncheckedCreateWithoutMediaInput> | ProposalAttachmentCreateWithoutMediaInput[] | ProposalAttachmentUncheckedCreateWithoutMediaInput[]
+    connectOrCreate?: ProposalAttachmentCreateOrConnectWithoutMediaInput | ProposalAttachmentCreateOrConnectWithoutMediaInput[]
+    upsert?: ProposalAttachmentUpsertWithWhereUniqueWithoutMediaInput | ProposalAttachmentUpsertWithWhereUniqueWithoutMediaInput[]
+    createMany?: ProposalAttachmentCreateManyMediaInputEnvelope
+    set?: ProposalAttachmentWhereUniqueInput | ProposalAttachmentWhereUniqueInput[]
+    disconnect?: ProposalAttachmentWhereUniqueInput | ProposalAttachmentWhereUniqueInput[]
+    delete?: ProposalAttachmentWhereUniqueInput | ProposalAttachmentWhereUniqueInput[]
+    connect?: ProposalAttachmentWhereUniqueInput | ProposalAttachmentWhereUniqueInput[]
+    update?: ProposalAttachmentUpdateWithWhereUniqueWithoutMediaInput | ProposalAttachmentUpdateWithWhereUniqueWithoutMediaInput[]
+    updateMany?: ProposalAttachmentUpdateManyWithWhereWithoutMediaInput | ProposalAttachmentUpdateManyWithWhereWithoutMediaInput[]
+    deleteMany?: ProposalAttachmentScalarWhereInput | ProposalAttachmentScalarWhereInput[]
+  }
+
+  export type ProposalAttachmentUncheckedUpdateManyWithoutMediaNestedInput = {
+    create?: XOR<ProposalAttachmentCreateWithoutMediaInput, ProposalAttachmentUncheckedCreateWithoutMediaInput> | ProposalAttachmentCreateWithoutMediaInput[] | ProposalAttachmentUncheckedCreateWithoutMediaInput[]
+    connectOrCreate?: ProposalAttachmentCreateOrConnectWithoutMediaInput | ProposalAttachmentCreateOrConnectWithoutMediaInput[]
+    upsert?: ProposalAttachmentUpsertWithWhereUniqueWithoutMediaInput | ProposalAttachmentUpsertWithWhereUniqueWithoutMediaInput[]
+    createMany?: ProposalAttachmentCreateManyMediaInputEnvelope
+    set?: ProposalAttachmentWhereUniqueInput | ProposalAttachmentWhereUniqueInput[]
+    disconnect?: ProposalAttachmentWhereUniqueInput | ProposalAttachmentWhereUniqueInput[]
+    delete?: ProposalAttachmentWhereUniqueInput | ProposalAttachmentWhereUniqueInput[]
+    connect?: ProposalAttachmentWhereUniqueInput | ProposalAttachmentWhereUniqueInput[]
+    update?: ProposalAttachmentUpdateWithWhereUniqueWithoutMediaInput | ProposalAttachmentUpdateWithWhereUniqueWithoutMediaInput[]
+    updateMany?: ProposalAttachmentUpdateManyWithWhereWithoutMediaInput | ProposalAttachmentUpdateManyWithWhereWithoutMediaInput[]
+    deleteMany?: ProposalAttachmentScalarWhereInput | ProposalAttachmentScalarWhereInput[]
+  }
+
+  export type ProposalCreateNestedOneWithoutAttachmentsInput = {
+    create?: XOR<ProposalCreateWithoutAttachmentsInput, ProposalUncheckedCreateWithoutAttachmentsInput>
+    connectOrCreate?: ProposalCreateOrConnectWithoutAttachmentsInput
+    connect?: ProposalWhereUniqueInput
+  }
+
+  export type MediaCreateNestedOneWithoutAttachmentsInput = {
+    create?: XOR<MediaCreateWithoutAttachmentsInput, MediaUncheckedCreateWithoutAttachmentsInput>
+    connectOrCreate?: MediaCreateOrConnectWithoutAttachmentsInput
+    connect?: MediaWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutProposalAttachmentsInput = {
+    create?: XOR<UserCreateWithoutProposalAttachmentsInput, UserUncheckedCreateWithoutProposalAttachmentsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutProposalAttachmentsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type ProposalUpdateOneRequiredWithoutAttachmentsNestedInput = {
+    create?: XOR<ProposalCreateWithoutAttachmentsInput, ProposalUncheckedCreateWithoutAttachmentsInput>
+    connectOrCreate?: ProposalCreateOrConnectWithoutAttachmentsInput
+    upsert?: ProposalUpsertWithoutAttachmentsInput
+    connect?: ProposalWhereUniqueInput
+    update?: XOR<XOR<ProposalUpdateToOneWithWhereWithoutAttachmentsInput, ProposalUpdateWithoutAttachmentsInput>, ProposalUncheckedUpdateWithoutAttachmentsInput>
+  }
+
+  export type MediaUpdateOneRequiredWithoutAttachmentsNestedInput = {
+    create?: XOR<MediaCreateWithoutAttachmentsInput, MediaUncheckedCreateWithoutAttachmentsInput>
+    connectOrCreate?: MediaCreateOrConnectWithoutAttachmentsInput
+    upsert?: MediaUpsertWithoutAttachmentsInput
+    connect?: MediaWhereUniqueInput
+    update?: XOR<XOR<MediaUpdateToOneWithWhereWithoutAttachmentsInput, MediaUpdateWithoutAttachmentsInput>, MediaUncheckedUpdateWithoutAttachmentsInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutProposalAttachmentsNestedInput = {
+    create?: XOR<UserCreateWithoutProposalAttachmentsInput, UserUncheckedCreateWithoutProposalAttachmentsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutProposalAttachmentsInput
+    upsert?: UserUpsertWithoutProposalAttachmentsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutProposalAttachmentsInput, UserUpdateWithoutProposalAttachmentsInput>, UserUncheckedUpdateWithoutProposalAttachmentsInput>
+  }
+
   export type NestedIntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[]
@@ -37461,6 +39179,7 @@ export namespace Prisma {
     selectedMembers?: SelectedMemberCreateNestedManyWithoutProposalInput
     timelines?: TimelineCreateNestedManyWithoutProposalInput
     shareTokens?: ProposalShareTokenCreateNestedManyWithoutProposalInput
+    attachments?: ProposalAttachmentCreateNestedManyWithoutProposalInput
   }
 
   export type ProposalUncheckedCreateWithoutUserInput = {
@@ -37488,6 +39207,7 @@ export namespace Prisma {
     selectedMembers?: SelectedMemberUncheckedCreateNestedManyWithoutProposalInput
     timelines?: TimelineUncheckedCreateNestedManyWithoutProposalInput
     shareTokens?: ProposalShareTokenUncheckedCreateNestedManyWithoutProposalInput
+    attachments?: ProposalAttachmentUncheckedCreateNestedManyWithoutProposalInput
   }
 
   export type ProposalCreateOrConnectWithoutUserInput = {
@@ -37522,6 +39242,33 @@ export namespace Prisma {
   export type ClientProfileCreateOrConnectWithoutUserInput = {
     where: ClientProfileWhereUniqueInput
     create: XOR<ClientProfileCreateWithoutUserInput, ClientProfileUncheckedCreateWithoutUserInput>
+  }
+
+  export type ProposalAttachmentCreateWithoutUserInput = {
+    label?: string | null
+    displayOrder?: number | null
+    createdAt?: Date | string
+    proposal: ProposalCreateNestedOneWithoutAttachmentsInput
+    media: MediaCreateNestedOneWithoutAttachmentsInput
+  }
+
+  export type ProposalAttachmentUncheckedCreateWithoutUserInput = {
+    attachmentId?: number
+    proposalId: number
+    mediaId: number
+    label?: string | null
+    displayOrder?: number | null
+    createdAt?: Date | string
+  }
+
+  export type ProposalAttachmentCreateOrConnectWithoutUserInput = {
+    where: ProposalAttachmentWhereUniqueInput
+    create: XOR<ProposalAttachmentCreateWithoutUserInput, ProposalAttachmentUncheckedCreateWithoutUserInput>
+  }
+
+  export type ProposalAttachmentCreateManyUserInputEnvelope = {
+    data: ProposalAttachmentCreateManyUserInput | ProposalAttachmentCreateManyUserInput[]
+    skipDuplicates?: boolean
   }
 
   export type RoleUpsertWithoutUsersInput = {
@@ -37635,6 +39382,35 @@ export namespace Prisma {
     proposals?: ProposalUncheckedUpdateManyWithoutClientProfileNestedInput
   }
 
+  export type ProposalAttachmentUpsertWithWhereUniqueWithoutUserInput = {
+    where: ProposalAttachmentWhereUniqueInput
+    update: XOR<ProposalAttachmentUpdateWithoutUserInput, ProposalAttachmentUncheckedUpdateWithoutUserInput>
+    create: XOR<ProposalAttachmentCreateWithoutUserInput, ProposalAttachmentUncheckedCreateWithoutUserInput>
+  }
+
+  export type ProposalAttachmentUpdateWithWhereUniqueWithoutUserInput = {
+    where: ProposalAttachmentWhereUniqueInput
+    data: XOR<ProposalAttachmentUpdateWithoutUserInput, ProposalAttachmentUncheckedUpdateWithoutUserInput>
+  }
+
+  export type ProposalAttachmentUpdateManyWithWhereWithoutUserInput = {
+    where: ProposalAttachmentScalarWhereInput
+    data: XOR<ProposalAttachmentUpdateManyMutationInput, ProposalAttachmentUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type ProposalAttachmentScalarWhereInput = {
+    AND?: ProposalAttachmentScalarWhereInput | ProposalAttachmentScalarWhereInput[]
+    OR?: ProposalAttachmentScalarWhereInput[]
+    NOT?: ProposalAttachmentScalarWhereInput | ProposalAttachmentScalarWhereInput[]
+    attachmentId?: IntFilter<"ProposalAttachment"> | number
+    proposalId?: IntFilter<"ProposalAttachment"> | number
+    mediaId?: IntFilter<"ProposalAttachment"> | number
+    label?: StringNullableFilter<"ProposalAttachment"> | string | null
+    displayOrder?: IntNullableFilter<"ProposalAttachment"> | number | null
+    addedBy?: IntFilter<"ProposalAttachment"> | number
+    createdAt?: DateTimeFilter<"ProposalAttachment"> | Date | string
+  }
+
   export type UserCreateWithoutUserStatusInput = {
     username: string
     firstName: string
@@ -37646,6 +39422,7 @@ export namespace Prisma {
     role: RoleCreateNestedOneWithoutUsersInput
     proposals?: ProposalCreateNestedManyWithoutUserInput
     clientProfile?: ClientProfileCreateNestedOneWithoutUserInput
+    proposalAttachments?: ProposalAttachmentCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutUserStatusInput = {
@@ -37660,6 +39437,7 @@ export namespace Prisma {
     dateUpdated?: Date | string | null
     proposals?: ProposalUncheckedCreateNestedManyWithoutUserInput
     clientProfile?: ClientProfileUncheckedCreateNestedOneWithoutUserInput
+    proposalAttachments?: ProposalAttachmentUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutUserStatusInput = {
@@ -37715,6 +39493,7 @@ export namespace Prisma {
     userStatus?: AccountStatusCreateNestedOneWithoutUsersInput
     proposals?: ProposalCreateNestedManyWithoutUserInput
     clientProfile?: ClientProfileCreateNestedOneWithoutUserInput
+    proposalAttachments?: ProposalAttachmentCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutRoleInput = {
@@ -37729,6 +39508,7 @@ export namespace Prisma {
     dateUpdated?: Date | string | null
     proposals?: ProposalUncheckedCreateNestedManyWithoutUserInput
     clientProfile?: ClientProfileUncheckedCreateNestedOneWithoutUserInput
+    proposalAttachments?: ProposalAttachmentUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutRoleInput = {
@@ -37781,6 +39561,7 @@ export namespace Prisma {
     selectedMembers?: SelectedMemberCreateNestedManyWithoutProposalInput
     timelines?: TimelineCreateNestedManyWithoutProposalInput
     shareTokens?: ProposalShareTokenCreateNestedManyWithoutProposalInput
+    attachments?: ProposalAttachmentCreateNestedManyWithoutProposalInput
   }
 
   export type ProposalUncheckedCreateWithoutClientProfileInput = {
@@ -37808,6 +39589,7 @@ export namespace Prisma {
     selectedMembers?: SelectedMemberUncheckedCreateNestedManyWithoutProposalInput
     timelines?: TimelineUncheckedCreateNestedManyWithoutProposalInput
     shareTokens?: ProposalShareTokenUncheckedCreateNestedManyWithoutProposalInput
+    attachments?: ProposalAttachmentUncheckedCreateNestedManyWithoutProposalInput
   }
 
   export type ProposalCreateOrConnectWithoutClientProfileInput = {
@@ -37831,6 +39613,7 @@ export namespace Prisma {
     role: RoleCreateNestedOneWithoutUsersInput
     userStatus?: AccountStatusCreateNestedOneWithoutUsersInput
     proposals?: ProposalCreateNestedManyWithoutUserInput
+    proposalAttachments?: ProposalAttachmentCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutClientProfileInput = {
@@ -37845,6 +39628,7 @@ export namespace Prisma {
     dateCreated?: Date | string
     dateUpdated?: Date | string | null
     proposals?: ProposalUncheckedCreateNestedManyWithoutUserInput
+    proposalAttachments?: ProposalAttachmentUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutClientProfileInput = {
@@ -37890,6 +39674,7 @@ export namespace Prisma {
     role?: RoleUpdateOneRequiredWithoutUsersNestedInput
     userStatus?: AccountStatusUpdateOneRequiredWithoutUsersNestedInput
     proposals?: ProposalUpdateManyWithoutUserNestedInput
+    proposalAttachments?: ProposalAttachmentUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutClientProfileInput = {
@@ -37904,6 +39689,7 @@ export namespace Prisma {
     dateCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateUpdated?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     proposals?: ProposalUncheckedUpdateManyWithoutUserNestedInput
+    proposalAttachments?: ProposalAttachmentUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ClientProfileCreateWithoutProposalsInput = {
@@ -37956,6 +39742,7 @@ export namespace Prisma {
     role: RoleCreateNestedOneWithoutUsersInput
     userStatus?: AccountStatusCreateNestedOneWithoutUsersInput
     clientProfile?: ClientProfileCreateNestedOneWithoutUserInput
+    proposalAttachments?: ProposalAttachmentCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutProposalsInput = {
@@ -37970,6 +39757,7 @@ export namespace Prisma {
     dateCreated?: Date | string
     dateUpdated?: Date | string | null
     clientProfile?: ClientProfileUncheckedCreateNestedOneWithoutUserInput
+    proposalAttachments?: ProposalAttachmentUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutProposalsInput = {
@@ -38171,6 +39959,33 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type ProposalAttachmentCreateWithoutProposalInput = {
+    label?: string | null
+    displayOrder?: number | null
+    createdAt?: Date | string
+    media: MediaCreateNestedOneWithoutAttachmentsInput
+    user: UserCreateNestedOneWithoutProposalAttachmentsInput
+  }
+
+  export type ProposalAttachmentUncheckedCreateWithoutProposalInput = {
+    attachmentId?: number
+    mediaId: number
+    label?: string | null
+    displayOrder?: number | null
+    addedBy: number
+    createdAt?: Date | string
+  }
+
+  export type ProposalAttachmentCreateOrConnectWithoutProposalInput = {
+    where: ProposalAttachmentWhereUniqueInput
+    create: XOR<ProposalAttachmentCreateWithoutProposalInput, ProposalAttachmentUncheckedCreateWithoutProposalInput>
+  }
+
+  export type ProposalAttachmentCreateManyProposalInputEnvelope = {
+    data: ProposalAttachmentCreateManyProposalInput | ProposalAttachmentCreateManyProposalInput[]
+    skipDuplicates?: boolean
+  }
+
   export type ClientProfileUpsertWithoutProposalsInput = {
     update: XOR<ClientProfileUpdateWithoutProposalsInput, ClientProfileUncheckedUpdateWithoutProposalsInput>
     create: XOR<ClientProfileCreateWithoutProposalsInput, ClientProfileUncheckedCreateWithoutProposalsInput>
@@ -38244,6 +40059,7 @@ export namespace Prisma {
     role?: RoleUpdateOneRequiredWithoutUsersNestedInput
     userStatus?: AccountStatusUpdateOneRequiredWithoutUsersNestedInput
     clientProfile?: ClientProfileUpdateOneWithoutUserNestedInput
+    proposalAttachments?: ProposalAttachmentUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutProposalsInput = {
@@ -38258,6 +40074,7 @@ export namespace Prisma {
     dateCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateUpdated?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     clientProfile?: ClientProfileUncheckedUpdateOneWithoutUserNestedInput
+    proposalAttachments?: ProposalAttachmentUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type SlaOfferUpsertWithWhereUniqueWithoutProposalInput = {
@@ -38447,6 +40264,22 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"ProposalShareToken"> | Date | string
   }
 
+  export type ProposalAttachmentUpsertWithWhereUniqueWithoutProposalInput = {
+    where: ProposalAttachmentWhereUniqueInput
+    update: XOR<ProposalAttachmentUpdateWithoutProposalInput, ProposalAttachmentUncheckedUpdateWithoutProposalInput>
+    create: XOR<ProposalAttachmentCreateWithoutProposalInput, ProposalAttachmentUncheckedCreateWithoutProposalInput>
+  }
+
+  export type ProposalAttachmentUpdateWithWhereUniqueWithoutProposalInput = {
+    where: ProposalAttachmentWhereUniqueInput
+    data: XOR<ProposalAttachmentUpdateWithoutProposalInput, ProposalAttachmentUncheckedUpdateWithoutProposalInput>
+  }
+
+  export type ProposalAttachmentUpdateManyWithWhereWithoutProposalInput = {
+    where: ProposalAttachmentScalarWhereInput
+    data: XOR<ProposalAttachmentUpdateManyMutationInput, ProposalAttachmentUncheckedUpdateManyWithoutProposalInput>
+  }
+
   export type ProposalCreateWithoutProposalStatusInput = {
     slug: string
     clientType: string
@@ -38471,6 +40304,7 @@ export namespace Prisma {
     selectedMembers?: SelectedMemberCreateNestedManyWithoutProposalInput
     timelines?: TimelineCreateNestedManyWithoutProposalInput
     shareTokens?: ProposalShareTokenCreateNestedManyWithoutProposalInput
+    attachments?: ProposalAttachmentCreateNestedManyWithoutProposalInput
   }
 
   export type ProposalUncheckedCreateWithoutProposalStatusInput = {
@@ -38498,6 +40332,7 @@ export namespace Prisma {
     selectedMembers?: SelectedMemberUncheckedCreateNestedManyWithoutProposalInput
     timelines?: TimelineUncheckedCreateNestedManyWithoutProposalInput
     shareTokens?: ProposalShareTokenUncheckedCreateNestedManyWithoutProposalInput
+    attachments?: ProposalAttachmentUncheckedCreateNestedManyWithoutProposalInput
   }
 
   export type ProposalCreateOrConnectWithoutProposalStatusInput = {
@@ -38550,6 +40385,7 @@ export namespace Prisma {
     selectedMembers?: SelectedMemberCreateNestedManyWithoutProposalInput
     timelines?: TimelineCreateNestedManyWithoutProposalInput
     shareTokens?: ProposalShareTokenCreateNestedManyWithoutProposalInput
+    attachments?: ProposalAttachmentCreateNestedManyWithoutProposalInput
   }
 
   export type ProposalUncheckedCreateWithoutProposalViewsInput = {
@@ -38577,6 +40413,7 @@ export namespace Prisma {
     selectedMembers?: SelectedMemberUncheckedCreateNestedManyWithoutProposalInput
     timelines?: TimelineUncheckedCreateNestedManyWithoutProposalInput
     shareTokens?: ProposalShareTokenUncheckedCreateNestedManyWithoutProposalInput
+    attachments?: ProposalAttachmentUncheckedCreateNestedManyWithoutProposalInput
   }
 
   export type ProposalCreateOrConnectWithoutProposalViewsInput = {
@@ -38619,6 +40456,7 @@ export namespace Prisma {
     selectedMembers?: SelectedMemberUpdateManyWithoutProposalNestedInput
     timelines?: TimelineUpdateManyWithoutProposalNestedInput
     shareTokens?: ProposalShareTokenUpdateManyWithoutProposalNestedInput
+    attachments?: ProposalAttachmentUpdateManyWithoutProposalNestedInput
   }
 
   export type ProposalUncheckedUpdateWithoutProposalViewsInput = {
@@ -38646,6 +40484,7 @@ export namespace Prisma {
     selectedMembers?: SelectedMemberUncheckedUpdateManyWithoutProposalNestedInput
     timelines?: TimelineUncheckedUpdateManyWithoutProposalNestedInput
     shareTokens?: ProposalShareTokenUncheckedUpdateManyWithoutProposalNestedInput
+    attachments?: ProposalAttachmentUncheckedUpdateManyWithoutProposalNestedInput
   }
 
   export type ProposalCreateWithoutShareTokensInput = {
@@ -38672,6 +40511,7 @@ export namespace Prisma {
     proposalViews?: ProposalViewCreateNestedManyWithoutProposalInput
     selectedMembers?: SelectedMemberCreateNestedManyWithoutProposalInput
     timelines?: TimelineCreateNestedManyWithoutProposalInput
+    attachments?: ProposalAttachmentCreateNestedManyWithoutProposalInput
   }
 
   export type ProposalUncheckedCreateWithoutShareTokensInput = {
@@ -38699,6 +40539,7 @@ export namespace Prisma {
     proposalViews?: ProposalViewUncheckedCreateNestedManyWithoutProposalInput
     selectedMembers?: SelectedMemberUncheckedCreateNestedManyWithoutProposalInput
     timelines?: TimelineUncheckedCreateNestedManyWithoutProposalInput
+    attachments?: ProposalAttachmentUncheckedCreateNestedManyWithoutProposalInput
   }
 
   export type ProposalCreateOrConnectWithoutShareTokensInput = {
@@ -38741,6 +40582,7 @@ export namespace Prisma {
     proposalViews?: ProposalViewUpdateManyWithoutProposalNestedInput
     selectedMembers?: SelectedMemberUpdateManyWithoutProposalNestedInput
     timelines?: TimelineUpdateManyWithoutProposalNestedInput
+    attachments?: ProposalAttachmentUpdateManyWithoutProposalNestedInput
   }
 
   export type ProposalUncheckedUpdateWithoutShareTokensInput = {
@@ -38768,6 +40610,7 @@ export namespace Prisma {
     proposalViews?: ProposalViewUncheckedUpdateManyWithoutProposalNestedInput
     selectedMembers?: SelectedMemberUncheckedUpdateManyWithoutProposalNestedInput
     timelines?: TimelineUncheckedUpdateManyWithoutProposalNestedInput
+    attachments?: ProposalAttachmentUncheckedUpdateManyWithoutProposalNestedInput
   }
 
   export type ProposalCreateWithoutSelectedMembersInput = {
@@ -38794,6 +40637,7 @@ export namespace Prisma {
     proposalViews?: ProposalViewCreateNestedManyWithoutProposalInput
     timelines?: TimelineCreateNestedManyWithoutProposalInput
     shareTokens?: ProposalShareTokenCreateNestedManyWithoutProposalInput
+    attachments?: ProposalAttachmentCreateNestedManyWithoutProposalInput
   }
 
   export type ProposalUncheckedCreateWithoutSelectedMembersInput = {
@@ -38821,6 +40665,7 @@ export namespace Prisma {
     proposalViews?: ProposalViewUncheckedCreateNestedManyWithoutProposalInput
     timelines?: TimelineUncheckedCreateNestedManyWithoutProposalInput
     shareTokens?: ProposalShareTokenUncheckedCreateNestedManyWithoutProposalInput
+    attachments?: ProposalAttachmentUncheckedCreateNestedManyWithoutProposalInput
   }
 
   export type ProposalCreateOrConnectWithoutSelectedMembersInput = {
@@ -38891,6 +40736,7 @@ export namespace Prisma {
     proposalViews?: ProposalViewUpdateManyWithoutProposalNestedInput
     timelines?: TimelineUpdateManyWithoutProposalNestedInput
     shareTokens?: ProposalShareTokenUpdateManyWithoutProposalNestedInput
+    attachments?: ProposalAttachmentUpdateManyWithoutProposalNestedInput
   }
 
   export type ProposalUncheckedUpdateWithoutSelectedMembersInput = {
@@ -38918,6 +40764,7 @@ export namespace Prisma {
     proposalViews?: ProposalViewUncheckedUpdateManyWithoutProposalNestedInput
     timelines?: TimelineUncheckedUpdateManyWithoutProposalNestedInput
     shareTokens?: ProposalShareTokenUncheckedUpdateManyWithoutProposalNestedInput
+    attachments?: ProposalAttachmentUncheckedUpdateManyWithoutProposalNestedInput
   }
 
   export type TeamMemberUpsertWithoutSelectedMembersInput = {
@@ -39013,6 +40860,7 @@ export namespace Prisma {
     proposalViews?: ProposalViewCreateNestedManyWithoutProposalInput
     selectedMembers?: SelectedMemberCreateNestedManyWithoutProposalInput
     shareTokens?: ProposalShareTokenCreateNestedManyWithoutProposalInput
+    attachments?: ProposalAttachmentCreateNestedManyWithoutProposalInput
   }
 
   export type ProposalUncheckedCreateWithoutTimelinesInput = {
@@ -39040,6 +40888,7 @@ export namespace Prisma {
     proposalViews?: ProposalViewUncheckedCreateNestedManyWithoutProposalInput
     selectedMembers?: SelectedMemberUncheckedCreateNestedManyWithoutProposalInput
     shareTokens?: ProposalShareTokenUncheckedCreateNestedManyWithoutProposalInput
+    attachments?: ProposalAttachmentUncheckedCreateNestedManyWithoutProposalInput
   }
 
   export type ProposalCreateOrConnectWithoutTimelinesInput = {
@@ -39101,6 +40950,7 @@ export namespace Prisma {
     proposalViews?: ProposalViewUpdateManyWithoutProposalNestedInput
     selectedMembers?: SelectedMemberUpdateManyWithoutProposalNestedInput
     shareTokens?: ProposalShareTokenUpdateManyWithoutProposalNestedInput
+    attachments?: ProposalAttachmentUpdateManyWithoutProposalNestedInput
   }
 
   export type ProposalUncheckedUpdateWithoutTimelinesInput = {
@@ -39128,6 +40978,7 @@ export namespace Prisma {
     proposalViews?: ProposalViewUncheckedUpdateManyWithoutProposalNestedInput
     selectedMembers?: SelectedMemberUncheckedUpdateManyWithoutProposalNestedInput
     shareTokens?: ProposalShareTokenUncheckedUpdateManyWithoutProposalNestedInput
+    attachments?: ProposalAttachmentUncheckedUpdateManyWithoutProposalNestedInput
   }
 
   export type TimelineScopeItemUpsertWithWhereUniqueWithoutTimelineInput = {
@@ -39262,6 +41113,7 @@ export namespace Prisma {
     selectedMembers?: SelectedMemberCreateNestedManyWithoutProposalInput
     timelines?: TimelineCreateNestedManyWithoutProposalInput
     shareTokens?: ProposalShareTokenCreateNestedManyWithoutProposalInput
+    attachments?: ProposalAttachmentCreateNestedManyWithoutProposalInput
   }
 
   export type ProposalUncheckedCreateWithoutSlaOffersInput = {
@@ -39289,6 +41141,7 @@ export namespace Prisma {
     selectedMembers?: SelectedMemberUncheckedCreateNestedManyWithoutProposalInput
     timelines?: TimelineUncheckedCreateNestedManyWithoutProposalInput
     shareTokens?: ProposalShareTokenUncheckedCreateNestedManyWithoutProposalInput
+    attachments?: ProposalAttachmentUncheckedCreateNestedManyWithoutProposalInput
   }
 
   export type ProposalCreateOrConnectWithoutSlaOffersInput = {
@@ -39360,6 +41213,7 @@ export namespace Prisma {
     selectedMembers?: SelectedMemberUpdateManyWithoutProposalNestedInput
     timelines?: TimelineUpdateManyWithoutProposalNestedInput
     shareTokens?: ProposalShareTokenUpdateManyWithoutProposalNestedInput
+    attachments?: ProposalAttachmentUpdateManyWithoutProposalNestedInput
   }
 
   export type ProposalUncheckedUpdateWithoutSlaOffersInput = {
@@ -39387,6 +41241,7 @@ export namespace Prisma {
     selectedMembers?: SelectedMemberUncheckedUpdateManyWithoutProposalNestedInput
     timelines?: TimelineUncheckedUpdateManyWithoutProposalNestedInput
     shareTokens?: ProposalShareTokenUncheckedUpdateManyWithoutProposalNestedInput
+    attachments?: ProposalAttachmentUncheckedUpdateManyWithoutProposalNestedInput
   }
 
   export type DealItemCreateWithoutPackageInput = {
@@ -39820,6 +41675,7 @@ export namespace Prisma {
     selectedMembers?: SelectedMemberCreateNestedManyWithoutProposalInput
     timelines?: TimelineCreateNestedManyWithoutProposalInput
     shareTokens?: ProposalShareTokenCreateNestedManyWithoutProposalInput
+    attachments?: ProposalAttachmentCreateNestedManyWithoutProposalInput
   }
 
   export type ProposalUncheckedCreateWithoutServiceProductOffersInput = {
@@ -39847,6 +41703,7 @@ export namespace Prisma {
     selectedMembers?: SelectedMemberUncheckedCreateNestedManyWithoutProposalInput
     timelines?: TimelineUncheckedCreateNestedManyWithoutProposalInput
     shareTokens?: ProposalShareTokenUncheckedCreateNestedManyWithoutProposalInput
+    attachments?: ProposalAttachmentUncheckedCreateNestedManyWithoutProposalInput
   }
 
   export type ProposalCreateOrConnectWithoutServiceProductOffersInput = {
@@ -39930,6 +41787,7 @@ export namespace Prisma {
     selectedMembers?: SelectedMemberUpdateManyWithoutProposalNestedInput
     timelines?: TimelineUpdateManyWithoutProposalNestedInput
     shareTokens?: ProposalShareTokenUpdateManyWithoutProposalNestedInput
+    attachments?: ProposalAttachmentUpdateManyWithoutProposalNestedInput
   }
 
   export type ProposalUncheckedUpdateWithoutServiceProductOffersInput = {
@@ -39957,6 +41815,7 @@ export namespace Prisma {
     selectedMembers?: SelectedMemberUncheckedUpdateManyWithoutProposalNestedInput
     timelines?: TimelineUncheckedUpdateManyWithoutProposalNestedInput
     shareTokens?: ProposalShareTokenUncheckedUpdateManyWithoutProposalNestedInput
+    attachments?: ProposalAttachmentUncheckedUpdateManyWithoutProposalNestedInput
   }
 
   export type OfferEntryUpsertWithWhereUniqueWithoutServiceProductOfferInput = {
@@ -40085,6 +41944,311 @@ export namespace Prisma {
     dateCreated?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type ProposalAttachmentCreateWithoutMediaInput = {
+    label?: string | null
+    displayOrder?: number | null
+    createdAt?: Date | string
+    proposal: ProposalCreateNestedOneWithoutAttachmentsInput
+    user: UserCreateNestedOneWithoutProposalAttachmentsInput
+  }
+
+  export type ProposalAttachmentUncheckedCreateWithoutMediaInput = {
+    attachmentId?: number
+    proposalId: number
+    label?: string | null
+    displayOrder?: number | null
+    addedBy: number
+    createdAt?: Date | string
+  }
+
+  export type ProposalAttachmentCreateOrConnectWithoutMediaInput = {
+    where: ProposalAttachmentWhereUniqueInput
+    create: XOR<ProposalAttachmentCreateWithoutMediaInput, ProposalAttachmentUncheckedCreateWithoutMediaInput>
+  }
+
+  export type ProposalAttachmentCreateManyMediaInputEnvelope = {
+    data: ProposalAttachmentCreateManyMediaInput | ProposalAttachmentCreateManyMediaInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ProposalAttachmentUpsertWithWhereUniqueWithoutMediaInput = {
+    where: ProposalAttachmentWhereUniqueInput
+    update: XOR<ProposalAttachmentUpdateWithoutMediaInput, ProposalAttachmentUncheckedUpdateWithoutMediaInput>
+    create: XOR<ProposalAttachmentCreateWithoutMediaInput, ProposalAttachmentUncheckedCreateWithoutMediaInput>
+  }
+
+  export type ProposalAttachmentUpdateWithWhereUniqueWithoutMediaInput = {
+    where: ProposalAttachmentWhereUniqueInput
+    data: XOR<ProposalAttachmentUpdateWithoutMediaInput, ProposalAttachmentUncheckedUpdateWithoutMediaInput>
+  }
+
+  export type ProposalAttachmentUpdateManyWithWhereWithoutMediaInput = {
+    where: ProposalAttachmentScalarWhereInput
+    data: XOR<ProposalAttachmentUpdateManyMutationInput, ProposalAttachmentUncheckedUpdateManyWithoutMediaInput>
+  }
+
+  export type ProposalCreateWithoutAttachmentsInput = {
+    slug: string
+    clientType: string
+    proposalTitle: string
+    proposalType: string
+    executiveSummary: string
+    goalsAndObjectives: string
+    execVideoUrl?: string | null
+    proposedSolution: string
+    proposalDescription?: string | null
+    statusUpdated?: Date | string
+    dateCreated?: Date | string
+    dateUpdated?: Date | string | null
+    firstViewedAt?: Date | string | null
+    lastViewedAt?: Date | string | null
+    viewCount?: number | null
+    clientProfile: ClientProfileCreateNestedOneWithoutProposalsInput
+    proposalStatus: ProposalStatusCreateNestedOneWithoutProposalsInput
+    user: UserCreateNestedOneWithoutProposalsInput
+    slaOffers?: SlaOfferCreateNestedManyWithoutProposalInput
+    serviceProductOffers?: ServiceProductOfferCreateNestedManyWithoutProposalInput
+    proposalViews?: ProposalViewCreateNestedManyWithoutProposalInput
+    selectedMembers?: SelectedMemberCreateNestedManyWithoutProposalInput
+    timelines?: TimelineCreateNestedManyWithoutProposalInput
+    shareTokens?: ProposalShareTokenCreateNestedManyWithoutProposalInput
+  }
+
+  export type ProposalUncheckedCreateWithoutAttachmentsInput = {
+    proposalId?: number
+    slug: string
+    clientId: number
+    clientType: string
+    proposalTitle: string
+    proposalType: string
+    executiveSummary: string
+    goalsAndObjectives: string
+    execVideoUrl?: string | null
+    proposedSolution: string
+    proposalDescription?: string | null
+    statusId: number
+    createdBy: number
+    statusUpdated?: Date | string
+    dateCreated?: Date | string
+    dateUpdated?: Date | string | null
+    firstViewedAt?: Date | string | null
+    lastViewedAt?: Date | string | null
+    viewCount?: number | null
+    slaOffers?: SlaOfferUncheckedCreateNestedManyWithoutProposalInput
+    serviceProductOffers?: ServiceProductOfferUncheckedCreateNestedManyWithoutProposalInput
+    proposalViews?: ProposalViewUncheckedCreateNestedManyWithoutProposalInput
+    selectedMembers?: SelectedMemberUncheckedCreateNestedManyWithoutProposalInput
+    timelines?: TimelineUncheckedCreateNestedManyWithoutProposalInput
+    shareTokens?: ProposalShareTokenUncheckedCreateNestedManyWithoutProposalInput
+  }
+
+  export type ProposalCreateOrConnectWithoutAttachmentsInput = {
+    where: ProposalWhereUniqueInput
+    create: XOR<ProposalCreateWithoutAttachmentsInput, ProposalUncheckedCreateWithoutAttachmentsInput>
+  }
+
+  export type MediaCreateWithoutAttachmentsInput = {
+    fileName: string
+    originalName: string
+    bucketKey: string
+    mimeType: string
+    fileSize: number
+    folder?: string | null
+    uploadedBy?: number | null
+    createdAt?: Date | string
+  }
+
+  export type MediaUncheckedCreateWithoutAttachmentsInput = {
+    mediaId?: number
+    fileName: string
+    originalName: string
+    bucketKey: string
+    mimeType: string
+    fileSize: number
+    folder?: string | null
+    uploadedBy?: number | null
+    createdAt?: Date | string
+  }
+
+  export type MediaCreateOrConnectWithoutAttachmentsInput = {
+    where: MediaWhereUniqueInput
+    create: XOR<MediaCreateWithoutAttachmentsInput, MediaUncheckedCreateWithoutAttachmentsInput>
+  }
+
+  export type UserCreateWithoutProposalAttachmentsInput = {
+    username: string
+    firstName: string
+    lastName: string
+    userEmail: string
+    userPassword: string
+    dateCreated?: Date | string
+    dateUpdated?: Date | string | null
+    role: RoleCreateNestedOneWithoutUsersInput
+    userStatus?: AccountStatusCreateNestedOneWithoutUsersInput
+    proposals?: ProposalCreateNestedManyWithoutUserInput
+    clientProfile?: ClientProfileCreateNestedOneWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutProposalAttachmentsInput = {
+    userId?: number
+    username: string
+    firstName: string
+    lastName: string
+    userEmail: string
+    userPassword: string
+    accountStatus?: number
+    accountRole: number
+    dateCreated?: Date | string
+    dateUpdated?: Date | string | null
+    proposals?: ProposalUncheckedCreateNestedManyWithoutUserInput
+    clientProfile?: ClientProfileUncheckedCreateNestedOneWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutProposalAttachmentsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutProposalAttachmentsInput, UserUncheckedCreateWithoutProposalAttachmentsInput>
+  }
+
+  export type ProposalUpsertWithoutAttachmentsInput = {
+    update: XOR<ProposalUpdateWithoutAttachmentsInput, ProposalUncheckedUpdateWithoutAttachmentsInput>
+    create: XOR<ProposalCreateWithoutAttachmentsInput, ProposalUncheckedCreateWithoutAttachmentsInput>
+    where?: ProposalWhereInput
+  }
+
+  export type ProposalUpdateToOneWithWhereWithoutAttachmentsInput = {
+    where?: ProposalWhereInput
+    data: XOR<ProposalUpdateWithoutAttachmentsInput, ProposalUncheckedUpdateWithoutAttachmentsInput>
+  }
+
+  export type ProposalUpdateWithoutAttachmentsInput = {
+    slug?: StringFieldUpdateOperationsInput | string
+    clientType?: StringFieldUpdateOperationsInput | string
+    proposalTitle?: StringFieldUpdateOperationsInput | string
+    proposalType?: StringFieldUpdateOperationsInput | string
+    executiveSummary?: StringFieldUpdateOperationsInput | string
+    goalsAndObjectives?: StringFieldUpdateOperationsInput | string
+    execVideoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    proposedSolution?: StringFieldUpdateOperationsInput | string
+    proposalDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    statusUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
+    dateCreated?: DateTimeFieldUpdateOperationsInput | Date | string
+    dateUpdated?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    firstViewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastViewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    viewCount?: NullableIntFieldUpdateOperationsInput | number | null
+    clientProfile?: ClientProfileUpdateOneRequiredWithoutProposalsNestedInput
+    proposalStatus?: ProposalStatusUpdateOneRequiredWithoutProposalsNestedInput
+    user?: UserUpdateOneRequiredWithoutProposalsNestedInput
+    slaOffers?: SlaOfferUpdateManyWithoutProposalNestedInput
+    serviceProductOffers?: ServiceProductOfferUpdateManyWithoutProposalNestedInput
+    proposalViews?: ProposalViewUpdateManyWithoutProposalNestedInput
+    selectedMembers?: SelectedMemberUpdateManyWithoutProposalNestedInput
+    timelines?: TimelineUpdateManyWithoutProposalNestedInput
+    shareTokens?: ProposalShareTokenUpdateManyWithoutProposalNestedInput
+  }
+
+  export type ProposalUncheckedUpdateWithoutAttachmentsInput = {
+    proposalId?: IntFieldUpdateOperationsInput | number
+    slug?: StringFieldUpdateOperationsInput | string
+    clientId?: IntFieldUpdateOperationsInput | number
+    clientType?: StringFieldUpdateOperationsInput | string
+    proposalTitle?: StringFieldUpdateOperationsInput | string
+    proposalType?: StringFieldUpdateOperationsInput | string
+    executiveSummary?: StringFieldUpdateOperationsInput | string
+    goalsAndObjectives?: StringFieldUpdateOperationsInput | string
+    execVideoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    proposedSolution?: StringFieldUpdateOperationsInput | string
+    proposalDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    statusId?: IntFieldUpdateOperationsInput | number
+    createdBy?: IntFieldUpdateOperationsInput | number
+    statusUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
+    dateCreated?: DateTimeFieldUpdateOperationsInput | Date | string
+    dateUpdated?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    firstViewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastViewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    viewCount?: NullableIntFieldUpdateOperationsInput | number | null
+    slaOffers?: SlaOfferUncheckedUpdateManyWithoutProposalNestedInput
+    serviceProductOffers?: ServiceProductOfferUncheckedUpdateManyWithoutProposalNestedInput
+    proposalViews?: ProposalViewUncheckedUpdateManyWithoutProposalNestedInput
+    selectedMembers?: SelectedMemberUncheckedUpdateManyWithoutProposalNestedInput
+    timelines?: TimelineUncheckedUpdateManyWithoutProposalNestedInput
+    shareTokens?: ProposalShareTokenUncheckedUpdateManyWithoutProposalNestedInput
+  }
+
+  export type MediaUpsertWithoutAttachmentsInput = {
+    update: XOR<MediaUpdateWithoutAttachmentsInput, MediaUncheckedUpdateWithoutAttachmentsInput>
+    create: XOR<MediaCreateWithoutAttachmentsInput, MediaUncheckedCreateWithoutAttachmentsInput>
+    where?: MediaWhereInput
+  }
+
+  export type MediaUpdateToOneWithWhereWithoutAttachmentsInput = {
+    where?: MediaWhereInput
+    data: XOR<MediaUpdateWithoutAttachmentsInput, MediaUncheckedUpdateWithoutAttachmentsInput>
+  }
+
+  export type MediaUpdateWithoutAttachmentsInput = {
+    fileName?: StringFieldUpdateOperationsInput | string
+    originalName?: StringFieldUpdateOperationsInput | string
+    bucketKey?: StringFieldUpdateOperationsInput | string
+    mimeType?: StringFieldUpdateOperationsInput | string
+    fileSize?: IntFieldUpdateOperationsInput | number
+    folder?: NullableStringFieldUpdateOperationsInput | string | null
+    uploadedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MediaUncheckedUpdateWithoutAttachmentsInput = {
+    mediaId?: IntFieldUpdateOperationsInput | number
+    fileName?: StringFieldUpdateOperationsInput | string
+    originalName?: StringFieldUpdateOperationsInput | string
+    bucketKey?: StringFieldUpdateOperationsInput | string
+    mimeType?: StringFieldUpdateOperationsInput | string
+    fileSize?: IntFieldUpdateOperationsInput | number
+    folder?: NullableStringFieldUpdateOperationsInput | string | null
+    uploadedBy?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserUpsertWithoutProposalAttachmentsInput = {
+    update: XOR<UserUpdateWithoutProposalAttachmentsInput, UserUncheckedUpdateWithoutProposalAttachmentsInput>
+    create: XOR<UserCreateWithoutProposalAttachmentsInput, UserUncheckedCreateWithoutProposalAttachmentsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutProposalAttachmentsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutProposalAttachmentsInput, UserUncheckedUpdateWithoutProposalAttachmentsInput>
+  }
+
+  export type UserUpdateWithoutProposalAttachmentsInput = {
+    username?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    userEmail?: StringFieldUpdateOperationsInput | string
+    userPassword?: StringFieldUpdateOperationsInput | string
+    dateCreated?: DateTimeFieldUpdateOperationsInput | Date | string
+    dateUpdated?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    role?: RoleUpdateOneRequiredWithoutUsersNestedInput
+    userStatus?: AccountStatusUpdateOneRequiredWithoutUsersNestedInput
+    proposals?: ProposalUpdateManyWithoutUserNestedInput
+    clientProfile?: ClientProfileUpdateOneWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutProposalAttachmentsInput = {
+    userId?: IntFieldUpdateOperationsInput | number
+    username?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    userEmail?: StringFieldUpdateOperationsInput | string
+    userPassword?: StringFieldUpdateOperationsInput | string
+    accountStatus?: IntFieldUpdateOperationsInput | number
+    accountRole?: IntFieldUpdateOperationsInput | number
+    dateCreated?: DateTimeFieldUpdateOperationsInput | Date | string
+    dateUpdated?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    proposals?: ProposalUncheckedUpdateManyWithoutUserNestedInput
+    clientProfile?: ClientProfileUncheckedUpdateOneWithoutUserNestedInput
+  }
+
   export type ProposalCreateManyUserInput = {
     proposalId?: number
     slug: string
@@ -40104,6 +42268,15 @@ export namespace Prisma {
     firstViewedAt?: Date | string | null
     lastViewedAt?: Date | string | null
     viewCount?: number | null
+  }
+
+  export type ProposalAttachmentCreateManyUserInput = {
+    attachmentId?: number
+    proposalId: number
+    mediaId: number
+    label?: string | null
+    displayOrder?: number | null
+    createdAt?: Date | string
   }
 
   export type ProposalUpdateWithoutUserInput = {
@@ -40130,6 +42303,7 @@ export namespace Prisma {
     selectedMembers?: SelectedMemberUpdateManyWithoutProposalNestedInput
     timelines?: TimelineUpdateManyWithoutProposalNestedInput
     shareTokens?: ProposalShareTokenUpdateManyWithoutProposalNestedInput
+    attachments?: ProposalAttachmentUpdateManyWithoutProposalNestedInput
   }
 
   export type ProposalUncheckedUpdateWithoutUserInput = {
@@ -40157,6 +42331,7 @@ export namespace Prisma {
     selectedMembers?: SelectedMemberUncheckedUpdateManyWithoutProposalNestedInput
     timelines?: TimelineUncheckedUpdateManyWithoutProposalNestedInput
     shareTokens?: ProposalShareTokenUncheckedUpdateManyWithoutProposalNestedInput
+    attachments?: ProposalAttachmentUncheckedUpdateManyWithoutProposalNestedInput
   }
 
   export type ProposalUncheckedUpdateManyWithoutUserInput = {
@@ -40178,6 +42353,32 @@ export namespace Prisma {
     firstViewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     lastViewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     viewCount?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
+  export type ProposalAttachmentUpdateWithoutUserInput = {
+    label?: NullableStringFieldUpdateOperationsInput | string | null
+    displayOrder?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    proposal?: ProposalUpdateOneRequiredWithoutAttachmentsNestedInput
+    media?: MediaUpdateOneRequiredWithoutAttachmentsNestedInput
+  }
+
+  export type ProposalAttachmentUncheckedUpdateWithoutUserInput = {
+    attachmentId?: IntFieldUpdateOperationsInput | number
+    proposalId?: IntFieldUpdateOperationsInput | number
+    mediaId?: IntFieldUpdateOperationsInput | number
+    label?: NullableStringFieldUpdateOperationsInput | string | null
+    displayOrder?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProposalAttachmentUncheckedUpdateManyWithoutUserInput = {
+    attachmentId?: IntFieldUpdateOperationsInput | number
+    proposalId?: IntFieldUpdateOperationsInput | number
+    mediaId?: IntFieldUpdateOperationsInput | number
+    label?: NullableStringFieldUpdateOperationsInput | string | null
+    displayOrder?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type UserCreateManyUserStatusInput = {
@@ -40203,6 +42404,7 @@ export namespace Prisma {
     role?: RoleUpdateOneRequiredWithoutUsersNestedInput
     proposals?: ProposalUpdateManyWithoutUserNestedInput
     clientProfile?: ClientProfileUpdateOneWithoutUserNestedInput
+    proposalAttachments?: ProposalAttachmentUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutUserStatusInput = {
@@ -40217,6 +42419,7 @@ export namespace Prisma {
     dateUpdated?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     proposals?: ProposalUncheckedUpdateManyWithoutUserNestedInput
     clientProfile?: ClientProfileUncheckedUpdateOneWithoutUserNestedInput
+    proposalAttachments?: ProposalAttachmentUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutUserStatusInput = {
@@ -40254,6 +42457,7 @@ export namespace Prisma {
     userStatus?: AccountStatusUpdateOneRequiredWithoutUsersNestedInput
     proposals?: ProposalUpdateManyWithoutUserNestedInput
     clientProfile?: ClientProfileUpdateOneWithoutUserNestedInput
+    proposalAttachments?: ProposalAttachmentUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutRoleInput = {
@@ -40268,6 +42472,7 @@ export namespace Prisma {
     dateUpdated?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     proposals?: ProposalUncheckedUpdateManyWithoutUserNestedInput
     clientProfile?: ClientProfileUncheckedUpdateOneWithoutUserNestedInput
+    proposalAttachments?: ProposalAttachmentUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutRoleInput = {
@@ -40327,6 +42532,7 @@ export namespace Prisma {
     selectedMembers?: SelectedMemberUpdateManyWithoutProposalNestedInput
     timelines?: TimelineUpdateManyWithoutProposalNestedInput
     shareTokens?: ProposalShareTokenUpdateManyWithoutProposalNestedInput
+    attachments?: ProposalAttachmentUpdateManyWithoutProposalNestedInput
   }
 
   export type ProposalUncheckedUpdateWithoutClientProfileInput = {
@@ -40354,6 +42560,7 @@ export namespace Prisma {
     selectedMembers?: SelectedMemberUncheckedUpdateManyWithoutProposalNestedInput
     timelines?: TimelineUncheckedUpdateManyWithoutProposalNestedInput
     shareTokens?: ProposalShareTokenUncheckedUpdateManyWithoutProposalNestedInput
+    attachments?: ProposalAttachmentUncheckedUpdateManyWithoutProposalNestedInput
   }
 
   export type ProposalUncheckedUpdateManyWithoutClientProfileInput = {
@@ -40441,6 +42648,15 @@ export namespace Prisma {
     portalUserId?: number | null
     usedAt?: Date | string | null
     expiresAt?: Date | string | null
+    createdAt?: Date | string
+  }
+
+  export type ProposalAttachmentCreateManyProposalInput = {
+    attachmentId?: number
+    mediaId: number
+    label?: string | null
+    displayOrder?: number | null
+    addedBy: number
     createdAt?: Date | string
   }
 
@@ -40645,6 +42861,32 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type ProposalAttachmentUpdateWithoutProposalInput = {
+    label?: NullableStringFieldUpdateOperationsInput | string | null
+    displayOrder?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    media?: MediaUpdateOneRequiredWithoutAttachmentsNestedInput
+    user?: UserUpdateOneRequiredWithoutProposalAttachmentsNestedInput
+  }
+
+  export type ProposalAttachmentUncheckedUpdateWithoutProposalInput = {
+    attachmentId?: IntFieldUpdateOperationsInput | number
+    mediaId?: IntFieldUpdateOperationsInput | number
+    label?: NullableStringFieldUpdateOperationsInput | string | null
+    displayOrder?: NullableIntFieldUpdateOperationsInput | number | null
+    addedBy?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProposalAttachmentUncheckedUpdateManyWithoutProposalInput = {
+    attachmentId?: IntFieldUpdateOperationsInput | number
+    mediaId?: IntFieldUpdateOperationsInput | number
+    label?: NullableStringFieldUpdateOperationsInput | string | null
+    displayOrder?: NullableIntFieldUpdateOperationsInput | number | null
+    addedBy?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type ProposalCreateManyProposalStatusInput = {
     proposalId?: number
     slug: string
@@ -40690,6 +42932,7 @@ export namespace Prisma {
     selectedMembers?: SelectedMemberUpdateManyWithoutProposalNestedInput
     timelines?: TimelineUpdateManyWithoutProposalNestedInput
     shareTokens?: ProposalShareTokenUpdateManyWithoutProposalNestedInput
+    attachments?: ProposalAttachmentUpdateManyWithoutProposalNestedInput
   }
 
   export type ProposalUncheckedUpdateWithoutProposalStatusInput = {
@@ -40717,6 +42960,7 @@ export namespace Prisma {
     selectedMembers?: SelectedMemberUncheckedUpdateManyWithoutProposalNestedInput
     timelines?: TimelineUncheckedUpdateManyWithoutProposalNestedInput
     shareTokens?: ProposalShareTokenUncheckedUpdateManyWithoutProposalNestedInput
+    attachments?: ProposalAttachmentUncheckedUpdateManyWithoutProposalNestedInput
   }
 
   export type ProposalUncheckedUpdateManyWithoutProposalStatusInput = {
@@ -40963,6 +43207,41 @@ export namespace Prisma {
     displayOrder?: IntFieldUpdateOperationsInput | number
     isSelected?: BoolFieldUpdateOperationsInput | boolean
     dateCreated?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProposalAttachmentCreateManyMediaInput = {
+    attachmentId?: number
+    proposalId: number
+    label?: string | null
+    displayOrder?: number | null
+    addedBy: number
+    createdAt?: Date | string
+  }
+
+  export type ProposalAttachmentUpdateWithoutMediaInput = {
+    label?: NullableStringFieldUpdateOperationsInput | string | null
+    displayOrder?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    proposal?: ProposalUpdateOneRequiredWithoutAttachmentsNestedInput
+    user?: UserUpdateOneRequiredWithoutProposalAttachmentsNestedInput
+  }
+
+  export type ProposalAttachmentUncheckedUpdateWithoutMediaInput = {
+    attachmentId?: IntFieldUpdateOperationsInput | number
+    proposalId?: IntFieldUpdateOperationsInput | number
+    label?: NullableStringFieldUpdateOperationsInput | string | null
+    displayOrder?: NullableIntFieldUpdateOperationsInput | number | null
+    addedBy?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProposalAttachmentUncheckedUpdateManyWithoutMediaInput = {
+    attachmentId?: IntFieldUpdateOperationsInput | number
+    proposalId?: IntFieldUpdateOperationsInput | number
+    label?: NullableStringFieldUpdateOperationsInput | string | null
+    displayOrder?: NullableIntFieldUpdateOperationsInput | number | null
+    addedBy?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

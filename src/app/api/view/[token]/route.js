@@ -42,6 +42,10 @@ export async function GET(req, { params }) {
         serviceProductOffers: {
           include: { offerEntries: { orderBy: { displayOrder: 'asc' } } },
         },
+        attachments: {
+          include: { media: true },
+          orderBy: [{ displayOrder: 'asc' }, { createdAt: 'asc' }],
+        },
       },
     })
 
@@ -90,36 +94,42 @@ export async function GET(req, { params }) {
         })
       }
 
-      // On first-ever view: notify the staff member who created the proposal
-      if (isFirstView) {
-        await tx.activityLogs.create({
-          data: {
-            entityType: 'proposals',
-            entityId: proposal.slug,
-            action: 'proposal_viewed',
-            performedBy: proposal.createdBy,
-            performedByRole: 'client',
-            metaData: {
-              executor: shareToken.recipientEmail,
-              proposalTitle: proposal.proposalTitle,
-            },
+      // Notify the staff member who created the proposal on every view, not just the first
+      await tx.activityLogs.create({
+        data: {
+          entityType: 'proposals',
+          entityId: proposal.slug,
+          action: 'proposal_viewed',
+          performedBy: proposal.createdBy,
+          performedByRole: 'client',
+          metaData: {
+            executor: shareToken.recipientEmail,
+            proposalTitle: proposal.proposalTitle,
           },
-        })
+        },
+      })
 
-        await tx.notification.create({
-          data: {
-            userId: proposal.createdBy,
-            title: 'Proposal Viewed',
-            message: `${shareToken.recipientEmail} viewed "${proposal.proposalTitle}"`,
-            entityType: 'proposals',
-            entityId: proposal.slug,
-            notificationType: 'proposal_viewed',
-          },
-        })
-      }
+      await tx.notification.create({
+        data: {
+          userId: proposal.createdBy,
+          title: 'Proposal Viewed',
+          message: `${shareToken.recipientEmail} viewed "${proposal.proposalTitle}"`,
+          entityType: 'proposals',
+          entityId: proposal.slug,
+          notificationType: 'proposal_viewed',
+        },
+      })
     })
 
-    return NextResponse.json({ proposal })
+    const proposalWithAttachmentUrls = {
+      ...proposal,
+      attachments: proposal.attachments.map((a) => ({
+        ...a,
+        url: `${process.env.R2_PUBLIC_URL}/${a.media.bucketKey}`,
+      })),
+    }
+
+    return NextResponse.json({ proposal: proposalWithAttachmentUrls })
   } catch (err) {
     console.error('View token fetch error:', err)
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 })

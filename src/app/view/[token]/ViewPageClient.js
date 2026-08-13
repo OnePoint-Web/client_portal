@@ -27,6 +27,7 @@ const SECTIONS = [
   { id: 'executive-summary', label: 'Summary', icon: RiFileTextLine },
   { id: 'goals', label: 'Goals', icon: RiFocus3Line },
   { id: 'solution', label: 'Solution', icon: RiLightbulbLine },
+  { id: 'attachments', label: 'Resources', icon: RiFileTextLine },
   { id: 'team', label: 'Team', icon: RiTeamLine },
   { id: 'timeline', label: 'Timeline', icon: RiTimelineView },
   { id: 'budget', label: 'Budget', icon: RiMoneyDollarCircleLine },
@@ -199,6 +200,7 @@ export default function ViewPageClient({ token }) {
   const sections = SECTIONS.filter(s => {
     if (s.id === 'budget') return isSla ? !!slaOffer : !!serviceOffer
     if (s.id === 'timeline') return timelines.length > 0
+    if (s.id === 'attachments') return (proposal.attachments?.length ?? 0) > 0
     return true
   })
 
@@ -336,6 +338,39 @@ export default function ViewPageClient({ token }) {
               dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(proposal.proposedSolution ?? '') }}
             />
           </section>
+
+          {/* Resources / Attachments */}
+          {proposal.attachments?.length > 0 && (
+            <section
+              id="attachments"
+              ref={el => { sectionRefs.current['attachments'] = el }}
+              className="bg-white rounded-2xl border border-[#E2E8F0] shadow-[0_1px_3px_rgba(0,0,0,0.06)] overflow-hidden"
+            >
+              <div className="flex items-center gap-3 px-6 py-4 border-b border-[#F0F2F8] bg-gradient-to-r from-[#FFF0F3] to-white">
+                <div className="w-8 h-8 rounded-xl bg-[#F22044] flex items-center justify-center">
+                  <RiFileTextLine className="w-4 h-4 text-white" />
+                </div>
+                <h2 className="text-base font-bold text-[#1A202C]">Resources</h2>
+              </div>
+              <div className="px-6 py-5">
+                <ul className="space-y-2">
+                  {proposal.attachments.map(a => (
+                    <li key={a.attachmentId}>
+                      <a
+                        href={a.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 text-sm font-semibold text-[#F22044] hover:underline"
+                      >
+                        <RiFileTextLine className="w-4 h-4 flex-shrink-0" />
+                        {a.label || a.media.originalName}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </section>
+          )}
 
           {/* The Team */}
           <section

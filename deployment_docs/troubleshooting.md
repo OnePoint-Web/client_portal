@@ -239,6 +239,121 @@ docker compose up -d --force-recreate proposal_portal
 
 - `NEXT_PUBLIC_APP_URL` is used *only* for Puppeteer's internal navigation in the PDF routes (`/api/proposals/[slug]/pdf`, `/api/discovery/[id]/pdf`). Emailed/shareable proposal links use a separate variable, `PORTAL_URL`, and are unaffected by this.
 - Applies equally to any future server-side Puppeteer/headless-browser usage added to either app.
+- If `NEXT_PUBLIC_APP_URL` is already correctly `http://localhost:3000` and this error still occurs — specifically only on proposals/discovery sessions that have team members with a photo — see the next section below. It's a different, host-level cause that produces the identical error message.
+
+---
+
+## PDF generation times out — only on proposals/sessions with team member photos (host has no outbound network)
+
+### Symptoms
+
+Same error as above:
+
+```text
+PDF ERROR: Error [TimeoutError]: Navigation timeout of 30000 ms exceeded
+```
+
+But `NEXT_PUBLIC_APP_URL` is already correctly set to `http://localhost:3000`, and it only happens for proposals/discovery sessions whose team members have a photo. Proposals/sessions with no team members (or members with no photo) generate fine.
+
+---
+
+### Cause
+
+`OurTeam.js` renders each team member's photo as `<img src={m.teamMember.memberImage}>`, which is a full external URL on Cloudflare R2 (`https://media.1pt.com.au/...`, via `uploadToR2` in `src/lib/uploadToR2.js`). Chromium has to fetch that image before `page.goto(..., { waitUntil: "networkidle0" })` will resolve.
+
+The underlying host (`op-web-01`, AlmaLinux/cPanel) had `net.ipv4.ip_forward = 0` in `/etc/sysctl.conf`, from the base security-hardening template. With IP forwarding disabled at the kernel level, **no Docker container on this host can reach anything outside the box** — not just this R2 domain, but any external destination (DNS resolution to Cloudflare's `1.1.1.1` and to Linode's own internal resolvers both failed identically). This had nothing to do with Imunify360, iptables/nftables rules, or NAT config — all of those were already correctly set up and were confirmed innocent one by one. Packets from the container's bridge got processed fine through `PREROUTING`, then were silently dropped at the routing/forwarding decision, before ever reaching `FORWARD`, `POSTROUTING`, or the physical `eth0` interface.
+
+This almost certainly predates the team-photo feature entirely — nothing else the app does requires a container to reach the public internet (DB access and inter-container calls stay on the Docker bridge; inbound requests arrive via published ports, which don't require forwarding), so this was likely broken from the moment Docker was first deployed on this host and simply never triggered until now.
+
+---
+
+### Diagnosis
+
+Confirm the container has no outbound network access at all (not domain-specific):
+
+```bash
+docker exec <container> node -e "require('dns').lookup('google.com',(e,a)=>console.log(e?e.message:a))"
+docker exec <container> node -e "fetch('https://1.1.1.1').catch(e=>console.error(e.message))"
+```
+
+Both failing (`EAI_AGAIN`, `fetch failed`) — including against a public resolver like Cloudflare, not just the app's own domain — rules out anything domain-specific and points at general egress being broken.
+
+Rule out routing/NAT/firewall config first (all should look fine — the actual bug is one level deeper):
+
+```bash
+sudo iptables -t nat -L POSTROUTING -n -v   # MASQUERADE rule for the container's bridge subnet should be present
+ip route                                     # host's own default route should be normal
+sudo firewall-cmd --list-all                 # firewalld status
+```
+
+If those all look correct, trace the actual packet with nftables to see exactly where it dies:
+
+```bash
+sudo nft add table inet trace_dbg
+sudo nft add chain inet trace_dbg pre  "{ type filter hook prerouting  priority -300 ; }"
+sudo nft add chain inet trace_dbg fwdc "{ type filter hook forward     priority -300 ; }"   # 'fwd' alone is a reserved nft keyword
+sudo nft add chain inet trace_dbg post "{ type filter hook postrouting priority -300 ; }"
+sudo nft add rule inet trace_dbg pre  ip daddr 1.1.1.1 meta nftrace set 1
+sudo nft add rule inet trace_dbg fwdc ip daddr 1.1.1.1 meta nftrace set 1
+sudo nft add rule inet trace_dbg post ip daddr 1.1.1.1 meta nftrace set 1
+
+# Terminal 1:
+sudo nft monitor trace
+# Terminal 2, while the above runs:
+docker exec <container> node -e "const dns=require('dns');const r=new dns.Resolver();r.setServers(['1.1.1.1']);r.resolve4('google.com',(e,a)=>console.log(e?e.message:a))"
+
+# cleanup once done:
+sudo nft delete table inet trace_dbg
+```
+
+If the trace shows the packet processed fine through `PREROUTING` (including NAT) but the `fwdc` (forward-hook) trace never fires at all, the packet is being dropped at the routing decision — check forwarding directly:
+
+```bash
+sudo sysctl net.ipv4.ip_forward
+sudo sysctl net.ipv4.conf.all.forwarding
+sudo sysctl net.ipv4.conf.<bridge-interface>.forwarding   # e.g. br-ebf8c29ac568 — find via `docker inspect <container>`
+```
+
+`0` on any of these confirms it.
+
+---
+
+### Resolution
+
+Edit `/etc/sysctl.conf` directly (on this box it's the actual source of truth — `/etc/sysctl.d/99-sysctl.conf` is just a symlink to it, and there's no cPanel Tweak Setting managing it, confirmed via `grep forward /var/cpanel/cpanel.config` returning nothing):
+
+```
+net.ipv4.ip_forward = 0    # change to 1
+```
+
+Then reapply and verify:
+
+```bash
+sudo sysctl --system
+sudo sysctl net.ipv4.ip_forward   # should now read 1
+```
+
+A plain `sudo sysctl -w net.ipv4.ip_forward=1` fixes it only until the next `sysctl --system` or reboot re-reads `/etc/sysctl.conf` and reverts it — the file itself must be edited for the fix to survive.
+
+While diagnosing this, both PDF routes (`src/app/api/proposals/[slug]/pdf/route.js`, `src/app/api/discovery/[id]/pdf/route.js`) were temporarily given request interception to abort any non-local image request, as a stop-gap so PDFs would still generate (without team photos) while the host-level networking was broken. **That interception code was removed once the `ip_forward` fix was confirmed working** — team photos load normally now, and leaving the abort logic in place would have silently hidden them forever, with no visible error, in every future PDF. If a PDF is ever missing team photos with no error in the logs, check whether that interception code has been reintroduced before re-diagnosing the network from scratch.
+
+Both routes did keep one change from that pass: always closing the Puppeteer browser in a `finally` block — previously, every timeout left a headless Chromium process running (leaked, never cleaned up). That fix is unrelated to the networking issue and still applies.
+
+---
+
+### Notes
+
+- This broke **all** outbound container networking on the host, not just PDF generation — anything added in the future that needs a container to reach the public internet (webhooks, third-party APIs, outbound email via an API, etc.) would hit the same wall. Check `net.ipv4.ip_forward` first if a container mysteriously can't reach anything external.
+- It also broke the Docker **build** itself: `prisma generate` tries to reach `binaries.prisma.sh` and failed the same way, unrelated to the runtime fix above. `compose.yaml`'s `proposal_portal` build config now sets `network: host` so the build stage uses the host's network directly instead of the (at-the-time broken) bridge/NAT path:
+  ```yaml
+  proposal_portal:
+    build:
+      context: ./onepoint_proposals/
+      network: host
+  ```
+  This build-time setting is unrelated to the runtime `ip_forward` fix and should stay regardless — it makes the build itself more robust to this class of host networking issue.
+- Host-native processes (outside Docker) were unaffected the whole time, which is what made this confusing — `curl`/`getent hosts` from the shell worked fine while every container was cut off, because host-originated traffic doesn't go through the forwarding path at all.
+- If outbound networking ever breaks again on this host and a stop-gap is needed before `ip_forward` can be fixed, the request-interception snippet in the Resolution above is the pattern to reapply — but remember to remove it again afterward, since it silently hides team photos with no visible error otherwise.
 
 ---
 
