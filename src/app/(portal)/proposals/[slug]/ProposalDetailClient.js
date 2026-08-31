@@ -9,6 +9,7 @@ import {
   RiVideoLine,
   RiFocus3Line,
   RiLightbulbLine,
+  RiRoadMapLine,
   RiTeamLine,
   RiTimelineView,
   RiMoneyDollarCircleLine,
@@ -24,14 +25,16 @@ import {
 import StatusBadge from '@/components/ui/StatusBadge/StatusBadge'
 import MemberCard from '@/components/ui/MemberCard/MemberCard'
 import TermsAndConditions from '@/components/ui/TermsAndConditions/TermsAndConditions'
+import OurMethodology from '@/components/ui/OurMethodology/OurMethodology'
 
 const SECTIONS = [
   { id: 'executive-summary', label: 'Summary', icon: RiFileTextLine },
   { id: 'goals', label: 'Goals', icon: RiFocus3Line },
+  { id: 'methodology', label: 'Approach', icon: RiRoadMapLine },
   { id: 'solution', label: 'Solution', icon: RiLightbulbLine },
   { id: 'team', label: 'Team', icon: RiTeamLine },
   { id: 'timeline', label: 'Timeline', icon: RiTimelineView },
-  { id: 'budget', label: 'Budget', icon: RiMoneyDollarCircleLine },
+  { id: 'budget', label: 'Investment', icon: RiMoneyDollarCircleLine },
   { id: 'approval', label: 'Approval', icon: RiCheckboxCircleLine },
   { id: 'terms', label: 'Terms', icon: RiFileTextLine },
 ]
@@ -335,6 +338,21 @@ export default function ProposalDetailClient({ slug }) {
           />
         </section>
 
+        {/* Our Methodology */}
+        <section
+          id="methodology"
+          ref={el => { sectionRefs.current['methodology'] = el }}
+          className="bg-white rounded-2xl border border-[#E2E8F0] shadow-[0_1px_3px_rgba(0,0,0,0.06)] overflow-hidden"
+        >
+          <div className="flex items-center gap-3 px-6 py-4 border-b border-[#F0F2F8] bg-gradient-to-r from-teal-50 to-white">
+            <div className="w-8 h-8 rounded-xl bg-teal-500 flex items-center justify-center">
+              <RiRoadMapLine className="w-4 h-4 text-white" />
+            </div>
+            <h2 className="text-base font-bold text-[#1A202C]">Our Methodology</h2>
+          </div>
+          <OurMethodology />
+        </section>
+
         {/* Proposed Solution */}
         <section
           id="solution"
@@ -478,7 +496,7 @@ export default function ProposalDetailClient({ slug }) {
               <div className="w-8 h-8 rounded-xl bg-purple-500 flex items-center justify-center">
                 <RiMoneyDollarCircleLine className="w-4 h-4 text-white" />
               </div>
-              <h2 className="text-base font-bold text-[#1A202C]">Proposed Budget</h2>
+              <h2 className="text-base font-bold text-[#1A202C]">Investment</h2>
             </div>
 
             <div className="px-6 py-5 space-y-5">
